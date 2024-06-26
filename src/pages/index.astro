@@ -1,16 +1,44 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro"
+import HeroImage from "../components/HeroImage"
+import LatestPost from "../components/LatestPost"
 
+const pageTitle="Home"
+const resumeOnClick = "window.open('https://youtube.com')"
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout pageTitle={pageTitle}>
+  <section class="h-[100%] flex flex-row justify-evenly items-center" id="landing">
+    <div class="w-[551px]">
+      <h1 class="font-Nunito font-semibold text-[#D9D9D9] text-5xl tracking-wider mb-3">
+        Hello,
+        <b class="text-[#459DDE] font-semibold">friends</b>
+      </h1>
+      <p class="text-[#D9D9D9] font-normal text-3xl space-x-0 mt-3">
+        Hi, I'm Gab! I am a canadian Computer Science <b class="font-normal text-[#459DDE]">student</b>,
+        aspiring video game <b class="font-normal text-[#459DDE]">developer</b> and
+        <b class="font-normal text-[#459DDE]">musician</b>
+      </p>
+      <button class="w-44 h-14 flex justify-center items-center border-2 border-[#459DDE] mt-6 text-[#459DDE] text-3xl hover:bg-[#459DDE] hover:text-[#252525] transition-all" onclick={resumeOnClick}>Resume</button>
+    </div>
+    <HeroImage />
+  </section>
+  <section class="h-fit flex flex-col py-10 mb-20" id="latest-posts">
+    <h2 class="font-Nunito font-semibold text-[#D9D9D9] text-5xl tracking-wider">Latest Posts</h2>
+    <p class="text-neutral-400 text-2xl mt-1">Have you read these new articles...</p>
+    <div class="flex flex-row justify-evenly">
+      <LatestPost />
+      <LatestPost />
+      <LatestPost />
+    </div>
+  </section>
+  <section class="h-fit flex flex-col py-10 mb-24" id="rss-feed">
+    <h3 class="font-Nunito font-semibold text-[#D9D9D9] text-5xl tracking-wider">Like what I write?</h3>
+    <p class="text-neutral-400 text-2xl mt-1">Add this site to your feed to be notified of my next posts!</p>
+    <button 
+       class="border-2 border-[#459DDE] text-[#459DDE] w-[400px] transition-all h-28 text-4xl mx-auto mt-[153px] hover:bg-[#459DDE] hover:text-[#252525]"
+       onclick={resumeOnClick}
+    >
+      Add to feed
+    </button>
+  </section>
+</BaseLayout>
