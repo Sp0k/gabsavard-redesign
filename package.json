@@ -13,6 +13,7 @@
     "@astrojs/check": "^0.7.0",
     "@astrojs/react": "^3.6.0",
     "@astrojs/tailwind": "^5.1.0",
+    "@emailjs/browser": "^4.3.3",
     "@fontsource-variable/nunito": "^5.0.19",
     "@fontsource/source-sans-pro": "^5.0.8",
     "@types/react": "^18.3.3",
