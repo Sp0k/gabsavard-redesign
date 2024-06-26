@@ -14,6 +14,11 @@ I know websites usually don't have a feature part, especially when they use fram
 
 - [ ] Home Page
   - [ ] Replace the hero image
+  - [x] Salutation module
+  - [x] Resume
+  - [x] Landing
+  - [x] Latest posts
+  - [x] RSS Button
 - [ ] Projects
   - [ ] Projects index page
     - [ ] Filter the projects by tags
@@ -24,10 +29,11 @@ I know websites usually don't have a feature part, especially when they use fram
     - [ ] Filter the blog articles by tags
     - [ ] Automatically updates with new articles
   - [ ] Blog article Layout
-- [ ] Contact Page
-  - [ ] Email form
-  - [ ] Socials list
+- [x] Contact Page
+  - [x] Email form
+  - [x] Socials list
 - [ ] About Page
+- [ ] RSS Setup
 
 ## Project Structure
 
@@ -56,6 +62,8 @@ Astro-website/
 │   │   └── BaseLayout.astro
 │   ├── pages/
 │   │   └── index.astro
+│   ├── styles/
+│   │   └── global.css
 │   └── env.d.ts
 ├── tailwind.config.mjs
 └── tsconfig.json
@@ -65,6 +73,7 @@ Astro-website/
 - src/components/: Reusable components used throughout the site.
 - src/layouts/: Layout components to structure different pages.
 - src/pages/: Page components for different routes.
+- src/styles/: Global style used when tailwind cannot be used.
 
 ## License
 
