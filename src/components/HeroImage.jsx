@@ -2,7 +2,7 @@ const HeroImage = () => {
   const currentJob = " Portfolio";
 
   return (
-    <div class="w-[469px] h-[422px]">
+    <div className="w-[469px] h-[422px]">
       <img src="/hero.png" alt="Gab Savard" class="w-[469px] h-386px" />
       <div className="w-[402px] h-9 p-2 border border-neutral-400 justify-start items-center gap-2.5 inline-flex ml-8">
         <div className="w-4 h-4 bg-[#459DDE] border border-[#459DDE]" />
