@@ -1,47 +1,71 @@
-# Astro Starter Kit: Minimal
+# gabsavard.com Redesign
 
-```sh
-npm create astro@latest -- --template minimal
+This is the code for my personal [website](https://gabsavard.com). I am using this opportunity to continue learning the **Astrojs** framework as well as the **React** and **Tailwind**. My goal is to not only design and build a complete website containing a projects, a blog and a contact form. I will take inspiration from my other _Astrojs_ project for some of my components. Eventually, this website will be deployed through **Netlify**.
+
+## Table of Contents
+
+- [Features](#features)
+- [Project Structure](#project_structure)
+- [License](#license)
+
+## Features
+
+I know websites usually don't have a feature part, especially when they use frameworks like Astro that are more about being static. But I am using this section more as a checklist for what I want to do with my website:
+
+- [ ] Home Page
+  - [ ] Replace the hero image
+- [ ] Projects
+  - [ ] Projects index page
+    - [ ] Filter the projects by tags
+    - [ ] Automatically updates with new projects
+  - [ ] Project Page Layout
+- [ ] Blog
+  - [ ] Blog index page
+    - [ ] Filter the blog articles by tags
+    - [ ] Automatically updates with new articles
+  - [ ] Blog article Layout
+- [ ] Contact Page
+  - [ ] Email form
+  - [ ] Socials list
+- [ ] About Page
+
+## Project Structure
+
+Here's an overview of the project structure:
+
 ```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
+Astro-website/
+├── astro.config.mjs
+├── LICENSE
+├── node_modules/
+│   └── (Too many modules to list here)
+├── package.json
+├── package-lock.json
 ├── public/
+│   ├── favicon.ico
+│   └── hero.png
+├── README.md
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/
+│   │   ├── HeroImage.jsx
+│   │   ├── LatestPost.jsx
+│   │   ├── Navigation.jsx
+│   │   ├── ScrollView.jsx
+│   │   └── SideBar.jsx
+│   ├── layouts/
+│   │   └── BaseLayout.astro
+│   ├── pages/
+│   │   └── index.astro
+│   └── env.d.ts
+├── tailwind.config.mjs
+└── tsconfig.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- public/: Static assets like images and icons.
+- src/components/: Reusable components used throughout the site.
+- src/layouts/: Layout components to structure different pages.
+- src/pages/: Page components for different routes.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## License
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
