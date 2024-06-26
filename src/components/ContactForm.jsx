@@ -1,13 +1,13 @@
-import email from "@emailjs/browser";
+import emailjs from "@emailjs/browser";
 import { useState } from "react";
 
 const ContactForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [errors, setErrors] = useState("");
+  const [errors, setErrors] = useState({});
 
-  const MAX_NAME_LENGTH = 100;
+  const MAX_NAME_LENGTH = 50;
   const MAX_MESSAGE_LENGTH = 2000;
   const ids = ["name", "email", "message"];
 
@@ -17,42 +17,32 @@ const ContactForm = () => {
 
     for (let i = 0; i < ids.length; i++) {
       const elem = document.getElementById(ids[i]);
-      elem.classList.remove("border-b-red");
-      elem.classList.add("border-b-neutral-400");
+      elem.classList.remove("container-error");
     }
 
     if (name && name.length > MAX_NAME_LENGTH) {
-      formErrors.name = `Name must be under ${MAX_NAME_LENGTH} characters`;
-      const elem = document.getElementById("name");
-      elem.classList.remove("border-b-neutral-400");
-      elem.classList.add("border-b-red");
+      formErrors.names = `Names must be under ${MAX_NAME_LENGTH} characters`;
+      document.getElementById("name").classList.toggle("container-error");
       valid = false;
     }
 
     if (!email.trim()) {
       formErrors.email = "Email is required";
-      const elem = document.getElementById("email");
-      elem.classList.remove("border-b-neutral-400");
-      elem.classList.add("border-b-red");
+      document.getElementById("email").classList.toggle("container-error");
       valid = false;
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       formErrors.email = "Email address is invalid";
-      const elem = document.getElementById("email");
-      elem.classList.remove("border-b-neutral-400");
-      elem.classList.add("border-b-red");
+      document.getElementById("email").classList.toggle("container-error");
       valid = false;
     }
 
     if (!message.trim()) {
-      const elem = document.getElementById("message");
-      elem.classList.remove("border-b-neutral-400");
-      elem.classList.add("border-b-red");
+      formErrors.message = "Message is required";
+      document.getElementById("message").classList.toggle("container-error");
       valid = false;
     } else if (message && message.length > MAX_MESSAGE_LENGTH) {
       formErrors.message = `Message should be under ${MAX_MESSAGE_LENGTH} characters`;
-      const elem = document.getElementById("message");
-      elem.classList.remove("border-b-neutral-400");
-      elem.classList.add("border-b-red");
+      document.getElementById("message").classList.toggle("container-error");
       valid = false;
     }
 
@@ -99,7 +89,7 @@ const ContactForm = () => {
         className="bg-transparent border-b-2 border-b-neutral-400 mb-9 font-Source-Sans-Pro text-3xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none focus:border-b-[#D9D9D9]"
         id="name"
       />
-      {name && <p className="error">{errors.name}</p>}
+      {errors.name && <p className="error">{errors.names}</p>}
       <input
         type="email"
         placeholder="Email *"
@@ -130,7 +120,7 @@ const ContactForm = () => {
       </p>
       <button
         type="submit"
-        class="border border-[#459DDE] text-[#459DDE] flex flex-row justify-center items-center fill-[#459DDE] hover:bg-[#459DDE] hover:fill-[#252525] hover:text-[#252525] transition-all text-4xl font-Nunito mb-[33px] h-[75px] w-[300px] mx-auto"
+        className="border border-[#459DDE] text-[#459DDE] flex flex-row justify-center items-center fill-[#459DDE] hover:bg-[#459DDE] hover:fill-[#252525] hover:text-[#252525] transition-all text-4xl font-Nunito mb-[33px] h-[75px] w-[300px] mx-auto"
       >
         Send
       </button>
