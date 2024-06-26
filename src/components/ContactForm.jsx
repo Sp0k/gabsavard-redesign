@@ -80,7 +80,10 @@ const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col w-[575px] h-fit">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col w-[575px] h-fit mt-10"
+    >
       <input
         type="text"
         placeholder="Name"
@@ -115,7 +118,7 @@ const ContactForm = () => {
         </span>
       </div>
       {errors.message && <p className="error">{errors.message}</p>}
-      <p className="font-Source-Sans-Pro text-neutral-400 text-lg">
+      <p className="font-Source-Sans-Pro text-neutral-400 text-lg -mt-8">
         Please include your contact information when you write me :)
       </p>
       <button
