@@ -7,7 +7,7 @@ const ContactForm = () => {
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState({});
 
-  const MAX_NAME_LENGTH = 50;
+  const MAX_NAME_LENGTH = 100;
   const MAX_MESSAGE_LENGTH = 2000;
   const ids = ["name", "email", "message"];
 
@@ -17,32 +17,48 @@ const ContactForm = () => {
 
     for (let i = 0; i < ids.length; i++) {
       const elem = document.getElementById(ids[i]);
-      elem.classList.remove("container-error");
+      elem.classList.remove("border-b-red-500");
+      elem.classList.add("focus:border-b-[#D9D9D9]", "border-b-neutral-400");
     }
 
     if (name && name.length > MAX_NAME_LENGTH) {
-      formErrors.names = `Names must be under ${MAX_NAME_LENGTH} characters`;
-      document.getElementById("name").classList.toggle("container-error");
+      formErrors.name = `Name must be under ${MAX_NAME_LENGTH} characters`;
+      document
+        .getElementById("name")
+        .classList.remove("focus:border-b-[#D9D9D9]", "border-b-neutral-400");
+      document.getElementById("name").classList.add("border-b-red-500");
       valid = false;
     }
 
     if (!email.trim()) {
       formErrors.email = "Email is required";
-      document.getElementById("email").classList.toggle("container-error");
+      document
+        .getElementById("email")
+        .classList.remove("focus:border-b-[#D9D9D9]", "border-b-neutral-400");
+      document.getElementById("email").classList.add("border-b-red-500");
       valid = false;
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       formErrors.email = "Email address is invalid";
-      document.getElementById("email").classList.toggle("container-error");
+      document
+        .getElementById("email")
+        .classList.remove("focus:border-b-[#D9D9D9]", "border-b-neutral-400");
+      document.getElementById("email").classList.add("border-b-red-500");
       valid = false;
     }
 
     if (!message.trim()) {
       formErrors.message = "Message is required";
-      document.getElementById("message").classList.toggle("container-error");
+      document
+        .getElementById("message")
+        .classList.remove("focus:border-b-[#D9D9D9]", "border-b-neutral-400");
+      document.getElementById("message").classList.add("border-b-red-500");
       valid = false;
     } else if (message && message.length > MAX_MESSAGE_LENGTH) {
       formErrors.message = `Message should be under ${MAX_MESSAGE_LENGTH} characters`;
-      document.getElementById("message").classList.toggle("container-error");
+      document
+        .getElementById("message")
+        .classList.remove("focus:border-b-[#D9D9D9]", "border-b-neutral-400");
+      document.getElementById("message").classList.add("border-b-red-500");
       valid = false;
     }
 
@@ -89,21 +105,29 @@ const ContactForm = () => {
         placeholder="Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        className="bg-transparent border-b-2 border-b-neutral-400 mb-9 font-Source-Sans-Pro text-3xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none focus:border-b-[#D9D9D9]"
+        className="bg-transparent border-b-2 border-b-neutral-400 font-Source-Sans-Pro text-3xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none focus:border-b-[#D9D9D9]"
         id="name"
       />
-      {errors.name && <p className="error">{errors.names}</p>}
+      {errors.name && (
+        <p className="text-base text-red-500 font-Source-Sans-Pro mt-2">
+          {errors.name}
+        </p>
+      )}
       <input
         type="email"
         placeholder="Email *"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="bg-transparent border-b-2 border-b-neutral-400 mb-9 font-Source-Sans-Pro text-3xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none focus:border-b-[#D9D9D9]"
+        className="bg-transparent border-b-2 border-b-neutral-400 mt-9 font-Source-Sans-Pro text-3xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none focus:border-b-[#D9D9D9]"
         id="email"
       />
-      {errors.email && <p className="error">{errors.email}</p>}
+      {errors.email && (
+        <p className="text-base text-red-500 font-Source-Sans-Pro mt-2">
+          {errors.email}
+        </p>
+      )}
       <div
-        className="bg-transparent flex flex-col border-b-2 border-b-neutral-400 mb-9 font-Source-Sans-Pro placeholder-neutral-400 focus-within:border-b-[#D9D9D9] text-neutral-400 focus-within:text-[#D9D9D9]"
+        className="bg-transparent flex flex-col border-b-2 border-b-neutral-400 font-Source-Sans-Pro placeholder-neutral-400 focus-within:border-b-[#D9D9D9] text-neutral-400 focus-within:text-[#D9D9D9] mt-9"
         id="message"
       >
         <textarea
@@ -117,8 +141,12 @@ const ContactForm = () => {
           {message.length}/{MAX_MESSAGE_LENGTH}
         </span>
       </div>
-      {errors.message && <p className="error">{errors.message}</p>}
-      <p className="font-Source-Sans-Pro text-neutral-400 text-lg -mt-8">
+      {errors.message && (
+        <p className="text-base text-red-500 font-Source-Sans-Pro mt-2">
+          {errors.message}
+        </p>
+      )}
+      <p className="font-Source-Sans-Pro text-neutral-400 text-lg mt-2">
         Please include your contact information when you write me :)
       </p>
       <button
