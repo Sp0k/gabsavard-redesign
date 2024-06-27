@@ -3,6 +3,8 @@ import SideBar from "../components/SideBar";
 import "../styles/global.css";
 
 const ScrollView = ({ children }) => {
+  const year = new Date().getFullYear();
+
   return (
     <div className="max-w-screen-2xl max-h-[1000px] h-[95vh] rounded-[40px] border-2 border-neutral-400 mx-auto mt-[3vh] overflow-hidden">
       <Navigation />
@@ -11,7 +13,7 @@ const ScrollView = ({ children }) => {
         <div className="max-w-[1400px] w-full h-[100%] min-h-[500px] max-h-[850px] overflow-y-scroll scrollbar">
           {children}
           <p className="mx-auto text-[#999999] w-fit font-Source-Sans-Pro text-base py-6">
-            © Copyright 2024. Made by Gab Savard.
+            © Copyright {year}. Made by Gab Savard.
           </p>
         </div>
       </div>
