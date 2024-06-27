@@ -5,8 +5,8 @@ const SkillsTable = () => {
   const languagesRef = useRef();
   const frameworksRef = useRef();
   const softSkillsRef = useRef();
-  const othersRef = useRef();
-  const tabs = [languagesRef, frameworksRef, softSkillsRef, othersRef];
+  const certificationsRef = useRef();
+  const tabs = [languagesRef, frameworksRef, softSkillsRef, certificationsRef];
 
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
@@ -14,8 +14,13 @@ const SkillsTable = () => {
   const languagesBtn = useRef();
   const frameworksBtn = useRef();
   const softSkillsBtn = useRef();
-  const othersBtn = useRef();
-  const buttons = [languagesBtn, frameworksBtn, softSkillsBtn, othersBtn];
+  const certificationsBtn = useRef();
+  const buttons = [
+    languagesBtn,
+    frameworksBtn,
+    softSkillsBtn,
+    certificationsBtn,
+  ];
 
   const [activeBtn, setActiveBtn] = useState(buttons[0]);
 
@@ -80,12 +85,12 @@ const SkillsTable = () => {
         <button
           className="text-3xl text-neutral-400 border border-neutral-400 py-4 px-4 hover:text-[#D9D9D9] hover:border-[#D9D9D9] transition-all font-Source-Sans-Pro"
           onClick={() => onClickHandle(buttons[3], tabs[3])}
-          ref={othersBtn}
+          ref={certificationsBtn}
         >
-          Others
+          Certifications
         </button>
       </div>
-      <div className="w-[800px] border-2 border-neutral-400 h-fit">
+      <div className="min-w-[800px] border-2 border-neutral-400 h-fit">
         <div
           className="flex flex-col justify-center transition-all"
           ref={languagesRef}
@@ -95,11 +100,11 @@ const SkillsTable = () => {
           </p>
           <hr className="h-0.5 bg-neutral-400 border-transparent" />
           <ul className="grid grid-cols-2 gap-10 text-3xl font-Source-Sans-Pro text-[#D9D9D9] list-disc mx-auto py-6">
-            <li className="mr-10">Java</li>
-            <li className="ml-10">C</li>
-            <li className="mr-10">JavaScript</li>
-            <li className="ml-10">Ruby</li>
-            <li className="mr-10">C#</li>
+            <li className="mr-5">Java</li>
+            <li className="ml-5">C</li>
+            <li className="mr-5">JavaScript</li>
+            <li className="ml-5">Ruby</li>
+            <li className="mr-5">C#</li>
           </ul>
         </div>
         <div
@@ -111,11 +116,11 @@ const SkillsTable = () => {
           </p>
           <hr className="h-0.5 bg-neutral-400 border-transparent" />
           <ul className="grid grid-cols-2 gap-10 text-3xl font-Source-Sans-Pro text-[#D9D9D9] list-disc mx-auto py-6">
-            <li className="mr-10">React</li>
-            <li className="ml-10">React Native</li>
-            <li className="mr-10">Ruby on Rails</li>
-            <li className="ml-10">Astro</li>
-            <li className="mr-10">Tailwind</li>
+            <li className="mr-5">React</li>
+            <li className="ml-5">React Native</li>
+            <li className="mr-5">Ruby on Rails</li>
+            <li className="ml-5">Astro</li>
+            <li className="mr-5">Tailwind</li>
           </ul>
         </div>
         <div
@@ -137,18 +142,17 @@ const SkillsTable = () => {
         </div>
         <div
           className="flex flex-col justify-center transition-all"
-          ref={othersRef}
+          ref={certificationsRef}
         >
           <p className="font-semibold font-Nunito text-4xl text-[#D9D9D9] text-left py-2 ml-2">
-            Others
+            Certifications
           </p>
           <hr className="h-0.5 bg-neutral-400 border-transparent" />
-          <ul className="grid grid-cols-2 gap-10 text-3xl font-Source-Sans-Pro text-[#D9D9D9] list-disc mx-auto py-6">
-            <li className="mr-5">Git</li>
-            <li className="ml-5">Docker</li>
-            <li className="mr-5">Design</li>
-            <li className="ml-5">Linux</li>
-            <li className="mr-5">Music composing</li>
+          <ul className="grid grid-cols-2 gap-10 text-2xl font-Source-Sans-Pro text-[#D9D9D9] list-disc mx-auto py-8 px-8">
+            <li className="mr-5">React Native (ShiftKey Labs)</li>
+            <li className="ml-5">React Native (Udemy)</li>
+            <li className="mr-5">Unity and C# (Udemy)</li>
+            <li className="ml-5">React (Udemy)</li>
           </ul>
         </div>
       </div>

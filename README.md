@@ -32,7 +32,7 @@ I know websites usually don't have a feature part, especially when they use fram
 - [x] Contact Page
   - [x] Email form
   - [x] Socials list
-- [ ] About Page
+- [x] About Page
 - [ ] RSS Setup
 
 ## Project Structure
@@ -78,3 +78,4 @@ Astro-website/
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
