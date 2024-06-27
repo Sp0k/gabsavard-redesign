@@ -1,4 +1,5 @@
 ---
+import { getCollection } from "astro:content"
 import BaseLayout from "../layouts/BaseLayout.astro"
 import HeroImage from "../components/HeroImage"
 import LatestPost from "../components/LatestPost"
@@ -6,6 +7,10 @@ import Salutations from "../components/Salutations"
 
 const pageTitle="Home"
 const resumeOnClick = "window.open('/gab_savard_resume.pdf')"
+
+const posts = (await getCollection('posts')).sort(
+  (a, b) => Date.parse(b.data.date) - Date.parse(a.data.date)
+)
 ---
 <BaseLayout pageTitle={pageTitle}>
   <section class="h-[100%] flex flex-row justify-evenly items-center" id="landing">
@@ -26,9 +31,9 @@ const resumeOnClick = "window.open('/gab_savard_resume.pdf')"
     <h2 class="font-Nunito font-semibold text-[#D9D9D9] text-5xl tracking-wider">Latest Posts</h2>
     <p class="text-neutral-400 text-2xl mt-1">Have you read these new articles...</p>
     <div class="flex flex-row justify-evenly flex-wrap">
-      <LatestPost />
-      <LatestPost />
-      <LatestPost />
+      <LatestPost post={posts[0]} />
+      <LatestPost post={posts[1]} />
+      <LatestPost post={posts[2]} />
     </div>
   </section>
   <section class="h-fit flex flex-col py-10 mb-24" id="rss-feed">
