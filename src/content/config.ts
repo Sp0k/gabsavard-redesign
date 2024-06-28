@@ -20,4 +20,18 @@ export const collections = {
         .optional(),
     }),
   }),
+  projects: defineCollection({
+    type: "content",
+    schema: z.object({
+      title: z.string().max(60, {
+        message: "Title must be 60 characters of less.",
+      }),
+      description: z.string().max(160, {
+        message: "Description must be 160 characters or less.",
+      }),
+      date: z.date(),
+      color: z.string(),
+      type: z.string(),
+    }),
+  }),
 };

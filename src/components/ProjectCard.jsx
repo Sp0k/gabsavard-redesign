@@ -1,14 +1,25 @@
-const ProjectCard = () => {
+const ProjectCard = ({ color, title, type, description, url }) => {
+  const colors = {
+    videoGame: "text-purple-400",
+    code: "text-rose-700",
+    web: "text-emerald-400",
+    music: "text-cyan-300",
+  };
+
+  const path = "/projects/" + url;
+
   return (
-    <div class="border border-[#D9D9D9] w-[500px] h-60 py-2 px-3 hover:border-[#459DDE] hover:shadow-[#459DDE] hover:shadow-lg transition-all">
-      <a href="nowhere">
-        <div class="w-full h-full">
-          <div class="flex flex-row justify-between">
-            <p class="text-3xl text-[#D9D9D9] text-Nunito">Title</p>
-            <p class="text-lg text-pink-500 text-Source-Sans-Pro">type</p>
+    <div className="border border-[#D9D9D9] w-[450px] h-48 py-2 px-3 hover:border-[#459DDE] hover:shadow-[#459DDE] hover:shadow-lg transition-all mt-2">
+      <a href={path}>
+        <div className="w-full h-full">
+          <div className="flex flex-row justify-between">
+            <p className="text-3xl text-[#D9D9D9] text-Nunito">{title}</p>
+            <p className={`text-lg ${colors[color]} text-Source-Sans-Pro`}>
+              {type}
+            </p>
           </div>
-          <hr class="h-[2px] bg-[#D9D9D9] border-none" />
-          <p class="text-xl text-[#D9D9D9]">Description</p>
+          <hr className="h-[2px] bg-[#D9D9D9] border-none" />
+          <p className="text-xl text-[#D9D9D9] mt-4">{description}</p>
         </div>
       </a>
     </div>

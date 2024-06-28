@@ -1,8 +1,12 @@
 ---
+import { getCollection } from "astro:content"
 import BaseLayout from "../layouts/BaseLayout.astro"
 import ProjectCard from "../components/ProjectCard"
 
 const pageTitle = "Projects"
+const projects = (await getCollection('projects')).sort(
+  (a, b) => Date.parse(b.data.date) - Date.parse(a.data.date)
+);
 ---
 <BaseLayout pageTitle={pageTitle}>
   <div class="mt-4">
@@ -11,7 +15,17 @@ const pageTitle = "Projects"
       Take a look at my projects, I am very proud of all of them!
     </p>
   </div>
-  <div>
-    <ProjectCard />
+  <div class="flex flex-row gap-3 flex-wrap mt-8">
+    {
+      projects.map((p) => (
+        <ProjectCard
+          title={p.data.title}
+          description={p.data.description}
+          url={p.slug}
+          color={p.data.color}
+          type={p.data.type}
+        />
+      ))
+    }
   </div>
 </BaseLayout>
