@@ -33,7 +33,7 @@ I know websites usually don't have a feature part, especially when they use fram
   - [x] Email form
   - [x] Socials list
 - [x] About Page
-- [ ] RSS Setup
+- [x] RSS Setup
 
 ## Project Structure
 
@@ -48,9 +48,11 @@ Astro-website/
 ├── package.json
 ├── package-lock.json
 ├── public/
-│   ├── favicon.ico
+│   ├── gs.svg
 │   ├── gab_savard_resume.pdf
-│   └── hero.png
+│   ├── hero.png
+│   └── rss
+│       └── pretty-feed-v3.xsl
 ├── README.md
 ├── src/
 │   ├── components/
@@ -76,7 +78,8 @@ Astro-website/
 │   │   ├── about.astro
 │   │   ├── blog.astro
 │   │   ├── contact.astro
-│   │   └── index.astro
+│   │   ├── index.astro
+│   │   └── rss.xml.js
 │   ├── styles/
 │   │   └── global.css
 │   └── env.d.ts

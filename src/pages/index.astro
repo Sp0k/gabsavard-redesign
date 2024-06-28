@@ -7,6 +7,7 @@ import Salutations from "../components/Salutations"
 
 const pageTitle="Home"
 const resumeOnClick = "window.open('/gab_savard_resume.pdf')"
+const rssOnClick = "window.open('/rss.xml')"
 
 const posts = (await getCollection('posts')).sort(
   (a, b) => Date.parse(b.data.date) - Date.parse(a.data.date)
@@ -41,7 +42,7 @@ const posts = (await getCollection('posts')).sort(
     <p class="text-neutral-400 text-2xl mt-1">Add this site to your feed to be notified of my next posts!</p>
     <button 
        class="border-2 border-[#459DDE] text-[#459DDE] w-[400px] transition-all h-28 text-4xl mx-auto mt-[153px] hover:bg-[#459DDE] hover:text-[#252525]"
-       onclick={resumeOnClick}
+       onclick={rssOnClick}
     >
       Add to feed
     </button>

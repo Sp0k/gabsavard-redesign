@@ -76,7 +76,7 @@ const SideBar = () => {
         </li>
         <li class="mt-6">
           <a
-            href="/"
+            href="/rss.xml"
             target="_blank"
             class="w-8 h-8 fill-neutral-400 hover:fill-[#459DDE] transition-all"
           >
