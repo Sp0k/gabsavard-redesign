@@ -25,9 +25,9 @@ I know websites usually don't have a feature part, especially when they use fram
     - [ ] Automatically updates with new projects
   - [ ] Project Page Layout
 - [ ] Blog
-  - [ ] Blog index page
-    - [ ] Filter the blog articles by tags
-    - [ ] Automatically updates with new articles
+  - [x] Blog index page
+    - [x] Filter the blog articles by tags
+    - [x] Automatically updates with new articles
   - [ ] Blog article Layout
 - [x] Contact Page
   - [x] Email form
@@ -49,18 +49,33 @@ Astro-website/
 ├── package-lock.json
 ├── public/
 │   ├── favicon.ico
+│   ├── gab_savard_resume.pdf
 │   └── hero.png
 ├── README.md
 ├── src/
 │   ├── components/
+│   │   ├── BlogCard.jsx
+│   │   ├── BlogList.jsx
+│   │   ├── ContactForm.jsx
 │   │   ├── HeroImage.jsx
 │   │   ├── LatestPost.jsx
 │   │   ├── Navigation.jsx
+│   │   ├── Salutations.jsx
 │   │   ├── ScrollView.jsx
-│   │   └── SideBar.jsx
+│   │   ├── SideBar.jsx
+│   │   ├── SkillsTable.jsx
+│   │   ├── SocialButton.astro
+│   │   └── TagButton.jsx
+│   ├── content/
+│   │   ├── config.ts
+│   │   └── posts/
+│   │       └── (All blog posts)
 │   ├── layouts/
 │   │   └── BaseLayout.astro
 │   ├── pages/
+│   │   ├── about.astro
+│   │   ├── blog.astro
+│   │   ├── contact.astro
 │   │   └── index.astro
 │   ├── styles/
 │   │   └── global.css
@@ -74,8 +89,8 @@ Astro-website/
 - src/layouts/: Layout components to structure different pages.
 - src/pages/: Page components for different routes.
 - src/styles/: Global style used when tailwind cannot be used.
+- src/contents/: The collections of content stored on the website.
 
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
-

@@ -1,7 +1,14 @@
 ---
+import { getCollection } from "astro:content"
 import BaseLayout from "../layouts/BaseLayout.astro"
+import BlogList from "../components/BlogList"
 
 const pageTitle = "Blog"
+const posts = (await getCollection('posts')).sort(
+  (a, b) => Date.parse(b.data.date) - Date.parse(a.data.date)
+);
+const tags = [...new Set(posts.map((post) => post.data.tags).flat())];
+tags.sort();
 ---
 <BaseLayout pageTitle={pageTitle}>
   <div class="mt-4">
@@ -10,5 +17,6 @@ const pageTitle = "Blog"
       Dive into my thoughts and interests. I write down my thoughts and ideas in here and hope will
       either find them interesting or helpful.
     </p>
+    <BlogList posts={posts} tags={tags} client:load />
   </div>
 </BaseLayout>
