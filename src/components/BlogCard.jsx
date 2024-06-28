@@ -2,7 +2,7 @@ const BlogCard = ({ title, description, url, image }) => {
   const path = "/posts/" + url;
 
   return (
-    <div className="w-[1000px] border-2 border-neutral-400 flex flex-row py-4 px-4 my-4 mx-auto hover:shadow-[#459DDE] hover:shadow-lg transition-all hover:border-[#459DDE]">
+    <div className="w-[1000px] border border-[#D9D9D9] flex flex-row py-4 px-4 my-4 mx-auto hover:shadow-[#459DDE] hover:shadow-lg transition-all hover:border-[#459DDE]">
       <a href={path} className="flex flex-row">
         <div className="w-[331.5px] h-[160px] overflow-hidden border border-neutral-400 my-auto">
           <img src={image.url} alt={image.src} />

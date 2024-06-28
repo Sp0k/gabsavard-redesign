@@ -5,7 +5,7 @@ const LatestPost = ({ post }) => {
   const path = "/posts/" + post.slug;
 
   return (
-    <div className="w-fit h-fit border-2 border-neutral-400 mt-6 transition-all hover:border-[#459DDE] hover:shadow-[#459DDE] hover:shadow-lg">
+    <div className="w-fit h-fit border border-neutral-400 mt-6 transition-all hover:border-[#459DDE] hover:shadow-[#459DDE] hover:shadow-lg">
       <a href="path">
         <img className="w-[340px] h-[201px]" src={image.url} alt={image.alt} />
         <div className="px-4 py-4">

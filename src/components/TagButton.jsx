@@ -34,7 +34,7 @@ const TagButton = ({ tag, pressHandler }) => {
   return (
     <button
       ref={buttonRef}
-      className="border-2 border-neutral-400 py-2 px-4 text-xl text-neutral-400 hover:border-[#D9D9D9] hover:text-[#D9D9D9] transition-all mr-2 my-2"
+      className="border border-neutral-400 py-2 px-4 text-xl text-neutral-400 hover:border-[#D9D9D9] hover:text-[#D9D9D9] transition-all mr-2 my-2"
       onClick={onClickHandler}
     >
       {tag}

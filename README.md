@@ -20,9 +20,8 @@ I know websites usually don't have a feature part, especially when they use fram
   - [x] Latest posts
   - [x] RSS Button
 - [ ] Projects
-  - [ ] Projects index page
-    - [ ] Filter the projects by tags
-    - [ ] Automatically updates with new projects
+  - [x] Projects index page
+    - [x] Automatically updates with new projects
   - [ ] Project Page Layout
 - [ ] Blog
   - [x] Blog index page
