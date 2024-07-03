@@ -50,13 +50,13 @@ Where <user> is your username and <remote_server> is the server name/link.
 ## Connecting your new SSH Key to your GitHub account
 Now that you have your SSH key generated, let's add it to your _GitHub_ account. To do so, first open _GitHub_ and head over to the settings page. on the side bar on the left, you should be able to see a section called SSH and GPG keys. Clicking on it should open the page about SSH and GPG keys
 
-![image](../../../public/pictures/posts/setting-up-ssh-keys/settings_screenshot.png)
+![GitHub's settings](../../../public/pictures/posts/setting-up-ssh-keys/settings_screenshot.png)
 
-![image](../../../public/pictures/posts/setting-up-ssh-keys/ssh_menu.png)
+![GitHub's SSH keys settings page](../../../public/pictures/posts/setting-up-ssh-keys/ssh_settings.png)
 
 From there, nothing easier, click on the *New SSH key* button to add your key. Once on that page, give your SSH key a title and copy your public key (the file ending in .pub) in the key text area. Once you copied it, click on the *Add SSH key* button, and you are done!
 
-![image](../../../public/pictures/posts/setting-up-ssh-keys/ssh_page.png)
+![GitHub's new SSH key page](../../../public/pictures/posts/setting-up-ssh-keys/ssh_page.png)
 
 From now on, you can use the SSH cloning instead of the HTML, which will use your SSH key instead to authentify your connection. But do keep in mind that your key is only good for the computer you generated it with, you will have to make another key for any other devices you use.
 
