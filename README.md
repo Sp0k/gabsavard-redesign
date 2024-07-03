@@ -23,11 +23,11 @@ I know websites usually don't have a feature part, especially when they use fram
   - [x] Projects index page
     - [x] Automatically updates with new projects
   - [ ] Project Page Layout
-- [ ] Blog
+- [x] Blog
   - [x] Blog index page
     - [x] Filter the blog articles by tags
     - [x] Automatically updates with new articles
-  - [ ] Blog article Layout
+  - [x] Blog article Layout
 - [x] Contact Page
   - [x] Email form
   - [x] Socials list
@@ -50,7 +50,10 @@ Astro-website/
 │   ├── gs.svg
 │   ├── gab_savard_resume.pdf
 │   ├── hero.png
-│   └── rss
+│   ├── pictures/
+│   │     └── posts/
+│   │          └── folders of images for each article
+│   └── rss/
 │       └── pretty-feed-v3.xsl
 ├── README.md
 ├── src/
