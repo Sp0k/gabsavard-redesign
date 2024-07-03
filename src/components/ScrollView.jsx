@@ -10,7 +10,7 @@ const ScrollView = ({ children }) => {
       <Navigation />
       <div class="flex flex-row h-[100%] justify-center gap-8 ml-8 items-start">
         <SideBar />
-        <div className="max-w-[1400px] w-full h-[100%] min-h-[500px] max-h-[850px] overflow-y-scroll scrollbar">
+        <div className="max-w-[1400px] w-full h-[100%] min-h-[500px] max-h-[83vh] overflow-y-scroll scrollbar">
           {children}
           <p className="mx-auto text-[#999999] w-fit font-Source-Sans-Pro text-base py-6">
             © Copyright {year}. Made by Gab Savard.
