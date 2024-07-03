@@ -1,5 +1,5 @@
-const HeroImage = () => {
-  const currentJob = " Portfolio";
+const HeroImage = ({ currentJob }) => {
+  const project = " " + currentJob;
 
   return (
     <div className="w-[469px] h-[422px]">
@@ -8,7 +8,7 @@ const HeroImage = () => {
         <div className="w-4 h-4 bg-[#459DDE] border border-[#459DDE]" />
         <p className="text-gray-400 text-base font-normal font-Source-Sans-Pro">
           Currently working on
-          <b className="text-[#459DDE] text-base font-semibold">{currentJob}</b>
+          <b className="text-[#459DDE] text-base font-semibold">{project}</b>
         </p>
       </div>
     </div>
