@@ -15,7 +15,7 @@ const LatestPost = ({ post }) => {
           </p>
           <a
             href={path}
-            class="border border-[#459DDE] py-2 px-4 text-[#459DDE] font-Source-Sans-Pro text-base hover:bg-[#459DDE] hover:text-[#252525] transition-all"
+            className="border border-[#459DDE] py-2 px-4 text-[#459DDE] font-Source-Sans-Pro text-base hover:bg-[#459DDE] hover:text-[#252525] transition-all"
           >
             Read more {`>`}
           </a>
