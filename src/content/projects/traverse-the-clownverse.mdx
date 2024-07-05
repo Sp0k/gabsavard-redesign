@@ -1,0 +1,97 @@
+---
+title: "Traverse the Clownverse"
+description: "A comedy battle game developped mostly in C# using Unity for the Global Game Jam 2024"
+date: 2024-01-28
+color: "videoGame"
+type: "Video Game"
+---
+import Gallery from "../../components/Gallery";
+import Picture from "../../components/Picture";
+export function imgArray() {
+  const images = [
+    { src: "/pictures/projects/clownverse/clownverse_1.PNG", alt: "In-game screenshot of the player walking" },
+    { src: "/pictures/projects/clownverse/clownverse_2.PNG", alt: "Game's main menu" },
+    { src: "/pictures/projects/clownverse/clownverse_3.PNG", alt: "Screenshot taken from the in-game lore" },
+    { src: "/pictures/projects/clownverse/clownverse_4.PNG", alt: "Screenshot taken during a combat" },
+    { src: "/pictures/projects/clownverse/clownverse_5.PNG", alt: "Game's credits" }
+  ];
+
+  return images;
+}
+
+*Traverse the Clownverse* is a comedy battle game. It was created for the *Global Game Jam 2024*. The game consists of two
+phases: the exploration phase and the battle phase. During the exploration phase, you can walk around the campus and explore
+to find hidden secrets. Once you find a battle, enter it and test your comedic talent with the game's battle system. *Traverse
+the Clownverse* was developped by team Team Name, which was made up of the following people this year: Anthony Safatli, Lucy Woods,
+Mack Tapp, Nir Kazatsker, Will Watson, Charlie Baker and myself. The game is available on its official
+<a href="https://globalgamejam.org/games/2024/team-name-7" target="_blank">Global Game Jam page</a> or on its
+<a href="https://github.com/Sp0k/Clownverse" target="_blank">GitHub page</a>.
+
+## Game Description
+
+Welcome to Clown College, you have worked tirelessly to get here and are ready to begin your journey to become the funniest clown. But
+when you arrive, things seem... off. An oddly unfunny haze has covered the campus, there is a dark hue to it. It seems that the
+professors of the prestigious Clown College have been corrupted by an entity known as the Void Clown. Their laugh-force is being siphoned
+to the anti-clown world. You remain uncorrupted and you need to purify them and restore their laughter. In order to save your new school,
+you'll have to take part in comedy battles and win against each of the anti-clown.
+
+The recommended commands for the game are as follows:
+- [w] [a] [s] [d] keys to move and [spacebar] to jump
+- mouse to choose your punchlines
+- e to interact
+
+## Gallery
+
+<Gallery images={imgArray()} client:load />
+
+## Game Development
+
+*Traverse the Clownverse* was me team and I's project for the 2024 edition of the *Global Game Jam* which was, once again, on the
+Dalhousie University campus. I am very proud of what we accomplished this year. The team and I pushed ourselves further this year by
+developing a 3D game. This year, I took on the roles of Game Designer, Sound Designer and Programmer. I also shared the Lead Developer role
+with my friend <a href="https://github.com/AnthonySafatli" target="_blank">Anthony Safatli</a>.
+
+Given that only a few members of my team had developped a game in 3D before, I knew this year I needed to keep my design simpler, my scope
+and goals smaller than last year. That way, we could make sure to not rush at the end of the jam and cut features we were excited about. The
+main mechanic of our game, its combat system, was heavily inspired by *Assassin's Creed: Valhalla*'s slam battles. The player receives a joke
+setup and three option to choose from as a punchline. Each round, one punchline is the good one, and is worth 10 points, one is the bad one
+and worth -10 points and one is the mediocre option worth -15 points.
+
+This year, we decided to download our assets for the map and the players. But we did everything else by ourselves.
+<a href="https://github.com/watson-disambiguation" target="_blank">Watson</a> designed an amazing shader for us to give our assets an infected
+look to match the story we came up with.
+
+I also decided that this year, I would go more in-depth with the sound design, so I wrote and produced more tracks. Watson also recorded
+himself laugh and boo multiple times in order for me to produce his recording into a crowd of reactions depending on the option chosen by the
+player. I also went through my archives and pulled out an older track I produced back when I was applying for music school, the piece *Far West*
+from the <a href="/projects/demo-ep">Demo EP</a>.
+
+After I finished the music and sound design. I took a look at the combat system and helped rebuild it from scratch since we were having issues
+with it. We ended up staying on campus coding until almost 2:00 am that night to redesign the system, which I finished recoding the next
+morning. We decided to use a more object oriented programming (OOP) approach for it and using multiple scripts and array of objects to make it
+work instead of one script. With the ability to look back on it now, our first design, made with what we had learned in class, was not best 
+suited for Unity 2022 and C#. But it did make a lot of sense for a group of programmers with mostly Java experience for class projects.
+
+The game did not win any award, but we, once again, received multiple compliments and praises for it. We believe we were runner-up for best music.
+But this year, we made it to a few reports about the event. We were filmed for some footage for a CTV report about two Global Game Jam events in
+Halifax that weekend (Global Game Jam and Global Game Jam Next). I was also interviewed by Ethan Hunt, a student-journalist from *The Signal*
+(King's College official newspapers). The article was released a few weeks after the event. If you would like to read it, you can find Hunt's
+article <a href="https://signalhfx.ca/even-novices-can-thrive-at-video-game-creator-challenge/" target="_blank">here</a>.
+
+## Final Thoughts
+
+This year was a really fun edition, there was so many more people than the previous year, and it's always so inspiring to see so many creative minds
+in the same place, working together and helping each other. Events like these remind me why I love the game development community.
+
+I clearly feel like I learned even more about game development this year. Last year, I clearly learned the basics of a game jam. But this year,
+already knowing what to expect. I could focus on game development itself and I learned so much. I was able to learn how to divide scripts to
+make our job easier when developing features. I also learned that video games require an OOP approach for almost everything, as every entity is
+just a clone of a class we wrote. After this year's edition, I feel so much more confident in my ability to create a video game and I can't wait
+to see what I learn next about the field!
+
+I would like to finish by thanking the mentors that were there helping us through the weekedn as well as *ShiftKey Lab* and Dr. Rina Wehbe for 
+organizing the whole event for us again this year. I am looking forward to the next one.
+
+Again, if you would like to checkout the game yourself, you can find it on its official 
+<a href="https://globalgamejam.org/games/2024/team-name-7" target="_blank">Global Game Jam page</a> or on its
+<a href="https://github.com/Sp0k/Clownverse" target="_blank">GitHub page</a>. Github will have the most updated versions with bugfixes.
