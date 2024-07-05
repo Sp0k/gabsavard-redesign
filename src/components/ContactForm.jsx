@@ -98,14 +98,14 @@ const ContactForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col w-[575px] h-fit mt-10"
+      className="flex flex-col w-[95%] lg:w-[575px] h-fit mt-10"
     >
       <input
         type="text"
         placeholder="Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        className="bg-transparent border-b-2 border-b-neutral-400 font-Source-Sans-Pro text-3xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none focus:border-b-[#D9D9D9]"
+        className="bg-transparent border-b-2 border-b-neutral-400 font-Source-Sans-Pro text-xl md:text-3xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none focus:border-b-[#D9D9D9]"
         id="name"
       />
       {errors.name && (
@@ -118,7 +118,7 @@ const ContactForm = () => {
         placeholder="Email *"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="bg-transparent border-b-2 border-b-neutral-400 mt-9 font-Source-Sans-Pro text-3xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none focus:border-b-[#D9D9D9]"
+        className="bg-transparent border-b-2 border-b-neutral-400 mt-9 font-Source-Sans-Pro text-xl md:text-3xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none focus:border-b-[#D9D9D9]"
         id="email"
       />
       {errors.email && (
@@ -134,10 +134,10 @@ const ContactForm = () => {
           placeholder="Message *"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className="bg-transparent font-Source-Sans-Pro text-3xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none"
+          className="bg-transparent font-Source-Sans-Pro text-xl md:text-3xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none"
           rows={7}
         ></textarea>
-        <span className="text-right text-2xl">
+        <span className="text-right text-lg md:text-2xl">
           {message.length}/{MAX_MESSAGE_LENGTH}
         </span>
       </div>
@@ -146,12 +146,12 @@ const ContactForm = () => {
           {errors.message}
         </p>
       )}
-      <p className="font-Source-Sans-Pro text-neutral-400 text-lg mt-2">
+      <p className="font-Source-Sans-Pro text-neutral-400 text-base md:text-lg mt-2 mb-4 md:mb-0">
         Please include your contact information when you write me :)
       </p>
       <button
         type="submit"
-        className="border border-[#459DDE] text-[#459DDE] flex flex-row justify-center items-center fill-[#459DDE] hover:bg-[#459DDE] hover:fill-[#252525] hover:text-[#252525] transition-all text-4xl font-Nunito mb-[33px] h-[75px] w-[300px] mx-auto"
+        className="border border-[#459DDE] text-[#459DDE] flex flex-row justify-center items-center fill-[#459DDE] hover:bg-[#459DDE] hover:fill-[#252525] hover:text-[#252525] transition-all text-lg py-4 px-28 md:py-0 md:px-0 md:text-4xl font-Nunito mb-[33px] md:h-[75px] md:w-[300px] mx-auto"
       >
         Send
       </button>
