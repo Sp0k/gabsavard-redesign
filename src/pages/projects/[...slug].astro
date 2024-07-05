@@ -13,13 +13,13 @@ const { entry } = Astro.props
 const { Content } = await entry.render()
 
 const colors = {
-  videoGame: "text-purple-400",
-  code: "text-rose-700",
-  web: "text-emerald-400",
-  music: "text-cyan-300",
+  0: "text-purple-400",
+  1: "text-rose-700",
+  2: "text-emerald-400",
+  3: "text-cyan-300",
 };
 
-const color = colors[entry.data.color];
+const color = colors[0];
 ---
 <BaseLayout pageTitle={entry.data.title}>
   <div class="mt-4">
