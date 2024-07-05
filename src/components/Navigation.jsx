@@ -1,9 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const btnRef = useRef(null);
 
   const toggleMenu = () => {
+    if (isOpen) {
+      btnRef.current.classList.add("-rotate-90");
+    } else {
+      btnRef.current.classList.remove("-rotate-90");
+    }
     setIsOpen(!isOpen);
   };
 
@@ -33,19 +39,20 @@ const Navigation = () => {
           <button className="md:hidden text-[#D9D9D9]" onClick={toggleMenu}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              height="24px"
+              height="32px"
               viewBox="0 -960 960 960"
-              width="24px"
-              className="fill-neutral-400"
+              width="32px"
+              className="fill-neutral-400 transition-all"
+              ref={btnRef}
             >
               <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
             </svg>
           </button>
         </div>
         <ul
-          className={`${isOpen ? "h-0" : "h-[85vh]"} rounded-3xl z-50 md:h-fit absolute md:relative md:right-0 flex flex-col md:flex-row overflow-hidden items-center list-none bg-[#252525] md:bg-transparent w-[95%] md:w-auto top-[12vh] md:top-0 transition-all`}
+          className={`${isOpen ? "h-0" : "h-[81vh]"} rounded-3xl z-50 md:h-fit absolute md:relative md:right-0 flex flex-col md:flex-row overflow-hidden items-center list-none bg-[#252525] md:bg-transparent w-[95%] md:w-auto top-[3.6rem] md:top-0 transition-all`}
         >
-          <li className="ml-7 mt-7 md:mt-0">
+          <li className="md:ml-7 mt-7 md:mt-0">
             <a
               href="/projects/"
               className="w-12 h-12 fill-neutral-400 hover:fill-[#459DDE] transition-all"
@@ -60,7 +67,7 @@ const Navigation = () => {
               </svg>
             </a>
           </li>
-          <li className="ml-7 mt-7 md:mt-0">
+          <li className="md:ml-7 mt-7 md:mt-0">
             <a
               href="/blog/"
               className="w-12 h-12 fill-neutral-400 hover:fill-[#459DDE] transition-all"
@@ -75,7 +82,7 @@ const Navigation = () => {
               </svg>
             </a>
           </li>
-          <li className="ml-7 mt-7 md:mt-0">
+          <li className="md:ml-7 mt-7 md:mt-0">
             <a
               href="/about/"
               className="w-12 h-12 fill-neutral-400 hover:fill-[#459DDE] transition-all"
@@ -90,7 +97,7 @@ const Navigation = () => {
               </svg>
             </a>
           </li>
-          <li className="ml-7 mt-7 md:mt-0">
+          <li className="md:ml-7 mt-7 md:mt-0">
             <a
               href="/contact/"
               className="w-12 h-12 fill-neutral-400 hover:fill-[#459DDE] transition-all"
@@ -105,7 +112,7 @@ const Navigation = () => {
               </svg>
             </a>
           </li>
-          <li className="ml-7 mt-7 md:mt-0">
+          <li className="md:ml-7 mt-7 md:mt-0">
             <a
               href="/"
               className="w-12 h-12 fill-neutral-400 hover:fill-[#459DDE] transition-all"
