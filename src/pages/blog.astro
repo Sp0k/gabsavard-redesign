@@ -5,7 +5,7 @@ import BlogList from "../components/BlogList"
 
 const pageTitle = "Blog"
 const posts = (await getCollection('posts')).sort(
-  (a, b) => Date.parse(b.data.date) - Date.parse(a.data.date)
+  (a, b) => Date.parse(b.data.date.toString()) - Date.parse(a.data.date.toString())
 );
 const tags = [...new Set(posts.map((post) => post.data.tags).flat())];
 tags.sort();

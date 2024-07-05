@@ -5,7 +5,7 @@ import ProjectCard from "../components/ProjectCard"
 
 const pageTitle = "Projects"
 const projects = (await getCollection('projects')).sort(
-  (a, b) => Date.parse(b.data.date) - Date.parse(a.data.date)
+  (a, b) => Date.parse(b.data.date.toString()) - Date.parse(a.data.date.toString())
 );
 ---
 <BaseLayout pageTitle={pageTitle}>
@@ -15,7 +15,7 @@ const projects = (await getCollection('projects')).sort(
       Take a look at a few of my projects! If you like them, I have a few more hiding on my github page.
     </p>
   </div>
-  <div class="flex flex-row gap-3 flex-wrap mt-8">
+  <div class="flex flex-row gap-3 flex-wrap mt-8 justify-center items-center">
     {
       projects.map((p) => (
         <ProjectCard
