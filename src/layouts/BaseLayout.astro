@@ -14,7 +14,7 @@ const { pageTitle } = Astro.props
     <ViewTransitions />
 	</head>
   <body class="bg-[#252525]">
-    <ScrollView>
+    <ScrollView client:load>
       <slot />
     </ScrollView>
 	</body>

@@ -6,13 +6,13 @@ const ScrollView = ({ children }) => {
   const year = new Date().getFullYear();
 
   return (
-    <div className="max-w-screen-2xl h-[95vh] rounded-[40px] border-2 border-neutral-400 mx-auto mt-[3vh] overflow-hidden">
+    <div className="max-w-screen-2xl h-[95vh] rounded-[40px] border-2 border-neutral-400 mx-auto md:mt-[3vh] overflow-hidden">
       <Navigation />
       <div className="flex flex-row h-[100%] justify-center gap-8 ml-8 items-start">
         <SideBar />
         <div className="max-w-[1400px] w-full h-[100%] min-h-[500px] max-h-[83vh] overflow-y-scroll scrollbar scroll-smooth">
-          {children}
-          <p className="mx-auto text-[#999999] w-fit font-Source-Sans-Pro text-base py-6">
+          <div className="mr-6 md:mr-0">{children}</div>
+          <p className="mx-auto text-[#999999] w-fit font-Source-Sans-Pro text-sm md:text-base py-6">
             © Copyright {year}. Made by Gab Savard.
           </p>
         </div>
