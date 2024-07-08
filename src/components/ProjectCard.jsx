@@ -13,15 +13,19 @@ const ProjectCard = ({ color, title, type, description, url }) => {
       <a href={path}>
         <div className="w-full h-full">
           <div className="flex flex-row justify-between items-center">
-            <p className="text-3xl text-[#D9D9D9] text-Nunito">{title}</p>
+            <p className="text-2xl lg:text-3xl text-[#D9D9D9] text-Nunito">
+              {title}
+            </p>
             <p
-              className={`text-lg ${colors[color]} text-Source-Sans-Pro min-w-fit`}
+              className={`text-base lg:text-lg ${colors[color]} text-Source-Sans-Pro min-w-fit`}
             >
               {type}
             </p>
           </div>
           <hr className="h-[2px] bg-[#D9D9D9] border-none" />
-          <p className="text-xl text-[#D9D9D9] mt-4">{description}</p>
+          <p className="text-lg lg:text-xl text-[#D9D9D9] mt-4">
+            {description}
+          </p>
         </div>
       </a>
     </div>
