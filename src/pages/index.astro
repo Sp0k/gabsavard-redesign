@@ -16,10 +16,10 @@ const posts = (await getCollection('posts')).sort(
 <BaseLayout pageTitle={pageTitle}>
   <section class="h-[88vh] flex flex-row justify-evenly items-center" id="landing">
     <div class="w-[551px]">
-      <h1 class="font-Nunito font-semibold text-[#D9D9D9] text-5xl tracking-wider mb-3 animate-fade-right animate-once animate-ease-in-out">
+      <h1 class="font-Nunito font-semibold text-[#D9D9D9] text-4xl lg:text-5xl tracking-wider mb-3 animate-fade-right animate-once animate-ease-in-out">
         Hello, <Salutations />
       </h1>
-      <p class="text-[#D9D9D9] font-normal text-3xl space-x-0 mt-3 font-Source-Sans-Pro animate-fade-right animate-once animate-ease-in-out animate-delay-[800ms]">
+      <p class="text-[#D9D9D9] font-normal text-xl lg:text-3xl space-x-0 mt-3 font-Source-Sans-Pro animate-fade-right animate-once animate-ease-in-out animate-delay-[800ms]">
         Hi, I'm Gab! I am a canadian Computer Science <b class="font-normal text-[#459DDE]">student</b>,
         aspiring video game <b class="font-normal text-[#459DDE]">developer</b> and
         <b class="font-normal text-[#459DDE]">musician</b>
@@ -29,8 +29,8 @@ const posts = (await getCollection('posts')).sort(
     <HeroImage currentJob="Portfolio" />
   </section>
   <section class="h-fit flex flex-col py-10 mb-20" id="latest-posts">
-    <h2 class="font-Nunito font-semibold text-[#D9D9D9] text-5xl tracking-wider">Latest Posts</h2>
-    <p class="text-neutral-400 text-2xl mt-1">Have you read these new articles...</p>
+    <h2 class="font-Nunito font-semibold text-[#D9D9D9] text-4xl lg:text-5xl tracking-wider">Latest Posts</h2>
+    <p class="text-neutral-400 text-xl lg:text-2xl mt-1">Have you read these new articles...</p>
     <div class="flex flex-row justify-evenly flex-wrap">
       <LatestPost post={posts[0]} />
       <LatestPost post={posts[1]} />
@@ -38,10 +38,10 @@ const posts = (await getCollection('posts')).sort(
     </div>
   </section>
   <section class="h-fit flex flex-col py-10 mb-24" id="rss-feed">
-    <h3 class="font-Nunito font-semibold text-[#D9D9D9] text-5xl tracking-wider">Like what I write?</h3>
-    <p class="text-neutral-400 text-2xl mt-1">Add this site to your feed to be notified of my next posts!</p>
+    <h3 class="font-Nunito font-semibold text-[#D9D9D9] text-4xl lg:text-5xl tracking-wider">Like what I write?</h3>
+    <p class="text-neutral-400 text-xl lg:text-2xl mt-1">Add this site to your feed to be notified of my next posts!</p>
     <button 
-       class="border border-[#459DDE] text-[#459DDE] w-[400px] transition-all h-28 text-4xl mx-auto mt-[153px] hover:bg-[#459DDE] hover:text-[#252525]"
+       class="border border-[#459DDE] text-[#459DDE] w-[250px] lg:w-[400px] transition-all h-20 lg:h-28 text-2xl lg:text-4xl mx-auto mt-10 lg:mt-[153px] hover:bg-[#459DDE] hover:text-[#252525]"
        onclick={rssOnClick}
     >
       Add to feed

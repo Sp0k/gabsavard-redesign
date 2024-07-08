@@ -19,10 +19,10 @@ I know websites usually don't have a feature part, especially when they use fram
   - [x] Landing
   - [x] Latest posts
   - [x] RSS Button
-- [ ] Projects
+- [x] Projects
   - [x] Projects index page
     - [x] Automatically updates with new projects
-  - [ ] Project Page Layout
+  - [x] Project Page Layout
 - [x] Blog
   - [x] Blog index page
     - [x] Filter the blog articles by tags
@@ -33,6 +33,14 @@ I know websites usually don't have a feature part, especially when they use fram
   - [x] Socials list
 - [x] About Page
 - [x] RSS Setup
+- [ ] Make website responsive
+  - [x] Home page
+  - [x] Contact page
+  - [ ] Projects page
+    - [ ] project layouts
+  - [ ] Blog Page
+    - [ ] Blog article layouts
+  - [ ] About
 
 ## Project Structure
 

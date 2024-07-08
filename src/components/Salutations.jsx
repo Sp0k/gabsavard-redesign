@@ -17,7 +17,7 @@ const Salutations = () => {
   } while (randomNum > 8);
 
   return (
-    <b className="font-Nunito font-semibold text-[#459DDE] text-5xl tracking-wider mb-3">
+    <b className="font-Nunito font-semibold text-[#459DDE] text-4xl lg:text-5xl tracking-wider mb-3">
       {friends[randomNum]}
     </b>
   );
