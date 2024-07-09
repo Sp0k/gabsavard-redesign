@@ -55,9 +55,9 @@ const AudioPlayer = ({ audioSrc, songTitle, artist }) => {
   }, [currentTime]);
 
   return (
-    <div className="w-[41rem] border border-neutral-400 py-4 px-4 flex flex-row justify-evenly items-center mx-auto">
+    <div className="w-[90%] max-w-[35rem] lg:w-[41rem] border border-neutral-400 py-4 px-4 flex flex-row justify-evenly items-center mx-auto">
       <div className="flex items-center flex-col">
-        <div className="w-36 h-36 bg-white"></div>
+        <div className="hidden md:block w-36 h-36 bg-white"></div>
       </div>
       <div className="w-[350px]">
         <div className="flex flex-col items-center">

@@ -30,7 +30,11 @@ const Picture = ({ src, alt }) => {
           >
             &times;
           </span>
-          <img className="max-w-screen-lg max-h-screen" src={src} alt={alt} />
+          <img
+            className="max-w-screen-lg max-h-screen w-[100%] h-auto"
+            src={src}
+            alt={alt}
+          />
         </div>
       )}
     </div>
