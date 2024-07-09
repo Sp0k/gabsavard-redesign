@@ -33,12 +33,12 @@ I know websites usually don't have a feature part, especially when they use fram
   - [x] Socials list
 - [x] About Page
 - [x] RSS Setup
-- [ ] Make website responsive
+- [x] Make website responsive
   - [x] Home page
   - [x] Contact page
   - [x] Projects page
     - [x] project layouts
-  - [ ] Blog Page
+  - [x] Blog Page
     - [x] Blog article layouts
   - [x] About
 
