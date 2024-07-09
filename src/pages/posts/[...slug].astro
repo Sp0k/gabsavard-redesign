@@ -15,20 +15,21 @@ const { Content } = await entry.render()
 <BaseLayout pageTitle={entry.data.title}>
   <div class="mt-4">
     <div class="flex flex-col">
-      <h1 class="text-5xl text-[#D9D9D9] font-semibold font-Nunito mb-2">{entry.data.title}</h1>
-      <p class="text-xl text-[#D9D9D9] font-normal font-Source-Sans-Pro">published: <b class="text-xl text-[#459DDE] font-normal font-Source-Sans-Pro">{entry.data.date.toString().slice(4,15)}</b></p>
+      <h1 class="text-4xl lg:text-5xl text-[#D9D9D9] font-semibold font-Nunito mb-2">{entry.data.title}</h1>
+      <p class="text-lg lg:text-xl text-[#D9D9D9] font-normal font-Source-Sans-Pro">published: <b class="text-lg lg:text-xl text-[#459DDE] font-normal font-Source-Sans-Pro">{entry.data.date.toString().slice(4,15)}</b></p>
       <hr class="bg-[#D9D9D9] border-none h-[1px] max-w-screen-xl my-3">
     </div>
     <div class="max-w-screen-xl mb-4 prose
-                prose-p:text-lg prose-p:text-[#D9D9D9] prose-p:font-Source-Sans-Pro
+                prose-p:text-base lg:prose-p:text-lg prose-p:text-[#D9D9D9] prose-p:font-Source-Sans-Pro
                 prose-a:text-[#459DDE] prose-a:no-underline hover:prose-a:underline prose-a:transition-all
-                prose-h2:text-3xl prose-h2:mb-1 prose-h2:mt-8 prose-h2:text-[#D9D9D9]
+                prose-h2:text-2xl lg:prose-h2:text-3xl prose-h2:mb-0 lg:prose-h2:mb-1 prose-h2:mt-8 prose-h2:text-[#D9D9D9]
                 prose-code:bg-[#303030] prose-code:font-semibold prose-code:font-Nunito prose-code:text-pink-600
                 prose-em:italic prose-em:text-[#D9D9D9] prose-em:font-bold
                 prose-strong:text-[#D9D9D9] prose-strong:font-extrabold
                 prose-pre:py-0 prose-pre:px-0 prose-pre:rounded-none
-                prose-ol:text-lg prose-ol:text-[#D9D9D9] prose-ol:font-Source-Sans-Pro prose-ol:mx-8
-                prose-h3:text-2xl prose-h3:text-[#D9D9D9]
+                prose-ol:text-base lg:prose-ol:text-lg prose-ol:text-[#D9D9D9] prose-ol:font-Source-Sans-Pro prose-ol:mx-8
+                prose-ul:text-base lg:prose-ul:text-lg prose-ul:text-[#D9D9D9] prose-ul:font-Source-Sans-Pro prose-ul:mx-8
+                prose-h3:text-xl lg:prose-h3:text-2xl prose-h3:text-[#D9D9D9] prose-h3:font-bold prose-h3:mb-0 lg:prose-h3:mb-1
                 ">
       <Content />
     </div>

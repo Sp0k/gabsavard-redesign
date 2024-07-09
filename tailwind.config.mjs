@@ -26,6 +26,12 @@ export default {
                 paddingBottom: theme("spacing.4"),
                 paddingLeft: theme("spacing.4"),
                 paddingRight: theme("spacing.4"),
+                fontSize: theme("fontSize.sm"),
+                fontWeight: theme("fontWeight.normal"),
+                [`@screen lg`]: {
+                  fontSize: theme("fontSize.base"),
+                  fontWeight: theme("fontWeight.semibold"),
+                },
               },
             },
             code: {

@@ -39,7 +39,7 @@ I know websites usually don't have a feature part, especially when they use fram
   - [x] Projects page
     - [x] project layouts
   - [ ] Blog Page
-    - [ ] Blog article layouts
+    - [x] Blog article layouts
   - [x] About
 
 ## Project Structure
