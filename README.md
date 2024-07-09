@@ -36,11 +36,11 @@ I know websites usually don't have a feature part, especially when they use fram
 - [ ] Make website responsive
   - [x] Home page
   - [x] Contact page
-  - [ ] Projects page
-    - [ ] project layouts
+  - [x] Projects page
+    - [x] project layouts
   - [ ] Blog Page
     - [ ] Blog article layouts
-  - [ ] About
+  - [x] About
 
 ## Project Structure
 
