@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 
-const AudioPlayer = ({ audioSrc, songTitle, artist }) => {
+const AudioPlayer = ({ audioSrc, songTitle, artist, cover }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -57,7 +57,13 @@ const AudioPlayer = ({ audioSrc, songTitle, artist }) => {
   return (
     <div className="w-[90%] max-w-[35rem] lg:w-[41rem] border border-neutral-400 py-4 px-4 flex flex-row justify-evenly items-center mx-auto">
       <div className="flex items-center flex-col">
-        <div className="hidden md:block w-36 h-36 bg-white"></div>
+        <div className="hidden md:block w-36 h-36 bg-white">
+          <img
+            className="w-full h-full mx-auto my-auto"
+            src={cover.src}
+            alt={cover.alt}
+          />
+        </div>
       </div>
       <div className="w-[350px]">
         <div className="flex flex-col items-center">

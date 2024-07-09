@@ -30,7 +30,6 @@ export default {
                 fontWeight: theme("fontWeight.normal"),
                 [`@screen lg`]: {
                   fontSize: theme("fontSize.base"),
-                  fontWeight: theme("fontWeight.semibold"),
                 },
               },
             },
