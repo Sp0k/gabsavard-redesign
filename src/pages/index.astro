@@ -8,6 +8,7 @@ import Salutations from "../components/Salutations"
 const pageTitle="Home"
 const resumeOnClick = "window.open('/gab_savard_resume.pdf')"
 const rssOnClick = "window.open('/rss.xml')"
+const currentJob = "Desktop pet"
 
 const posts = (await getCollection('posts')).sort(
 (a, b) => Date.parse(b.data.date.toString()) - Date.parse(a.data.date.toString())
@@ -26,7 +27,7 @@ const posts = (await getCollection('posts')).sort(
       </p>
       <button class="w-44 h-14 flex justify-center items-center border border-[#459DDE] mt-6 text-[#459DDE] text-3xl hover:bg-[#459DDE] hover:text-[#252525] transition-all animate-fade-right animate-once animate-ease-in-out animate-delay-[1600ms]" onclick={resumeOnClick}>Resume</button>
     </div>
-    <HeroImage currentJob="Portfolio" />
+    <HeroImage currentJob={currentJob} />
   </section>
   <section class="h-fit flex flex-col py-10 mb-20" id="latest-posts">
     <h2 class="font-Nunito font-semibold text-[#D9D9D9] text-4xl lg:text-5xl tracking-wider">Latest Posts</h2>
