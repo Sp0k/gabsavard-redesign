@@ -48,18 +48,19 @@ ssh-copy-id user@remote_server
 Where <user> is your username and <remote_server> is the server name/link.
 
 ## Connecting your new SSH Key to your GitHub account
+
 Now that you have your SSH key generated, let's add it to your _GitHub_ account. To do so, first open _GitHub_ and head over to the settings page. on the side bar on the left, you should be able to see a section called SSH and GPG keys. Clicking on it should open the page about SSH and GPG keys
 
-![GitHub's settings](../../../public/pictures/posts/setting-up-ssh-keys/settings_screenshot.png)
+![GitHub's settings](/pictures/posts/setting-up-ssh-keys/settings_screenshot.png)
 
-![GitHub's SSH keys settings page](../../../public/pictures/posts/setting-up-ssh-keys/ssh_settings.png)
+![GitHub's SSH keys settings page](/pictures/posts/setting-up-ssh-keys/ssh_settings.png)
 
-From there, nothing easier, click on the *New SSH key* button to add your key. Once on that page, give your SSH key a title and copy your public key (the file ending in .pub) in the key text area. Once you copied it, click on the *Add SSH key* button, and you are done!
+From there, nothing easier, click on the _New SSH key_ button to add your key. Once on that page, give your SSH key a title and copy your public key (the file ending in .pub) in the key text area. Once you copied it, click on the _Add SSH key_ button, and you are done!
 
-![GitHub's new SSH key page](../../../public/pictures/posts/setting-up-ssh-keys/ssh_page.png)
+![GitHub's new SSH key page](/pictures/posts/setting-up-ssh-keys/ssh_page.png)
 
 From now on, you can use the SSH cloning instead of the HTML, which will use your SSH key instead to authentify your connection. But do keep in mind that your key is only good for the computer you generated it with, you will have to make another key for any other devices you use.
 
 ## But why would you use an SSH Key?
-An SSH key is, in my opinion, one of the most useful tool to a modern day developer. On top of saving you time and simplifying your connection to servers by connecting you automatically to them, it also enhances the security of your connection. I also think that SSH keys are one of the easiest terminal based tools to learn and start practicing using terminals. Finally, I think that it's important for every programmer to learn about SSH keys and how to use them, for all of the reasons mentioned above but also because they are getting more and more essential to keep using your usual services like _GitHub_ since they now require tokens and 2FA's, which you can skip using SSH keys.
 
+An SSH key is, in my opinion, one of the most useful tool to a modern day developer. On top of saving you time and simplifying your connection to servers by connecting you automatically to them, it also enhances the security of your connection. I also think that SSH keys are one of the easiest terminal based tools to learn and start practicing using terminals. Finally, I think that it's important for every programmer to learn about SSH keys and how to use them, for all of the reasons mentioned above but also because they are getting more and more essential to keep using your usual services like _GitHub_ since they now require tokens and 2FA's, which you can skip using SSH keys.
