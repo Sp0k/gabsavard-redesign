@@ -12,7 +12,7 @@ const Picture = ({ src, alt }) => {
   };
 
   return (
-    <div>
+    <div className="w-full max-h-[300px] overflow-hidden">
       <img
         src={src}
         alt={alt}
@@ -31,7 +31,7 @@ const Picture = ({ src, alt }) => {
             &times;
           </span>
           <img
-            className="max-w-screen-lg max-h-screen w-[100%] h-auto"
+            className="max-w-screen-lg max-h-screen w-auto h-auto"
             src={src}
             alt={alt}
           />
