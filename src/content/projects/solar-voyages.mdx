@@ -5,4 +5,69 @@ date: 2023-11-01
 color: "web"
 type: "Website"
 ---
-{frontmatter.title}
+import Gallery from "../../components/Gallery";
+export function mobileImages() {
+    const images = [
+        { src: "/pictures/projects/solar_voyages/mobile_home.png", alt: "mobile home page" },
+        { src: "/pictures/projects/solar_voyages/mobile - planet information.png", alt: "mobile planet information page" },
+        { src: "/pictures/projects/solar_voyages/mobile - payment.png", alt: "mobile payment page" },
+        { src: "/pictures/projects/solar_voyages/mobile - login.png", alt: "mobile login page" },
+        { src: "/pictures/projects/solar_voyages/mobile - loading page.png", alt: "mobile loading page" },
+        { src: "/pictures/projects/solar_voyages/mobile - cart.png", alt: "mobile cart page" },
+    ];
+
+    return images;
+}
+export function desktopImages() {
+    const images = [
+        { src: "/pictures/projects/solar_voyages/desktop - home page.png", alt: "desktop home page" },
+        { src: "/pictures/projects/solar_voyages/desktop - planet information.png", alt: "desktop planet information page" },
+        { src: "/pictures/projects/solar_voyages/desktop - login.png", alt: "desktop login page" },
+        { src: "/pictures/projects/solar_voyages/desktop - cart.png", alt: "desktop cart page" },
+    ];
+
+    return images;
+}
+
+In November 2023, my friends and I participated in the *NASA International Space App Challenges*,
+which was a nice experience. We decided to take on the space travel agency challenge, for which we
+had to design an educative tool about space. We decided that the best way to make that tool fun
+would be to design and develop a website for a travel agency which would offer space trips. This
+is how Solar Voyages was born.
+
+## Design
+
+Our goal was to build a full-stack website for this challenge. We had planned on using the *Razor
+pages* dotNet framework. We also wanted the website to look and feel realistic and professional.
+We ended up spending a few hours online (mostly on figma) studying travel agency websites and
+designing our website based on what we had found. We started by designing a mobile version, which
+came out looking more like a mobile app. We started with the mobile version because we had learned
+to develop mobile-first in our classes.
+
+<Gallery images={mobileImages()} client:load />
+
+We then proceeded to continue the design by working on the desktop version. Which ended up looking
+very different from the mobile version, pushing even more the idea that the mobile version should
+have been a mobile app. We ended up coming up with the following designs.
+
+<Gallery images={desktopImages()} client:load />
+
+## Development
+
+We ended up only having time to develop two pages of the desktop version of the website. While two
+of my teammates tried to set up the database with the framework. The rest of the team with myself
+got started on developing the front end. We ended up coding the two pages in HTML, CSS and
+JavaScript pure. We only had time to finish the main page and the sign in page. We also sadly ran
+out of time and did not get to program more. We also never got to set up the database.
+
+If you were curious to see the code behind our two pages, you can find a zipped folder on our
+<a href="https://github.com/Sp0k/SpaceJam2023" target="_blank">repo</a> with the few files of code
+we wrote.
+
+## Final thoughts
+
+Even though we never finished what we had planned originally, I think that we learned a lot through
+this hackathon. Firstly, I learned key concepts of design which greatly influenced the first
+version of my website and how I design my mobile apps now. I am also very proud of what we did. We
+received a lot of compliments from the mentors present that day about our code and how much we had
+achieved using no framework for our pages.
