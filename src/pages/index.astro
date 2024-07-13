@@ -18,7 +18,7 @@ const posts = (await getCollection('posts')).sort(
   <section class="h-[88vh] flex flex-row justify-evenly items-center" id="landing">
     <div class="w-[551px]">
       <h1 class="font-Nunito font-semibold text-[#D9D9D9] text-4xl lg:text-5xl tracking-wider mb-3 animate-fade-right animate-once animate-ease-in-out">
-        Hello, <Salutations />
+        Hello, <Salutations client:load />
       </h1>
       <p class="text-[#D9D9D9] font-normal text-xl lg:text-3xl space-x-0 mt-3 font-Source-Sans-Pro animate-fade-right animate-once animate-ease-in-out animate-delay-[800ms]">
         Hi, I'm Gab! I am a canadian Computer Science <b class="font-normal text-[#459DDE]">student</b>,
