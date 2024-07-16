@@ -6,6 +6,7 @@ const LanguageList = ({ languages }) => {
         className="w-10 h-10"
         viewBox="0 0 24 24"
       >
+        <title>Java</title>
         <path
           className="w-full h-full"
           fill="#D9D9D9"
@@ -34,7 +35,7 @@ const LanguageList = ({ languages }) => {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <title>HTML5</title>
+        <title>HTML</title>
         <path
           className="h-full w-full"
           fill="#D9D9D9"
@@ -49,7 +50,7 @@ const LanguageList = ({ languages }) => {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <title>CSS3</title>
+        <title>CSS</title>
         <path
           className="w-full h-full"
           fill="#D9D9D9"
