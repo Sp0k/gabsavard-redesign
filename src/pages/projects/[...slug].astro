@@ -19,7 +19,7 @@ const colors = {
   3: "text-cyan-300",
 };
 
-const color = colors[0];
+const color = (entry.data.color === "videoGame") ? colors[0] : ((entry.data.color === "code") ? colors[1] : ((entry.data.color === "web") ? colors[2] : colors[3]))
 ---
 <BaseLayout pageTitle={entry.data.title}>
   <div class="mt-4">
