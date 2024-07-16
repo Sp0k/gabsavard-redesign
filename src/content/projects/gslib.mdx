@@ -4,7 +4,9 @@ description: "A Java library made up of my most used methods and other methods I
 date: 2023-10-20
 color: "code"
 type: "Code Library"
+langs: ["java"]
 ---
+
 GSLib is a very own Java library. It is made up of different packages that I have written, each
 filled with different methods I either find myself using often, or wanted to try coding for fun.
 I wanted my library to include the following categories:
@@ -47,9 +49,9 @@ that will require it.
 
 With the latest version, you no longer need to create a FileManager object, as I made all
 the methods static to the class. Instead, you just import the package into your file and
-call the class. Using the **createFile()** method, you can create a new empty file of any 
+call the class. Using the **createFile()** method, you can create a new empty file of any
 type (specified in your path). The **createFile()** method takes a String _filename_ as
-a parameter which should be the absolute or relative path to your file (e.g. 
+a parameter which should be the absolute or relative path to your file (e.g.
 '~/Documents/Example/myFile.txt' or '../myFile.txt').
 
 ```java
@@ -95,6 +97,7 @@ void main() {
 To erase the content of a file, you can use the **eraseContent()** method which takes in a
 String _filename_ parameter to locate the file. It will replace the content of the file with
 an empty String.
+
 ```java
 import GSLib.FileManager;
 
@@ -113,7 +116,7 @@ import GSLib.FileManager;
 
 void main() {
   // ...
-  
+
   FileManager.deleteFile(filename);
 }
 ```

@@ -32,6 +32,7 @@ export const collections = {
       date: z.date(),
       color: z.string(),
       type: z.string(),
+      langs: z.array(z.string()),
     }),
   }),
 };

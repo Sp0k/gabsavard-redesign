@@ -24,6 +24,7 @@ const projects = (await getCollection('projects')).sort(
           url={p.slug}
           color={p.data.color}
           type={p.data.type}
+          languages={p.data.langs}
         />
       ))
     }
