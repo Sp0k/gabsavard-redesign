@@ -93,7 +93,9 @@ const LanguageList = ({ languages }) => {
   return (
     <div className="flex flex-row w-fit items-center">
       {languages.map((lang) => (
-        <p className="text-[#D9D9D9] ml-4">{icons[lang]}</p>
+        <p className="text-[#D9D9D9] ml-4" key={lang}>
+          {icons[lang]}
+        </p>
       ))}
     </div>
   );
