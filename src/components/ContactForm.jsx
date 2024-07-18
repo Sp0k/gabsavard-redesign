@@ -147,7 +147,7 @@ const ContactForm = () => {
         </p>
       )}
       <p className="font-Source-Sans-Pro text-neutral-400 text-base md:text-lg mt-2 mb-4">
-        Please include your contact information when you write me :)
+        * indicates required fields :)
       </p>
       <button
         type="submit"

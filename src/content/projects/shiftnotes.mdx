@@ -7,12 +7,28 @@ type: "Mobile App"
 langs: ["javascript", "react"]
 ---
 
+import Gallery from "../../components/Gallery";
+export function imgArray() {
+  const images = [
+    { src: "/pictures/projects/shiftnotes/shiftnotes_home.PNG", alt: "App's empty home screen" },
+    { src: "/pictures/projects/shiftnotes/shiftnotes_fullscreen.PNG", alt: "App's full home screen" },
+    { src: "/pictures/projects/shiftnotes/shiftnotes_edit_new.PNG", alt: "App's edit screen for new notes" },
+    { src: "/pictures/projects/shiftnotes/shiftnotes_search.PNG", alt: "Using the search feature" },
+    { src: "/pictures/projects/shiftnotes/shiftnotes_edit.PNG", alt: "App's edit screen" },
+    { src: "/pictures/projects/shiftnotes/shiftnotes_share.jpg", alt: "App's share feature" },
+    { src: "/pictures/projects/shiftnotes/shiftnotes_delete.PNG", alt: "App's delete feture" }
+  ];
+
+return images;
+}
+
 _Shift Notes_ is a note taking app I develop as my course project for ShiftKey
 labs' **React Native certification**. I developed the app in JavaScript, using
 the React Native framework as well as Tailwind for the styling and Expo for
 testing. The app needed to have a few features in order to pass:
 
 - Display the notes using a Mason list
+- Filter notes with a search bar
 - Create new notes
 - Edit notes
 - Delete notes
@@ -25,8 +41,45 @@ can see how <a href="/posts/automatic-scroll-view">here</a>)
 
 ## The application
 
-_**Insert Gallery & description**_
+_Shift Notes_ is made up of two screens: a home screen that displays all the
+notes saved and that the user can scroll through, and an editing screen where
+the user can edit the title and/or content of the note selected.
+
+From the home screen, users can go through their notes saved in the app's
+database. They can also filter the notes displayed using the search bar at the
+top of the screen. Finally, the user can create a new app by clicking on the
+"+" button at the bottom of the screen. Clicking on the button take the user
+to the editing screen where the user can type in a title or the content of its
+new note.
+
+Users can also access and edit their note by clicking on them on the home
+screen. When they click on it, they will have access to the editing screen from
+which they can modify the note's title and/or the note's content. In this
+screen, users can also delete or share their notes. The notes also
+automatically save. Finally, the edit screen will also auto scroll to the
+cursor. This feature was explained in <a href="/posts/automatic-scroll-view">this article</a>.
+
+<Gallery images={imgArray()} client:load />
 
 ## Challenges
 
+As this project was a project for a certification, there was bound to be
+challenges. The first one was obviously learning React Native as well as
+needing a refresher on JavaScript. The bigger challenges were implementing the
+features in the app. For example, the search bar was difficult for me to
+implement because I was learning how to use Redux as it was the first time I
+was seeing that tool. The feature I had the most difficulty with was the
+auto-scroll in the editing screen. I ended up doing plenty of research, but
+I wasn't able to implement any solutions I found online. So in the end I ended
+up coming up with my own solution.
+
+I also found that without a strong base in JavaScript, the learning curve for
+React Native is really harsh, but very rewarding.
+
 ## Final thoughts
+
+This project was a really fun one to work on. I am so glad I got to work on it
+with my dad in since we took the cource together, but I also found learning the
+framework really fun and rewarding. I loved working with React Native and I
+enjoyed a lot my course. I don't see myself making mobile apps for a living,
+but I do think I'll have more fun with React Native.

@@ -17,7 +17,7 @@ const Picture = ({ src, alt }) => {
         src={src}
         alt={alt}
         onClick={openModal}
-        className="w-full h-full transition-all hover:scale-[1.05] mt-0 object-cover cursor-pointer"
+        className="h-full min-w-60 w-full transition-all hover:scale-[1.05] mt-0 object-cover cursor-pointer"
       />
       {isOpen && (
         <div
