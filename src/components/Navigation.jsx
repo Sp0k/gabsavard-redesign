@@ -50,7 +50,7 @@ const Navigation = () => {
           </button>
         </div>
         <ul
-          className={`${isOpen ? "h-0" : "h-[81vh]"} rounded-3xl z-50 md:h-fit absolute md:relative md:right-0 flex flex-col md:flex-row overflow-hidden items-center list-none bg-[#252525] md:bg-transparent w-[95%] md:w-auto top-[3.6rem] md:top-0 transition-all`}
+          className={`${isOpen ? "h-0" : "h-[100svh]"} rounded-3xl z-50 md:h-fit absolute md:relative md:right-0 flex flex-col md:flex-row overflow-hidden items-center list-none bg-[#252525] md:bg-transparent w-[95%] md:w-auto top-[3.6rem] md:top-0 transition-all`}
         >
           <li className="md:ml-7 mt-7 md:mt-0">
             <a
