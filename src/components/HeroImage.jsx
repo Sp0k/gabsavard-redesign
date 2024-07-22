@@ -7,7 +7,7 @@ const HeroImage = ({ currentJob }) => {
       <div className="w-[402px] h-9 p-2 border border-neutral-400 justify-start items-center gap-2.5 inline-flex ml-8">
         <div className="w-4 h-4 bg-[#459DDE] border border-[#459DDE]" />
         <p className="text-gray-400 text-base font-normal font-Source-Sans-Pro">
-          Currently working on
+          Current objective:
           <b className="text-[#459DDE] text-base font-semibold">{project}</b>
         </p>
       </div>

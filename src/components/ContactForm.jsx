@@ -1,11 +1,14 @@
 import emailjs from "@emailjs/browser";
 import { useState } from "react";
+import Alert from "./Alert";
 
 const ContactForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState({});
+  const [showError, setShowError] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const MAX_NAME_LENGTH = 100;
   const MAX_MESSAGE_LENGTH = 2000;
@@ -84,6 +87,7 @@ const ContactForm = () => {
         .send(serviceId, templateId, templateParams, publicKey)
         .then((response) => {
           console.log("email sent successfully", response);
+          setShowSuccess(true);
           setName("");
           setEmail("");
           setMessage("");
@@ -91,71 +95,96 @@ const ContactForm = () => {
         })
         .catch((error) => {
           console.log("error sending email", error);
+          setShowError(true);
         });
     }
   };
 
+  const onCloseError = () => {
+    setShowError(false);
+  };
+
+  const onCloseSuccess = () => {
+    setShowSuccess(false);
+  };
+
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col w-[95%] lg:w-[575px] h-fit mt-10"
-    >
-      <input
-        type="text"
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        className="bg-transparent border-b-2 border-b-neutral-400 font-Source-Sans-Pro text-xl md:text-3xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none focus:border-b-[#D9D9D9]"
-        id="name"
+    <div>
+      <Alert
+        show={showError}
+        onClose={onCloseError}
+        children="Something went wrong..."
+        type="error"
+        client:load
       />
-      {errors.name && (
-        <p className="text-base text-red-500 font-Source-Sans-Pro mt-2">
-          {errors.name}
-        </p>
-      )}
-      <input
-        type="email"
-        placeholder="Email *"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="bg-transparent border-b-2 border-b-neutral-400 mt-9 font-Source-Sans-Pro text-xl md:text-3xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none focus:border-b-[#D9D9D9]"
-        id="email"
+      <Alert
+        show={showSuccess}
+        onClose={onCloseSuccess}
+        children="Message sent!"
+        type="success"
+        client:load
       />
-      {errors.email && (
-        <p className="text-base text-red-500 font-Source-Sans-Pro mt-2">
-          {errors.email}
-        </p>
-      )}
-      <div
-        className="bg-transparent flex flex-col border-b-2 border-b-neutral-400 font-Source-Sans-Pro placeholder-neutral-400 focus-within:border-b-[#D9D9D9] text-neutral-400 focus-within:text-[#D9D9D9] mt-9"
-        id="message"
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col w-[95%] lg:w-[575px] h-fit mt-10"
       >
-        <textarea
-          placeholder="Message *"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          className="bg-transparent font-Source-Sans-Pro text-xl md:text-3xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none"
-          rows={7}
-        ></textarea>
-        <span className="text-right text-lg md:text-2xl">
-          {message.length}/{MAX_MESSAGE_LENGTH}
-        </span>
-      </div>
-      {errors.message && (
-        <p className="text-base text-red-500 font-Source-Sans-Pro mt-2">
-          {errors.message}
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="bg-transparent border-b-2 border-b-neutral-400 font-Source-Sans-Pro text-xl md:text-3xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none focus:border-b-[#D9D9D9]"
+          id="name"
+        />
+        {errors.name && (
+          <p className="text-base text-red-500 font-Source-Sans-Pro mt-2">
+            {errors.name}
+          </p>
+        )}
+        <input
+          type="email"
+          placeholder="Email *"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="bg-transparent border-b-2 border-b-neutral-400 mt-9 font-Source-Sans-Pro text-xl md:text-3xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none focus:border-b-[#D9D9D9]"
+          id="email"
+        />
+        {errors.email && (
+          <p className="text-base text-red-500 font-Source-Sans-Pro mt-2">
+            {errors.email}
+          </p>
+        )}
+        <div
+          className="bg-transparent flex flex-col border-b-2 border-b-neutral-400 font-Source-Sans-Pro placeholder-neutral-400 focus-within:border-b-[#D9D9D9] text-neutral-400 focus-within:text-[#D9D9D9] mt-9"
+          id="message"
+        >
+          <textarea
+            placeholder="Message *"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            className="bg-transparent font-Source-Sans-Pro text-xl md:text-3xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none"
+            rows={7}
+          ></textarea>
+          <span className="text-right text-lg md:text-2xl">
+            {message.length}/{MAX_MESSAGE_LENGTH}
+          </span>
+        </div>
+        {errors.message && (
+          <p className="text-base text-red-500 font-Source-Sans-Pro mt-2">
+            {errors.message}
+          </p>
+        )}
+        <p className="font-Source-Sans-Pro text-neutral-400 text-base md:text-lg mt-2 mb-4">
+          * indicates required fields :)
         </p>
-      )}
-      <p className="font-Source-Sans-Pro text-neutral-400 text-base md:text-lg mt-2 mb-4">
-        * indicates required fields :)
-      </p>
-      <button
-        type="submit"
-        className="border border-[#459DDE] text-[#459DDE] flex flex-row justify-center items-center fill-[#459DDE] hover:bg-[#459DDE] hover:fill-[#252525] hover:text-[#252525] transition-all text-lg py-4 px-28 md:py-0 md:px-0 md:text-4xl font-Nunito mb-[33px] md:h-[75px] md:w-[300px] mx-auto"
-      >
-        Send
-      </button>
-    </form>
+        <button
+          type="submit"
+          className="border border-[#459DDE] text-[#459DDE] flex flex-row justify-center items-center fill-[#459DDE] hover:bg-[#459DDE] hover:fill-[#252525] hover:text-[#252525] transition-all text-lg py-4 px-28 md:py-0 md:px-0 md:text-4xl font-Nunito mb-[33px] md:h-[75px] md:w-[300px] mx-auto"
+        >
+          Send
+        </button>
+      </form>
+    </div>
   );
 };
 
