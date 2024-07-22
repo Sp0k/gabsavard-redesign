@@ -7,7 +7,7 @@ type: "Mobile App"
 langs: ["javascript", "react"]
 ---
 
-import Gallery from "../../components/Gallery";
+import MobileGallery from "../../components/MobileGallery";
 export function imgArray() {
   const images = [
     { src: "/pictures/projects/shiftnotes/shiftnotes_home.PNG", alt: "App's empty home screen" },
@@ -59,7 +59,7 @@ screen, users can also delete or share their notes. The notes also
 automatically save. Finally, the edit screen will also auto scroll to the
 cursor. This feature was explained in <a href="/posts/automatic-scroll-view">this article</a>.
 
-<Gallery images={imgArray()} client:load />
+<MobileGallery images={imgArray()} client:load />
 
 ## Challenges
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Picture = ({ src, alt }) => {
+const MobilePicture = ({ src, alt }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -17,7 +17,7 @@ const Picture = ({ src, alt }) => {
         src={src}
         alt={alt}
         onClick={openModal}
-        className="h-full w-full transition-all hover:scale-[1.05] mt-0 object-cover cursor-pointer"
+        className="h-auto w-full transition-all hover:scale-[1.05] mt-0 object-cover cursor-pointer"
       />
       {isOpen && (
         <div
@@ -41,4 +41,4 @@ const Picture = ({ src, alt }) => {
   );
 };
 
-export default Picture;
+export default MobilePicture;

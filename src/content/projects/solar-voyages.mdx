@@ -8,6 +8,7 @@ langs: ["html", "css", "javascript"]
 ---
 
 import Gallery from "../../components/Gallery";
+import MobileGallery from "../../components/MobileGallery";
 export function mobileImages() {
     const images = [
         { src: "/pictures/projects/solar_voyages/mobile_home.png", alt: "mobile home page" },
@@ -22,12 +23,12 @@ export function mobileImages() {
 
 }
 export function desktopImages() {
-const images = [
-{ src: "/pictures/projects/solar_voyages/desktop - home page.png", alt: "desktop home page" },
-{ src: "/pictures/projects/solar_voyages/desktop - planet information.png", alt: "desktop planet information page" },
-{ src: "/pictures/projects/solar_voyages/desktop - login.png", alt: "desktop login page" },
-{ src: "/pictures/projects/solar_voyages/desktop - cart.png", alt: "desktop cart page" },
-];
+    const images = [
+	{ src: "/pictures/projects/solar_voyages/desktop - home page.png", alt: "desktop home page" },
+	{ src: "/pictures/projects/solar_voyages/desktop - planet information.png", alt: "desktop planet information page" },
+	{ src: "/pictures/projects/solar_voyages/desktop - login.png", alt: "desktop login page" },
+	{ src: "/pictures/projects/solar_voyages/desktop - cart.png", alt: "desktop cart page" },
+    ];
 
     return images;
 
@@ -48,7 +49,7 @@ designing our website based on what we had found. We started by designing a mobi
 came out looking more like a mobile app. We started with the mobile version because we had learned
 to develop mobile-first in our classes.
 
-<Gallery images={mobileImages()} client:load />
+<MobileGallery images={mobileImages()} client:load />
 
 We then proceeded to continue the design by working on the desktop version. Which ended up looking
 very different from the mobile version, pushing even more the idea that the mobile version should
