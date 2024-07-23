@@ -55,23 +55,39 @@ Astro-website/
 ├── package.json
 ├── package-lock.json
 ├── public/
-│   ├── gs.svg
+│   ├── computer.svg
 │   ├── gab_savard_resume.pdf
 │   ├── hero.png
+│   ├── music/
+│   │     └── demo_ep/
+│   │         ├── Ballade.wav
+│   │         ├── 'Far West.wav'
+│   │         ├── 'F E E L I N G S.mp3'
+│   │         └── Running.wav
 │   ├── pictures/
-│   │     └── posts/
-│   │          └── folders of images for each article
+│   │     ├── posts/
+│   │     │   └── folders of images for each article
+│   │     └── projects/
+│   │         └── folders of images for each project
 │   └── rss/
 │       └── pretty-feed-v3.xsl
 ├── README.md
 ├── src/
 │   ├── components/
+│   │   ├── Alert.jsx
+│   │   ├── AudioPlayer.jsx
 │   │   ├── BlogCard.jsx
 │   │   ├── BlogList.jsx
 │   │   ├── ContactForm.jsx
+│   │   ├── Gallery.jsx
 │   │   ├── HeroImage.jsx
+│   │   ├── LanguageList.jsx
 │   │   ├── LatestPost.jsx
+│   │   ├── MobileGallery.jsx
+│   │   ├── MobilePicture.jsx
 │   │   ├── Navigation.jsx
+│   │   ├── Picture.jsx
+│   │   ├── ProjectCard.jsx
 │   │   ├── Salutations.jsx
 │   │   ├── ScrollView.jsx
 │   │   ├── SideBar.jsx
@@ -80,8 +96,10 @@ Astro-website/
 │   │   └── TagButton.jsx
 │   ├── content/
 │   │   ├── config.ts
-│   │   └── posts/
-│   │       └── (All blog posts)
+│   │   ├── posts/
+│   │   │   └── (All blog posts)
+│   │   └── projects/
+│   │       └── (All projects posts)
 │   ├── layouts/
 │   │   └── BaseLayout.astro
 │   ├── pages/
@@ -89,6 +107,11 @@ Astro-website/
 │   │   ├── blog.astro
 │   │   ├── contact.astro
 │   │   ├── index.astro
+│   │   ├── posts/
+│   │   │   └── '[...slug].astro'
+│   │   ├── projects/
+│   │   │   └── '[...slug].astro'
+│   │   ├── projects.astro
 │   │   └── rss.xml.js
 │   ├── styles/
 │   │   └── global.css
