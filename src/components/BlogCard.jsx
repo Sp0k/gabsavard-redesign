@@ -1,8 +1,5 @@
 const BlogCard = ({ title, description, url, image }) => {
   const path = "/posts/" + url;
-  const onClickHandler = () => {
-    `window.location.href=${path}`;
-  };
 
   return (
     <div className="w-full md:w-fit md:max-w-2xl lg:max-w-[1000px] border border-[#D9D9D9] flex flex-row py-4 px-4 my-4 mx-auto hover:shadow-[#459DDE] hover:shadow-lg transition-all hover:border-[#459DDE]">
@@ -17,12 +14,9 @@ const BlogCard = ({ title, description, url, image }) => {
           <div className="text-lg lg:text-xl text-[#D9D9D9] font-Source-Sans-Pro mb-6">
             {description}
           </div>
-          <button
-            onClick={onClickHandler}
-            className="border border-[#459DDE] py-1 lg:py-2 px-2 lg:px-4 text-[#459DDE] font-Source-Sans-Pro text-base hover:bg-[#459DDE] hover:text-[#252525] transition-all"
-          >
+          <div className="border border-[#459DDE] w-fit py-1 lg:py-2 px-2 lg:px-4 text-[#459DDE] font-Source-Sans-Pro text-base hover:bg-[#459DDE] hover:text-[#252525] transition-all">
             Read more {`>`}
-          </button>
+          </div>
         </div>
       </a>
     </div>
