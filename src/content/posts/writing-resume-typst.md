@@ -1,6 +1,6 @@
 ---
 title: "Writing a resume with Typst"
-date: 2024-07-23 12:01:00
+date: 2024-07-24 12:01:00
 description: "My template for a resume using the Typst CLI with plugins"
 author: "Gab 'Sp0k' Savard"
 tags: ["typst", "tutorial", "professional"]
