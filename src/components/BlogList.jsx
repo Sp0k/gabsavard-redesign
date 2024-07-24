@@ -1,47 +1,50 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BlogCard from "./BlogCard";
 import TagButton from "./TagButton";
+import Pagination from "./Pagination";
 
 const BlogList = ({ posts, tags }) => {
   const [list, setList] = useState([...posts]);
   const [active, setActive] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
-  function addActive(tag) {
-    const tmp = active;
-    tmp.push(tag);
-    setActive(tmp);
-  }
+  useEffect(() => {
+    filterByTag();
+  }, [active]);
 
-  function removeActive(tag) {
-    const tmp = active;
-    const index = tmp.indexOf(tag);
-    if (index > -1) {
-      tmp.splice(index, 1);
-    }
-    setActive(tmp);
-  }
+  const addActive = (tag) => {
+    setActive((prev) => [...prev, tag]);
+  };
+
+  const removeActive = (tag) => {
+    setActive((prev) => prev.filter((t) => t !== tag));
+  };
 
   const pressHandler = (tag) => {
     active.includes(tag) ? removeActive(tag) : addActive(tag);
-    filterByTag();
   };
 
   const filterByTag = () => {
-    if (active.length === 0) setList([...posts]);
-    else {
-      const tmp = [...posts];
-      for (let i = 0; i < active.length; i++) {
-        for (let j = 0; j < tmp.length; j++) {
-          if (!tmp[j].data.tags.includes(active[i])) {
-            tmp.splice(j, 1);
-            j--;
-          }
-        }
-      }
-
-      setList([...tmp]);
+    if (active.length === 0) {
+      setList([...posts]);
+    } else {
+      const filteredPosts = posts.filter((post) =>
+        active.every((tag) => post.data.tags.includes(tag)),
+      );
+      setList(filteredPosts);
     }
+    setCurrentPage(1);
   };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = list.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(list.length / itemsPerPage);
 
   return (
     <div className="mt-6">
@@ -57,7 +60,7 @@ const BlogList = ({ posts, tags }) => {
             Seems like there is no posts that match those tags
           </p>
         ) : (
-          list.map((post) => (
+          currentItems.map((post) => (
             <BlogCard
               title={post.data.title}
               description={post.data.description}
@@ -66,6 +69,15 @@ const BlogList = ({ posts, tags }) => {
               key={post.id}
             />
           ))
+        )}
+        {list.length >= itemsPerPage ? (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        ) : (
+          <></>
         )}
       </div>
     </div>
