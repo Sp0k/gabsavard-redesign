@@ -86,6 +86,7 @@ Astro-website/
 │   │   ├── MobileGallery.jsx
 │   │   ├── MobilePicture.jsx
 │   │   ├── Navigation.jsx
+│   │   ├── Pagination.jsx
 │   │   ├── Picture.jsx
 │   │   ├── ProjectCard.jsx
 │   │   ├── Salutations.jsx
