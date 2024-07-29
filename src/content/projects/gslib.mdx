@@ -11,10 +11,12 @@ GSLib is a very own Java library. It is made up of different packages that I hav
 filled with different methods I either find myself using often, or wanted to try coding for fun.
 I wanted my library to include the following categories:
 
-1. File Management
-2. Statistics
-3. Math
-4. Calculus
+1. **Utilities**
+   - File Manager
+   - Directory Manager
+1. **Statistics**
+1. **Math**
+1. **Calculus**
 
 So far, I have been able to finish and publish the file management package, but I have not yet
 finished finished the others. I will also be making sure the whole thing will work with the
@@ -22,102 +24,166 @@ latest version of Java.
 
 ## Installation
 
-Some installation instructions will be provided soon.
+The library hasn't been uploaded to any online tool for libraries like Maven or Gradle.
+The only way to use the library right now is to download the `GSLib.zip` file from the
+latest release (available <a href="https://github.com/Sp0k/GSLib/releases" target="_blank">here</a>).
+You can then unzip the compressed file and copy the directory to your projects.
 
-## File Management
+## Using the library
 
-This package focuses on my file management methods. It is the smallest the packages in the
-library as it contains only 5 methods for now.
+The library is not hard to use once you have it imported into your project. All
+of the methods are static, meaning you just need to import the classes you need
+to use and call the methods statically. Here is an example with some classes
+of the utilities package.
 
-### Package features
+The goal in the example, is to create a file, then create a folder copy the file
+inside the folder and then copy the folder inside another folder we have created.
 
-- File creation: Create a file from an absolute or relative path to the file.
-- File deletion: Delete a file from an absolute or relative path to the file.
-- File reading: Read in a file and return its content in a String Format.
-- File writing: Write a string to a specified file.
-- Erase content: Erase the content of a file.
-
-These are the five current features in the package. I am planning on adding a method to
-erase specific content. Both erase specific strings and from line x to line y.
-
-### Usage
-
-Each of the methods will print error messages to the terminal if any is encountered.
-
-In order to use the library, you must import it in your project, then call it in the files
-that will require it.
-
-With the latest version, you no longer need to create a FileManager object, as I made all
-the methods static to the class. Instead, you just import the package into your file and
-call the class. Using the **createFile()** method, you can create a new empty file of any
-type (specified in your path). The **createFile()** method takes a String _filename_ as
-a parameter which should be the absolute or relative path to your file (e.g.
-'~/Documents/Example/myFile.txt' or '../myFile.txt').
+Code:
 
 ```java
-import GSLib.FileManager;
+import GSLib.Utilities.FileManager;
+import GSLib.Utilities.DirectoryManager;
 
 public class Example {
-  void main() {
-    String filename = "path/to/your/file"       // If you are using windows, replace the / with \\
-    FileManager.createFile(filename);
+  public static void main(String[] args) {
+    // Create file
+    FileManager.newFile("newFile.txt");
+
+    // Create first directory
+    DirectoryManager.newDirectory("NewDirectory");
+
+    // Copy file into directory
+    FileManager.copyFile("newFile.txt", "NewDirectory/copiedFile.txt");
+
+    // Create another directory
+    DirectoryManager.newDirectory("AnotherNewDirectory");
+
+    // Copy first directory into new one
+    DirectoryManager.copyDirectory("NewDirectory", "AnotherNewDirectory/CopiedDirectory");
   }
 }
 ```
 
-You can read a file using the **readFile()** method. The method takes in a String _filename_ as
-a parameter in order to locate the file to read. It then scans the entire file and returns its
-content as a String.
+Output:
+
+```bash
+File created: newFile.txt
+path: /home/sp0k/Documents/Personal/Languages/Java/Libraries/GSLib/newFile.txt
+Successfully created NewDirectory!
+Path: /home/sp0k/Documents/Personal/Languages/Java/Libraries/GSLib/NewDirectory
+Successfully copied file: newFile.txt to NewDirectory/copiedFile.txt!
+Successfully created AnotherNewDirectory!
+Path: /home/sp0k/Documents/Personal/Languages/Java/Libraries/GSLib/AnotherNewDirectory
+Successfully copied the directory from NewDirectory to AnotherNewDirectory/CopiedDirectory
+```
+
+Keep in mind that your output would come in the terminal that you use for these classes.
+The colors here are just to make it more readable.
+
+## Utilities
+
+The **Utilities** package is a package containing a few classes that I find useful
+for management inside the code. I find that a **Utilities** package makes life
+easier while programming since I no longer need to rewrite a lot of those
+methods that I often use, especially the file management methods which I use
+often with school. You can find the package <a href="https://github.com/Sp0k/GSLib/tree/main/Source_Code/Utilities" target="_blank">here</a>
+along with more documentation on it.
+
+### File Manager
+
+The File Manager class contains methods I use for managing files in my code.
+The more projects I do and the bigger they get, the more I find myself rewriting
+these methods into my code. This class is the reason I started working on this
+library. My goal in having this class is to replace the need of having multiple
+File objects in my code to keep tracks of my files. Instead, I get to use most of
+the File class methods through static method calls, which might potentially make
+my code more efficient, but definitely makes it easier to read.
+
+This class lets users do the following:
+
+- Create a file,
+- Delete a file,
+- Read a file,
+- Write to a file,
+- Rename a file,
+- Move a file,
+- Copy a file,
+- Erase the content of a file.
 
 ```java
-import GSLib.FileManager;
+import GSLib.Utilities.FileManager;
 
-void main() {
-  // ...
+public class Example {
+  public static void main(String[] args) {
+    // Create a file
+    FileManager.newFile(filepath);
 
-  String file = FileManager.readFile(filename);
+    // Delete a file
+    FileManager.deleteFile(filepath);
+
+    // Read a file (returns a String)
+    String file = FileManager.readFile(filepath);
+
+    // Write to a file
+    FileManager.writeToFile(filepath, "Hello, World!");
+
+    // Rename a file
+    FileManager.renameFile(filepath, newName);
+
+    // Move a file (Doesn't include the name of the file in the destination path)
+    FileManager.moveFile(filepath, dest);
+
+    // Copy a file (Includes the name of the file in the destination path)
+    FileManager.copyFile(filepath, dest);
+
+    // Erase content of a file
+    FileManager.eraseContent(filepath);
+  }
 }
 ```
 
-To write to a file, you will need to use the **writeToFile()** method. The method takes in a
-String _filename_ and a String _content_ as parameters. It will find the file using _filename_
-and then writes the String in _content_ in said file.
+### Directory Manager
+
+The Directory Manager is the second class I decided to write, once I had time
+to focus on the project again. Having a manager for my files, I thought that
+on bigger projects I might want to be able to also manage the directories for
+my data. This lead to this class. I also like this class because there is over
+6 months between this one and File Manager, and the difference between the
+understanding of what I'm doing and the quality of work is huge.
+
+This class lets users do the following:
+
+- Create directories,
+- Delete directories (and everything inside),
+- Rename a directory,
+- Move a directory,
+- Copy a directory.
 
 ```java
-import GSLib.FileManager;
+import GSLib.Utilities.DirectoryManager;
 
-void main() {
-  // ...
+public class Example {
+  public static void main(String[] args) {
+    // Create a directory in current one
+    DirectoryManager.newDirectory(dirName);
 
-  String content = "Hello, World! This is my message!";
-  FileManager.writeToFile(filepath, content);
-}
-```
+    // Create a directory at a specific location (Doesn't include the name of the file in the path)
+    DirectoryManager.newDirectory(dirName, dirPath);
 
-To erase the content of a file, you can use the **eraseContent()** method which takes in a
-String _filename_ parameter to locate the file. It will replace the content of the file with
-an empty String.
+    // Delete a directory
+    DirectoryManager.deleteDirectory(dirPath);
 
-```java
-import GSLib.FileManager;
+    // Rename a directory
+    DirectoryManager.renameDirectory(dirPath, newName);
 
-void main() {
-  // ...
 
-  FileManager.eraseContent(filename);
-}
-```
+    // Move a directory (Doesn't include the name of the directory in the destination path)
+    DirectoryManager.moveDirectory(dirPath, dest);
 
-You can use the **deleteFile()** method to delete files. The method takes in a String _filename_
-as a parameter to locate the file and then deletes it.
-
-```java
-import GSLib.FileManager;
-
-void main() {
-  // ...
-
-  FileManager.deleteFile(filename);
+    // Copy a directory (Includes the name of the directory in the destination path)
+    DirectoryManager.copyDirectory(dirPath, dest);
+  }
 }
 ```
 
