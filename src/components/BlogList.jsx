@@ -7,7 +7,7 @@ const BlogList = ({ posts, tags }) => {
   const [list, setList] = useState([...posts]);
   const [active, setActive] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 16;
 
   useEffect(() => {
     filterByTag();
