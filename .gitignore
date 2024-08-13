@@ -3,6 +3,9 @@ dist/
 # generated types
 .astro/
 
+# Typst files
+*.typ
+
 # dependencies
 node_modules/
 
