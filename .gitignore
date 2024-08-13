@@ -4,7 +4,7 @@ dist/
 .astro/
 
 # typst files
-.typ/
+*.typ
 
 # dependencies
 node_modules/
