@@ -3,7 +3,7 @@ title: "MySQL Survival Guide"
 date: 2024-02-18
 description: "My personal MySQL database coding guide based on Dalhousie's CSCI-2141: Intro to Databases"
 author: "Gab 'Sp0k' Savard"
-tags: ["guide", "dalhousie", "database"]
+tags: ["guide", "dalhousie", "database", "school"]
 image:
   url: "https://servermall.com/upload/medialibrary/b36/gvr5uafwnfk2uthxs3dct6zoy3n2sijt/mysql.jpg"
   alt: "An image showing a computer, a phone and the logos of Apple, Android and React Native"
@@ -129,7 +129,7 @@ to your **MySQL** server.
 
 The equivalent of 'ls' in bash inside your server.
 
-```mysql
+```sql
 -- Shows all elements of the type precised
 SHOW DATABASES;
 SHOW TABLES;
@@ -139,10 +139,14 @@ SHOW TABLES;
 
 ### USE
 
+<<<<<<< HEAD
 Opens the database specified. Any query executed will be executed for this DB.
 
 <<<<<<< Updated upstream
 ```mysql
+=======
+```sql
+>>>>>>> 179ffd6 (Article: add new article about Kleberg)
 USE DatabaseDB
 =======
 ```sql
@@ -160,7 +164,7 @@ DB at the end (i.e. DatabaseDB). Table names will be all lowercase.**
 The `SELECT` query generates customized results to a query. It does **NOT**
 modify the data in the table!
 
-```mysql
+```sql
 SELECT columns
   FROM table_name
   WHERE criteria
@@ -168,8 +172,12 @@ SELECT columns
   LIMIT max_rows;
 ```
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 ```mysql
+=======
+```sql
+>>>>>>> 179ffd6 (Article: add new article about Kleberg)
 SELECT * -- retrive and display every columns from a table. Still requires a FROM attribute.
 =======
 ```sql
@@ -181,8 +189,12 @@ SELECT * FROM table_name; -- Returns every columns from a table.
 
 Gives a display name to a column when printing the results of the query.
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 ```mysql
+=======
+```sql
+>>>>>>> 179ffd6 (Article: add new article about Kleberg)
 SELECT column1 AS 'name1' column2 AS 'name2', column3 AS 'name3', ...
   FROM [table];
 =======
@@ -223,7 +235,7 @@ languages. There is however specific ones to **MySQL**.
 
 Example:
 
-```mysql
+```sql
 SELECT column1, column2, column3, ...
   FROM table_name
   WHERE column1 = value; -- This case looks for the elements that match the value.
@@ -241,7 +253,7 @@ Allow more than one condition for the different attributes.
 
 Example:
 
-```mysql
+```sql
 SELECT column1, column2, column3, ...
   FROM table_name
   WHERE (column1 = 'value1' OR column1 <> 'value2') AND NOT column2 = 'value3';
@@ -254,7 +266,7 @@ multiple OR operator for the same attribute.
 
 Example:
 
-```mysql
+```sql
 SELECT column1, column2, column3, ...
   FROM table_name
   WHERE column IN (value_1, value_2, ...);
@@ -283,7 +295,7 @@ Examples:
 
 Like with `%`
 
-```mysql
+```sql
 -- Looks for everything that starts with "A" or "a"
 SELECT column1, column2, column3, ...
   FROM table_name
@@ -297,7 +309,7 @@ SELECT column1, column2, column3, ...
 
 LIKE wildcard matching
 
-```mysql
+```sql
 -- Looks for everything containing 'rain'
 SELECT column1, column2, column3, ...
   FROM table_name
@@ -312,7 +324,7 @@ SELECT column1, column2, column3, ...
 
 Multiple LIKE conditions
 
-```mysql
+```sql
 -- Looks for every string where at least one of them starts with 'A'
 SELECT column1, column2, column3, ...
   FROM table_name
@@ -322,7 +334,7 @@ SELECT column1, column2, column3, ...
 
 NOT LIKE
 
-```mysql
+```sql
 -- Looks for every string who's second character is not "A"
 SELECT column1, column2, column3, ...
   FROM table_name
@@ -339,14 +351,14 @@ along with the `INSERT` operations and read/ran into the server later.
 There is two options to create new databases. <br/>
 Option 1: Don't create a new one on top of an old one.
 
-```mysql
+```sql
 -- Ensures if the database already exist it won't be overwrittten
 CREATE DATABASE IF NOT EXISTS NameDB;
 ```
 
 Option 2: Ensure a new one is created (Will cause an error if the database does not already exist)
 
-```mysql
+```sql
 -- Erases the database and recreates it
 DROP DATABASE NameDB;
 CREATE DATABASE NameDB;
@@ -358,7 +370,7 @@ capitalized DB (i.e. CitiesDB)**
 Both option of database creation can also be used together to ensure less
 error.
 
-```mysql
+```sql
 DROP DATABASE IF EXISTS NameDB;
 CREATE DATABASE IF NOT EXISTS NameDB;
 ```
@@ -368,20 +380,20 @@ CREATE DATABASE IF NOT EXISTS NameDB;
 There is also two options to create new tables. The same logic can also be used to combine both options.<br/>
 Option 1: Don't create a table with the same name as an existing one
 
-```mysql
+```sql
 CREATE TABLE IF NOT EXISTS table_name (...);
 ```
 
 Option 2: Ensure a new fresh table is created
 
-```mysql
+```sql
 DROP TABLE table_name;
 CREATE TABLE table_name;
 ```
 
 When creating a new table, one should add parameters to the table
 
-```mysql
+```sql
 CREATE TABLE table_name (
   column_1 DATATYPE_CONSTRAINT(S),
   column_2 DATATYPE_CONSTRAINT(S),
@@ -392,7 +404,7 @@ CREATE TABLE table_name (
 
 Example of a table creation taken from Dr. Beiko's slides:
 
-```mysql
+```sql
 CREATE TABLE cities_simplified (
   city_id INT,
   city_name VARCHAR(100) NOT NULL,
@@ -434,7 +446,7 @@ These examples are taken directly from Dr. Beiko's slides.
 
 Create table using DEFAULT:
 
-```mysql
+```sql
 CREATE TABLE cities_simplified(
   city_id INT,
   city_name VARCHAR(100) NOT NULL,
@@ -448,7 +460,7 @@ CREATE TABLE cities_simplified(
 
 Create table using CHECK constraints:
 
-```mysql
+```sql
 CREATE TABLE cities_simplified(
   city_id INT,
   city_name VARCHAR(100) NOT NULL,
@@ -464,7 +476,7 @@ CREATE TABLE cities_simplified(
 
 Create table with AUTO_INCREMENT:
 
-```mysql
+```sql
 CREATE TABLE cities_simplified(
   city_id INT AUTO_INCREMENT,
   city_name VARCHAR(100) NOT NULL,
@@ -486,49 +498,49 @@ data already in the database._
 Examples:<br/>
 Add a column:
 
-```mysql
+```sql
 ALTER TABLE table_name
   ADD (new_colname DATATYPE constraints);
 ```
 
 Drop a column:
 
-```mysql
+```sql
 ALTER TABLE table_name
   DROP COLUMN column_name;
 ```
 
 Modify column type:
 
-```mysql
+```sql
 ALTER TABLE table_name
   MODIFY COLUMN column_name new_datatype;
 ```
 
 Change column name:
 
-```mysql
+```sql
 ALTER TABLE table_name
   CHANGE old_column_name new_column_name;
 ```
 
 Add primary key:
 
-```mysql
+```sql
 ALTER TABLE table_name
   ADD PRIMARY KEY (column_name);
 ```
 
 Drop primary key:
 
-```mysql
+```sql
 ALTER TABLE table_name
   DROP PRIMARY KEY;
 ```
 
 Add foreign key:
 
-```mysql
+```sql
 ALTER TABLE table_name
   ADD CONSTRAINT fk_name
   FOREIGN KEY (column_name)
@@ -537,42 +549,42 @@ ALTER TABLE table_name
 
 Drop foreign key:
 
-```mysql
+```sql
 ALTER TABLE table_name
   DROP FOREIGN KEY fk_name;
 ```
 
 Add index:
 
-```mysql
+```sql
 ALTER TABLE table_name
   ADD INDEX index_name (column_name);
 ```
 
 Drop index:
 
-```mysql
+```sql
 ALTER TABLE table_name
   DROP INDEX index_name;
 ```
 
 Rename table:
 
-```mysql
+```sql
 ALTER TABLE old_table_name
   RENAME TO new_table_name;
 ```
 
 Add unique constraint:
 
-```mysql
+```sql
 ALTER TABLE table_name
   ADD UNIQUE (column_name);
 ```
 
 Drop unique constraint:
 
-```mysql
+```sql
 ALTER TABLE table_name
   DROP INDEX index_name;
 ```
@@ -583,13 +595,13 @@ Deletes the specified table or database.
 
 Database:
 
-```mysql
+```sql
 DROP DATABASE Database_nameDB;
 ```
 
 Table:
 
-```mysql
+```sql
 DROP TABLE table_name;
 ```
 
@@ -597,14 +609,14 @@ DROP TABLE table_name;
 
 The INSERT statement is used to add new entities(rows) to a table.
 
-```mysql
+```sql
 INSERT INTO table_name(column_name1, column_name2, column_name3, ...)
 VALUES (value1, value2, value3, ...);
 ```
 
 or
 
-```mysql
+```sql
 INSERT INTO table_name(column_name1, column_name2, column_name3, ...)
 VALUES
 (value1, value2, value3, ...),
@@ -623,7 +635,7 @@ this must be used with precaution.
 The UPDATE statement is used to update a table with new values for
 columns and entities.
 
-```mysql
+```sql
 UPDATE table_name
   SET column1 = value1, column2 = value2, column3 = value3, ...
   WHERE conditions;
@@ -633,7 +645,7 @@ UPDATE table_name
 
 The DELETE statement is used to delete a row in a table.
 
-```mysql
+```sql
 DELETE FROM table_name
   WHERE conditions;
 ```
@@ -649,7 +661,7 @@ values from different columns using various operators.
 The idea is to be able to use them to mix values, for example calculating the
 population density:
 
-```mysql
+```sql
 SELECT population/land_area
   FROM table_name
   WHERE condition;
@@ -659,14 +671,14 @@ SELECT population/land_area
 
 ROUND(attribute, digits): Round attribute to digits of precision (default is zero).
 
-```mysql
+```sql
 SELECT ROUND(1.1111); -- Will be equal to 1
 SELECT ROUND(1.1111, 2); -- Will be equal to 1.11
 ```
 
 The ROUND command can renamed with an alias using AS.
 
-```mysql
+```sql
 SELECT column1, column2, column3, ROUND(column3/column2, 1) AS alias
   FROM table_name;
 ```
@@ -689,15 +701,15 @@ aggregation operators.
 
 How many rows satisfy a given condition?
 
-```mysql
+```sql
 SELECT COUNT(*) FROM table_name;
 ```
 
-```mysql
+```sql
 SELECT COUNT(column) FROM table_name;
 ```
 
-```mysql
+```sql
 SELECT COUNT(column)
   FROM table_name
   WHERE condition;
@@ -710,14 +722,14 @@ once in the table.
 
 Display distinct values:
 
-```mysql
+```sql
 SELECT DISTINCT column
   FROM table_name;
 ```
 
 Display the number of distinct values
 
-```mysql
+```sql
 SELECT COUNT(DISTINCT(column)) AS 'name'
   FROM table_name;
 ```
@@ -727,39 +739,39 @@ SELECT COUNT(DISTINCT(column)) AS 'name'
 <ins>**With numbers:**</ins><br>
 Identify the average value of an attribute
 
-```mysql
+```sql
 SELECT AVG(column) AS 'name'
   FROM table_name;
 ```
 
 Identify the max value of an attribute
 
-```mysql
+```sql
 SELECT MAX(column) FROM table_name;
 ```
 
 Identify the min value of an attribute
 
-```mysql
+```sql
 SELECT MIN(column) FROM table_name;
 ```
 
 Identify the sum of the value of an attribute
 
-```mysql
+```sql
 SELECT SUM(column) FROM table_name;
 ```
 
 <ins>**With strings, sort of...**</ins><br>
 MAX returns the last value in alphabetical order
 
-```mysql
+```sql
 SELECT MAX(column) FROM table_name;
 ```
 
 MIN returns the first value in alphabetical order
 
-```mysql
+```sql
 SELECT MIN(column) FROM table_name;
 ```
 
@@ -794,7 +806,7 @@ the related table.
 **The parent table must already exist before the foreign-key relationship is created!**<br/>
 A foreign key can be added during the creation of a new table.
 
-```mysql
+```sql
 CREATE TABLE IF NOT EXISTS table_2 (
   column_1 DATATYPE constraint UNIQUE,
   column_2 DATATYPE constraint,
@@ -807,7 +819,7 @@ CREATE TABLE IF NOT EXISTS table_2 (
 
 Reminder on how to add a foreign key to an already existing table:
 
-```mysql
+```sql
 ALTER TABLE table_name
   ADD FOREIGN KEY (column_name)
   REFERENCES parent_table(parent_column_name);
@@ -822,7 +834,7 @@ combine data from two or more tables to identify associations between entities.
 
 For now, this guide has shown the following code:
 
-```mysql
+```sql
 SELECT column_names
   FROM table_name
   WHERE conditions
@@ -835,7 +847,7 @@ SELECT column_names
 This lets a user get all the information they would want from one table. But, **MySQL** lets them also
 request information from different tables in a single statement. The code would now look like this:
 
-```mysql
+```sql
 SELECT column_names
   FROM table_1 JOIN table_2
     ON (column_name1 = column_name2)/USING(colname) -- USING is simpler to use, in my opinion
@@ -852,7 +864,7 @@ Selecting columns when there is multiple tables in the statement looks a little 
 when coding with Java. As one write their query, they have to specify which table to get the
 information from using either the name of the table or an alias.
 
-```mysql
+```sql
 SELECT t1.column_1, t1.column_2, t1.column_3
   FROM table_1 t1;
 ```
@@ -860,7 +872,7 @@ SELECT t1.column_1, t1.column_2, t1.column_3
 Using aliases or table names like the example above is unnecessary when there is only one table,
 but essential the moment the statement requires two or more tables.
 
-```mysql
+```sql
 SELECT t1.column_1, t1.column_2, t2.column_a
   FROM table_1 t1 JOIN table_2 t2 USING(column_a);
 ```
@@ -888,7 +900,7 @@ The CROSS JOIN, sometimes referred to as the most basic join, combines every
 row of Table 1 with every row of Table 2. It yields the Cartesian product,
 which is usually not very useful on its own.
 
-```mysql
+```sql
 SELECT * FROM table_name1 CROSS JOIN table_name2;
 ```
 
@@ -897,7 +909,7 @@ syntax. It consists of replacing the `CROSS JOIN` terms themselves by a `,`.
 This makes the code more compact but also less explicit, which, when writing
 databases with multiple programmer, would be bad.
 
-```mysql
+```sql
 SELECT * FROM table_name1, table_name2;
 ```
 
@@ -912,7 +924,7 @@ information on an entity that isn't stored in that specific row for example. In
 order to solve this problem, one would have to establish a restriction using
 the WHERE keyword, for example:
 
-```mysql
+```sql
 SELECT *
   FROM table_name1 t1 CROSS JOIN table_name2 t2
   WHERE t1.column_1 = t2.column_A;
@@ -926,19 +938,19 @@ the matching criteria.
 Just like the CROSS JOIN, the INNER JOIN also has an alternative form: JOIN. The four following commands
 would all yield the same result:
 
-```mysql
+```sql
 SELECT * FROM table_name1, table_name2; -- Implicit terminology, restricts with WHERE
 ```
 
-```mysql
+```sql
 SELECT * FROM table_name1 CROSS JOIN table_name2; -- Explicit terminology, restricts with WHERE
 ```
 
-```mysql
+```sql
 SELECT * FROM table_name1 JOIN table_name2; -- Implicit terminology, restricts with ON/USING
 ```
 
-```mysql
+```sql
 SELECT * FROM table_name1 INNER JOIN table_name2; -- Explicit terminology, restricts with ON/USING
 ```
 
@@ -981,22 +993,26 @@ The OUTER JOIN also has "add-ons" for the command to specify which table to take
 
 Here is how one would write each of the commands for the different specifications:
 
-```mysql
+```sql
 SELECT *
   FROM table_name1 t1
   LEFT OUTER JOIN table_name2 t2
   ON t1.column_1 = t2.column_a;
 ```
 
-```mysql
+```sql
 SELECT *
   FROM table_name1 t1
   RIGHT OUTER JOIN table_name2 t2
   ON t1.column_1 = t2.column_a;
 ```
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 ```mysql
+=======
+```sql
+>>>>>>> 179ffd6 (Article: add new article about Kleberg)
 SELECT *
   FROM table_name1 t1
   FULL OUTER JOIN table_name2 t2
