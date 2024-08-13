@@ -1,52 +1,36 @@
----
-title: "MySQL Survival Guide"
-date: 2024-02-18
-description: "My personal MySQL database coding guide based on Dalhousie's CSCI-2141: Intro to Databases"
-author: "Gab 'Sp0k' Savard"
-tags: ["guide", "dalhousie", "database", "school"]
-image:
-  url: "https://servermall.com/upload/medialibrary/b36/gvr5uafwnfk2uthxs3dct6zoy3n2sijt/mysql.jpg"
-  alt: "An image showing a computer, a phone and the logos of Apple, Android and React Native"
----
+# MySQL Survival Guide
 
 This started as a personal **MySQL** help file, catered to my Ubuntu machine. I
 wrote it for Dalhousie's CSCI-2141: Intro to Databases taught by Dr. Beiko and
 Dr. Malloch. The guide does not cover theory, or at least not a lot of theory,
-as its only goal was to be a cheat sheet for coding **MySQL**. You can download
-the PDF for this guide
-<a href="/downloads/mysql-survival-guide.pdf" download>here</a>
-or the original markdown file
-<a href="/downloads/mysql-survival-guide.md" download>here</a>.
+as its only goal was to be a cheat sheet for coding **MySQL**.
 
-Last updated: 2024-08-12 <br/>
+Last updated: 2024-08-12<br/>
 Up to: Week 5
-
-_I am currently working on this guide. Starting by rewriting it for clarity and
-the website, then I will finish with the missing 5 weeks._
 
 ## Table of contents
 
-1. Utilities
-2. Inside MySQL Server
-3. Queries
-   1. Select
-   2. Create
-   3. Alter
-   4. Insert
-   5. Update
-   6. Delete
-   7. Derived Attributes
-4. Aggregation
-   1. Count
-   2. Distinct
-   3. Max, min, sum, avg
-5. Connecting Tables
-6. Table Joins
-7. JOINS
-   1. CROSS JOIN
-   2. INNER JOIN
-   3. NATURAL JOIN
-   4. OUTER JOIN
+1. [Utilities](#utilities)
+2. [Inside MySQL Server](#inside-mysql-server)
+3. [Queries](#queries)
+   1. [Select](#select)
+   2. [Create](#create)
+   3. [Alter](#alter)
+   4. [Insert](#insert)
+   5. [Update](#update)
+   6. [Delete](#delete)
+   7. [Derived Attributes](#derived-attributes)
+4. [Aggregation](#aggregation)
+   1. [Count](#count)
+   2. [Distinct](#distinct)
+   3. [Max, min, sum, avg](#max,-min,-sum,-avg)
+5. [Connecting Tables](#connecting-tables)
+6. [Table Joins](#table-joins)
+7. [JOINS](#joins)
+   1. [CROSS JOIN](#cross-join)
+   2. [INNER JOIN](#inner-join)
+   3. [NATURAL JOIN](#natural-join)
+   4. [OUTER JOIN](#outer-join)
 
 ## Utilities
 
@@ -978,16 +962,6 @@ SELECT *
   RIGHT OUTER JOIN table_name2 t2
   ON t1.column_1 = t2.column_a;
 ```
-
-```sql
-SELECT *
-  FROM table_name1 t1
-  FULL OUTER JOIN table_name2 t2
-  ON t1.column_1 = t2.column_a
-```
-
-<strong>CAREFUL!!!!</strong><br>
-**MySQL** does not support the FULL OUTER JOINS
 
 ### SELF JOIN ?
 
