@@ -3,7 +3,7 @@ title: "My First Capture The Flag"
 date: 2024-07-11
 description: "I recently got the chance to participate in my first CTF hosted by ShiftKey Labs!"
 author: "Gab 'Sp0k' Savard"
-tags: ["cybersecurity", "event", "hackathon"]
+tags: ["cybersecurity", "event", "hackathon", "school", "dalhousie"]
 image:
   url: "/pictures/posts/my-first-ctf/htb_cover_1.png"
   alt: "Logos of HTB and ShiftKey Labs"
