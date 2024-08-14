@@ -12,8 +12,8 @@ This is the code for my personal [website](https://gabsavard.com). I am using th
 
 I know websites usually don't have a feature part, especially when they use frameworks like Astro that are more about being static. But I am using this section more as a checklist for what I want to do with my website:
 
-- [ ] Home Page
-  - [ ] Replace the hero image
+- [x] Home Page
+  - [x] Replace the hero image
   - [x] Salutation module
   - [x] Resume
   - [x] Landing
@@ -56,6 +56,9 @@ Astro-website/
 ├── package-lock.json
 ├── public/
 │   ├── computer.svg
+│   ├── downloads/
+│   │     ├── mysql-survival-guide.md
+│   │     └── mysql-survival-guide.pdf
 │   ├── gab_savard_resume.pdf
 │   ├── hero.png
 │   ├── music/
