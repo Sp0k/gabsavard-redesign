@@ -8,7 +8,7 @@ import Salutations from "../components/Salutations"
 const pageTitle="Home"
 const resumeOnClick = "window.open('/gab_savard_resume.pdf')"
 const rssOnClick = "window.open('/rss.xml')"
-const currentJob = "Portfolio"
+const currentJob = "Desktop Pet"
 
 const posts = (await getCollection('posts')).sort(
 (a, b) => Date.parse(b.data.date.toString()) - Date.parse(a.data.date.toString())
