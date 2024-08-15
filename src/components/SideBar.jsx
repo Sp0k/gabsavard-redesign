@@ -40,7 +40,7 @@ const SideBar = () => {
         </li>
         <li className="mt-6">
           <a
-            href="https://www.instagram.com/gabsavard_code/"
+            href="https://www.instagram.com/simply.sp0k_/"
             target="_blank"
             className="w-8 h-8 fill-neutral-400 hover:fill-[#459DDE] transition-all"
           >
@@ -58,7 +58,7 @@ const SideBar = () => {
         </li>
         <li className="mt-6">
           <a
-            href="https://www.youtube.com/@simply_gab"
+            href="https://www.youtube.com/@simply_sp0k"
             target="_blank"
             className="w-8 h-8 fill-neutral-400 hover:fill-[#459DDE] transition-all"
           >
