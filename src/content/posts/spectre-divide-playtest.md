@@ -43,22 +43,29 @@ On top of the duality system, _Spectre Divide_ also offers a sponsor system.
 Each player on each team selects a sponsor at the beginning of each match.
 The sponsor determines your loadout for the match. Each of them represent a
 style of gameplay, from more classic shooter game to more tactical. Each of
-the sponsors also have a specific role assigned to them.
+the sponsors also have a specific role assigned to them. You can find all the
+details about each sponsor and ability
+<a href="https://playspectre.com/the-sponsors" target="_blank">here</a>, but
+here is a quick list of each of each ability.
 
 <div class="justify-center flex">
   <img src="/pictures/posts/spectre-divide-review/sponsors.png" alt="The icons for each of the 8 sponsors" />
 </div>
 
-| Sponsor                | Role      | Primary Ability               | Secondary Ability              | Tertiary Ability                              |
-| ---------------------- | --------- | ----------------------------- | ------------------------------ | --------------------------------------------- |
-| Pinnacle International | Assault   | Splinter Grenade              | Adrena-Link (Self-healing)     | Flash Grenade                                 |
-| Morrgen United         | Disruptor | Smoke Shift (Smoke grenade)   | Meltdown (Area damage)         | Hidden Grasp (Hidden trap)                    |
-| Bloom Technologies     | Support   | Hex Barrier (Shield)          | Twin Mend (Healing other)      | Swarm Grenade (Area Damage)                   |
-| Ryker Industries       | Recon     | Wave Scane (Enemy Detection)  | Hull Mine                      | Acr Sentry (Crowd control / sentry)           |
-| Vector Dynamics        | Assault   | Dual Amp (Fire rate buff)     | Vector Wall (Slow moving wall) | Nano Sphere (Period damage)                   |
-| Ghost Link Collective  | Disruptor | Holo Wall                     | Dupe                           | Distortion Field (Blur vision inside an area) |
-| Muu Robotics           | Support   | Patches (Period Healing)      | Dazzler (Blinding)             | Hyper Dome (Health Shield dome)               |
-| Umbra Reconnaissance   | Recon     | PulseFinder (Emeny Detection) | Recon Wing (Enemy Detection)   | Glare Burts (Blinding)                        |
+<div class="justify-center flex">
+
+| Sponsor                | Role      | Primary Ability  | Secondary Ability | Tertiary Ability |
+| ---------------------- | --------- | ---------------- | ----------------- | ---------------- |
+| Pinnacle International | Assault   | Splinter Grenade | Adrena-Link       | Flash Grenade    |
+| Morrgen United         | Disruptor | Smoke Shift      | Meltdown          | Hidden Grasp     |
+| Bloom Technologies     | Support   | Hex Barrier      | Twin Mend         | Swarm Grenade    |
+| Ryker Industries       | Recon     | Wave Scane       | Hull Mine         | Acr Sentry       |
+| Vector Dynamics        | Assault   | Dual Amp         | Vector Wall       | Nano Sphere      |
+| Ghost Link Collective  | Disruptor | Holo Wall        | Dupe              | Distortion Field |
+| Muu Robotics           | Support   | Patches          | Dazzler           | Hyper Dome       |
+| Umbra Reconnaissance   | Recon     | PulseFinder      | Recon Wing        | Glare Burts      |
+
+</div>
 
 Finally, like a few tactical shooters, you buy your weapons at the beginning of
 each rounds. The weapons that will be available depends on how much money you
@@ -84,8 +91,9 @@ sprint quite annoying. Situations that I could survive if I was able to sprint
 out of them become deathtraps here. Instead of a sprint button, the game gives
 you a walk button.
 
-<div class="flex justify-center">
-  <img src="/pictures/posts/spectre-divide-review/gameplay_1.jpg" alt="In game picture" />
+<div class="flex justify-center flex-wrap lg: gap-4">
+  <img src="/pictures/posts/spectre-divide-review/gameplay_1.jpg" alt="Mid-battle screenshot of the player shooter at other players" width="600" />
+  <img src="/pictures/posts/spectre-divide-review/gameplay_2.PNG" alt="Screenshot of my score on the scoreboard" width="600" />
 </div>
 
 I find that getting used to the loadouts takes some time, you have to try

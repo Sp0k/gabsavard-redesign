@@ -14,7 +14,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       <ul className="flex flex-row items-center">
         <li className="my-0 mx-8">
           <button
-            className={`text-3xl ${currentPage === 1 ? "cursor-not-allowed text-[#454545]" : "cursor-pointer text-[#D9D9D9]"}`}
+            className={`text-3xl ${currentPage === 1 ? "cursor-not-allowed text-[#454545]" : "cursor-pointer text-[#D9D9D9] hover:text-[#459DDE]"}`}
             onClick={previousPage}
           >
             {`<-`}
@@ -34,7 +34,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           className={`my-0 mx-8 ${currentPage === totalPages && "cursor-not-allowed text-[#454545]"}`}
         >
           <button
-            className={`text-3xl ${currentPage === totalPages ? "cursor-not-allowed text-[#454545]" : "cursor-pointer text-[#D9D9D9]"}`}
+            className={`text-3xl ${currentPage === totalPages ? "cursor-not-allowed text-[#454545]" : "cursor-pointer text-[#D9D9D9] hover:text-[#459DDE]"}`}
             onClick={nextPage}
           >
             {`->`}

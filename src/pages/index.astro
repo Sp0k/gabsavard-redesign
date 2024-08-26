@@ -8,7 +8,7 @@ import Salutations from "../components/Salutations"
 const pageTitle="Home"
 const resumeOnClick = "window.open('/gab_savard_resume.pdf')"
 const rssOnClick = "window.open('/rss.xml')"
-const currentJob = "Sand Simulation"
+const currentJob = "NFC Task Manager"
 
 const posts = (await getCollection('posts')).sort(
 (a, b) => Date.parse(b.data.date.toString()) - Date.parse(a.data.date.toString())
@@ -17,15 +17,15 @@ const posts = (await getCollection('posts')).sort(
 <BaseLayout pageTitle={pageTitle}>
   <section class="h-[88vh] flex flex-row justify-evenly items-center" id="landing">
     <div class="w-[551px]">
-      <h1 class="font-Nunito font-semibold text-[#D9D9D9] text-4xl lg:text-5xl tracking-wider mb-3 animate-fade-right animate-once animate-ease-in-out">
+      <h1 class="font-Nunito font-semibold text-[#D9D9D9] text-4xl lg:text-5xl tracking-wider mb-3 animate-fade-right animate-once animate-ease-in-out animate-delay-[300ms]">
         Hello, <Salutations client:load />
       </h1>
-      <p class="text-[#D9D9D9] font-normal text-xl lg:text-3xl space-x-0 mt-3 font-Source-Sans-Pro animate-fade-right animate-once animate-ease-in-out animate-delay-[800ms]">
+      <p class="text-[#D9D9D9] font-normal text-xl lg:text-3xl space-x-0 mt-3 font-Source-Sans-Pro animate-fade-right animate-once animate-ease-in-out animate-delay-[1100ms]">
         Hi, I'm Gab! I am a Canadian Computer Science <b class="font-normal text-[#459DDE]">student</b>,
         aspiring video game <b class="font-normal text-[#459DDE]">developer</b> and
         <b class="font-normal text-[#459DDE]">musician</b>
       </p>
-      <button class="w-44 h-14 flex justify-center items-center border border-[#459DDE] mt-6 text-[#459DDE] text-3xl hover:bg-[#459DDE] hover:text-[#252525] transition-all animate-fade-right animate-once animate-ease-in-out animate-delay-[1600ms]" onclick={resumeOnClick}>Resume</button>
+      <button class="w-44 h-14 flex justify-center items-center border border-[#459DDE] mt-6 text-[#459DDE] text-3xl hover:bg-[#459DDE] hover:text-[#252525] transition-all animate-fade-right animate-once animate-ease-in-out animate-delay-[1900ms]" onclick={resumeOnClick}>Resume</button>
     </div>
     <HeroImage currentJob={currentJob} />
   </section>
