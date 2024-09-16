@@ -1,0 +1,93 @@
+---
+title: "Turn it Off"
+description: "A simple puzzle game originally created to help with my math homework turned into a fully-fledged game"
+date: 2024-02-03 12:00:00
+color: "videoGame"
+type: "Video Game"
+langs: ["csharp"]
+---
+
+import Gallery from "../../components/Gallery";
+export function imgArray() {
+  const images = [
+    { src: "/pictures/projects/turn_it_off/tif_1.png", alt: "Main menu of the game" },
+    { src: "/pictures/projects/turn_it_off/tif_2.png", alt: "Level selector screen" },
+    { src: "/pictures/projects/turn_it_off/tif_3.png", alt: "Beginning of a level" },
+    { src: "/pictures/projects/turn_it_off/tif_4.png", alt: "Solution of a level" }
+  ];
+
+return images;
+}
+
+_Turn it Off_ is a simple puzzle game where the player's goal is to turn off
+all of the buttons on the screen by pressing them (toggling them on/off).
+Each time a button is pressed, the surrounding buttons are also toggled, making
+the whole thing a game of reflection and trial and errors. As the level go,
+they get bigger, harder and introduce extra challenges for the player. _Turn it
+off_ is still in development because I want to make more levels for it before
+officially launching it, but the core mechanics and gameplay loop is complete.
+If you would like to try the beta, you can find it <a href="https://github.com/Sp0k/turn-it-off/releases" target="_blank">here</a>.
+
+## Game Description
+
+The game is truly a simple experience in my opinion. While the puzzle itself
+will (hopefully) take some thinking, the mechanics are quite easy to grasp.
+For each level, the player is presented with a number of buttons arranged in
+different order, some turned on, some turned off. The player's goal is to
+toggle the buttons until they are all off, while pressing a button toggles the
+one directly next to it to also toggle on/off. In order to play, a player only
+needs a mouse to press the buttons.
+
+Be ready for some harder challenges as more level get unlocked and created. In
+later levels, some buttons are broken and won't be turned on ever, but they
+also will block the progression by isolating certain buttons in their corners.
+Hopefully you will have fun thinking of the fastest ways to solve each puzzle
+and find new ways to solve them that I hadn't thought of!
+
+## Gallery
+
+<Gallery images={imgArray()} client:load />
+
+## Game Development
+
+What originally started as a way of making my linear algebra homework easy and
+faster to solve (but probably took me longer to code than it would've to solve
+the problems) eventually transformed into an actual game after I showed the
+project to my friends and partner. I originally had planned on using the code
+to only find every possible solution to the problem given on the homework, so
+once I decided to make the project an actual game, it took me a little bit of
+refactoring to make the buttons more easily arrangeable. This allowed me to
+create more easily levels.
+
+The hardest part was ironically not the programming of the game, the mechanics
+really only being pressing buttons on the screen, it was quite simple to create
+a prefab that could just be copied over and over again. The real difficult part
+was coming up with the puzzles and making them hard enough to be worth the game.
+Trying to come up with puzzles means I also had to solve them all myself first
+in order to make sure they were possible, which is actually what I think
+took the longest in the development. I think the first batch of 5 levels for
+the demo took me a week to design. But as I got more used to it, I started
+finding it easier to design levels that were hard enough to be worth while,
+while not being impossible.
+
+Eventually, after I added enough levels to makes sure the game takes at least
+an hour or two before finishing it, I would like to add a level editor, so that
+players can create their own level, and share them with their friends or the
+public. I don't know how difficult the level editor would be, but it feels like
+a nice and fun challenge, same thing with a gallery of community levels. But
+the current main goal is to finish enough levels to release a first complete
+version of the game.
+
+## Final Thoughts
+
+I think this game was a fun experience. Since I started game development at 14,
+this was the first game I did alone, without following a guide. I had so much
+fun working on this game. Don't get me wrong, I absolutely love working with my
+friends on our games during the game jams, but I found it so fun to be able to
+create a game from A to Z without the stress of the time limit. What I found
+the most fun what coming up with the levels, they aren't hard to add to the
+game, but they require me to get better at the game in order to make sure my
+ideas can be solved. I am really proud of what I make, and I will for sure
+continue to update this game overtime and add levels every now and then once I
+release a full version of the game. Once again, if you would like to try
+the beta of the game, you can find a release on its <a href="https://github.com/Sp0k/turn-it-off/releases" target="_blank">Github repository</a>.
