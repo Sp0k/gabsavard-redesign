@@ -99,13 +99,19 @@ const SkillsTable = () => {
             Languages
           </p>
           <hr className="h-0.5 bg-neutral-400 border-transparent" />
-          <ul className="grid grid-cols-2 ml-10 gap-10 text-xl lg:text-3xl font-Source-Sans-Pro text-[#D9D9D9] list-disc lg:mx-auto py-6">
-            <li className="lg:mr-5">Java</li>
-            <li className="lg:ml-5">C</li>
-            <li className="lg:mr-5">JavaScript</li>
-            <li className="lg:ml-5">Ruby</li>
-            <li className="lg:mr-5">C#</li>
-            <li className="lg:ml-5">Python</li>
+          <ul className="grid grid-cols-3 lg:grid-cols-4 ml-10 gap-10 text-lg lg:text-3xl font-Source-Sans-Pro text-[#D9D9D9] list-disc lg:mx-auto py-6">
+            <li className="lg:mr-1">Bash</li>
+            <li className="lg:mr-1">C</li>
+            <li className="lg:mr-1">C#</li>
+            <li className="lg:mr-1">CSS</li>
+            <li className="lg:mr-1">Go</li>
+            <li className="lg:mr-1">HTML</li>
+            <li className="lg:mr-1">Java</li>
+            <li className="lg:mr-1">JavaScript</li>
+            <li className="lg:mr-1">Python</li>
+            <li className="lg:mr-1">Ruby</li>
+            <li className="lg:mr-1">TypeScript</li>
+            <li className="lg:mr-1">Typst</li>
           </ul>
         </div>
         <div
@@ -116,12 +122,14 @@ const SkillsTable = () => {
             Frameworks
           </p>
           <hr className="h-0.5 bg-neutral-400 border-transparent" />
-          <ul className="grid grid-cols-2 ml-10 gap-10 text-xl lg:text-3xl font-Source-Sans-Pro text-[#D9D9D9] list-disc lg:mx-auto py-6">
+          <ul className="grid grid-cols-3 ml-10 gap-10 text-xl lg:text-3xl font-Source-Sans-Pro text-[#D9D9D9] list-disc lg:mx-auto py-6">
             <li className="lg:mr-5">React</li>
-            <li className="lg:ml-5">React Native</li>
+            <li className="lg:mr-5">React Native</li>
             <li className="lg:mr-5">Ruby on Rails</li>
-            <li className="lg:ml-5">Astro</li>
+            <li className="lg:mr-5">Astro</li>
             <li className="lg:mr-5">Tailwind</li>
+            <li className="lg:mr-5">Open GL</li>
+            <li className="lg:mr-5">Unity Engine</li>
           </ul>
         </div>
         <div
