@@ -3,7 +3,7 @@ title: "Setting up SSH Keys"
 date: 2024-07-02
 description: "How to set up SSH keys to save time when using GitHub or other services"
 author: "Gab 'Sp0k' Savard"
-tags: ["bash", "tutorial"]
+tags: ["bash", "tutorial", "terminal"]
 image:
   url: "https://www.keycdn.com/img/support/create-ssh-key-lg.webp"
   alt: "Schema of an SSH connection between a computer and a server"
