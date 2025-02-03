@@ -5,7 +5,7 @@ description: "My experience and thoughts after using NeoVim as my main IDE for a
 author: "Gab 'Sp0k' Savard"
 tags: ["review", "tutorial", "guide", "terminal"]
 image:
-  url: "../../../public/pictures/posts/using-neovim-in-2025/cover_image.png"
+  url: "/pictures/posts/using-neovim-in-2025/cover_image.png"
   alt: "Screenshot of Borealis (My personal NeoVim config)"
 ---
 
