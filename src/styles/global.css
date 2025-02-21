@@ -1,23 +1,52 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@import "tailwindcss-animated";
 
-@layer utilities {
-  .scrollbar::-webkit-scrollbar {
-    width: 7px;
-  }
+:root {
+  font-family: "Nunito", "Source Sans Pro", sans-serif;
+}
 
-  .scrollbar::-webkit-scrollbar-track {
-    background: #373737;
-    border-radius: 10px;
-  }
+ol lo::marker {
+  color: #d9d9d9;
+}
 
-  .scrollbar::-webkit-scrollbar-thumb {
-    background: #d9d9d9;
-    border-radius: 10px;
-  }
+ul li::marker {
+  color: #d9d9d9;
+}
 
-  .scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #459dde;
+pre code {
+  display: block;
+  white-space: pre-wrap;
+  word-break: break-word;
+  padding: 1rem;
+  font-size: theme("fontSize.sm");
+  font-weight: theme("fontWeight.normal");
+}
+
+@media (min-width: 1024px) {
+  pre code {
+    font-size: 1rem;
   }
+}
+
+code {
+  display: inline;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: #373736;
+  border-radius: 9px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #459dde;
 }
