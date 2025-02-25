@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import BlogCard from "./BlogCard";
-import TagButton from "./TagButton";
+import TagList from "./TagList";
 import Pagination from "./Pagination";
 
 const BlogList = ({ posts, tags }) => {
@@ -13,16 +13,8 @@ const BlogList = ({ posts, tags }) => {
     filterByTag();
   }, [active]);
 
-  const addActive = (tag) => {
-    setActive((prev) => [...prev, tag]);
-  };
-
-  const removeActive = (tag) => {
-    setActive((prev) => prev.filter((t) => t !== tag));
-  };
-
-  const pressHandler = (tag) => {
-    active.includes(tag) ? removeActive(tag) : addActive(tag);
+  const handleFilterChange = (filters) => {
+    setActive(filters);
   };
 
   const filterByTag = () => {
@@ -47,16 +39,11 @@ const BlogList = ({ posts, tags }) => {
   const totalPages = Math.ceil(list.length / itemsPerPage);
 
   return (
-    <div className="mt-6">
-      <div className="max-w-screen-xl mx-auto">
-        <p className="text-Source-Sans-Pro text-[#D9D9D9] text-3xl">Filters:</p>
-        {tags.map((tag) => (
-          <TagButton tag={tag} pressHandler={pressHandler} key={tag} />
-        ))}
-      </div>
-      <div className="flex flex-col items-center">
+    <div className="mt-6 flex flex-col lg:flex-row mx-auto max-w-screen-xl w-fit">
+      <TagList onHandleTag={handleFilterChange} tags={tags} />
+      <div className="flex flex-col items-center mx-auto">
         {list.length === 0 ? (
-          <p className="text-Source-Sans-Pro text-neutral-400 text-2xl my-8">
+          <p className="text-Source-Sans-Pro text-neutral-400 text-2xl my-8 w-full md:w-2xl lg:max-w-[1000px]">
             Seems like there is no posts that match those tags
           </p>
         ) : (
