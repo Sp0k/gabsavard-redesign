@@ -6,7 +6,7 @@ const ScrollView = ({ children }) => {
   const year = new Date().getFullYear();
 
   return (
-    <div className="max-w-screen-2xl h-[100svh] md:h-[95vh] rounded-[40px] border-2 border-neutral-400 mx-auto md:mt-[3vh] overflow-hidden">
+    <div className="max-w-screen-2xl h-[100svh] md:h-[95svh] rounded-[40px] border-2 border-neutral-400 mx-auto md:mt-[2svh] overflow-hidden">
       <Navigation />
       <div className="flex flex-row h-[100%] justify-center gap-8 ml-8 items-start">
         <SideBar />

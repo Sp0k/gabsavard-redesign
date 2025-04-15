@@ -73,7 +73,6 @@ const TagList = ({ onHandleTag, tags }) => {
 
   return (
     <div className="max-w-screen h-fit lg:border-r-2 border-neutral-400 lg:sticky lg:top-10 mb-4 lg:mb-0 lg:mr-8">
-      {/* TODO: Add a drop down menu button */}
       <div className="flex flex-row justify-between h-fit">
         <div className="flex flex-row">
           <button onClick={handleDropdown}>
@@ -94,15 +93,15 @@ const TagList = ({ onHandleTag, tags }) => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 -960 960 960"
-            className="mr-7 opacity-0 fill-neutral-500 hover:fill-[#D9D9D9] my-auto w-8 h-8 lg:w-7 lg:h-7 lg:mr-2"
+            className="mr-7 opacity-0 fill-neutral-500 hover:fill-[#D9D9D9] m-auto w-8 h-8 lg:w-7 lg:h-7 lg:mr-2"
             ref={resetBtnRef}
           >
-            <path d="m456-320 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 160q-19 0-36-8.5T296-192L80-480l216-288q11-15 28-23.5t36-8.5h440q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H360ZM180-480l180 240h440v-480H360L180-480Zm400 0Z" />
+            <path d="M440-122q-121-15-200.5-105.5T160-440q0-66 26-126.5T260-672l57 57q-38 34-57.5 79T240-440q0 88 56 155.5T440-202v80Zm80 0v-80q87-16 143.5-83T720-440q0-100-70-170t-170-70h-3l44 44-56 56-140-140 140-140 56 56-44 44h3q134 0 227 93t93 227q0 121-79.5 211.5T520-122Z" />
           </svg>
         </button>
       </div>
       <div
-        className="flex-col overflow-y-scroll scroll-smooth scrollbar overflow-hidden max-h-106 pr-6 mr-1 ml-10 hidden lg:flex lg:ml-0 duration-200 ease-in-out"
+        className="flex-col overflow-y-scroll scroll-smooth scrollbar overflow-hidden md:h-96 lg:max-h-122 pr-6 mr-1 ml-10 hidden lg:flex lg:ml-0 duration-200 ease-in-out"
         ref={tagsRef}
       >
         {tags.map((tag) => (
