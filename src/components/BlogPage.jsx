@@ -47,17 +47,17 @@ const BlogPage = ({ blogPosts, blogTags }) => {
   }, [content]);
 
   return (
-    <div className="mt-6 flex flex-col mx-auto max-w-screen-xl w-full">
+    <div className="mt-4 flex flex-col mx-auto max-w-screen-xl w-full">
       <div className="flex flex-row transition-all" ref={btns}>
         <button
-          className="font-Source-Sans-Pro text-4xl lg:text-5xl text-[#459DDE] border-b-2 border-[#459DDE] pb-2 pl-1 max-w-xs w-full text-left hover:text-[#D9D9D9] hover:border-[#D9D9D9]"
+          className="font-Source-Sans-Pro text-3xl lg:text-4xl text-[#459DDE] border-b-2 border-[#459DDE] pb-1 pl-1 max-w-xs w-full text-left hover:text-[#D9D9D9] hover:border-[#D9D9D9]"
           onClick={showBlog}
           ref={blogBtnRef}
         >
           Blog
         </button>
         <button
-          className="font-Source-Sans-Pro text-4xl lg:text-5xl text-neutral-500 border-b-2 border-neutral-500 pb-2 pl-1 max-w-xs w-full text-left hover:text-[#D9D9D9] hover:border-[#D9D9D9]"
+          className="font-Source-Sans-Pro text-3xl lg:text-4xl text-neutral-500 border-b-2 border-neutral-500 pb-2 pl-1 max-w-xs w-full text-left hover:text-[#D9D9D9] hover:border-[#D9D9D9]"
           onClick={showDevlog}
           ref={devlogBtnRef}
         >

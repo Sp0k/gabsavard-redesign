@@ -39,7 +39,7 @@ const BlogList = ({ posts, tags }) => {
   const totalPages = Math.ceil(list.length / itemsPerPage);
 
   return (
-    <div className="mt-6 flex flex-col lg:flex-row mx-auto max-w-screen-xl w-full">
+    <div className="mt-2 flex flex-col lg:mt-6 lg:flex-row mx-auto max-w-screen-xl w-full">
       <TagList onHandleTag={handleFilterChange} tags={tags} />
       <div className="flex flex-col items-center mx-auto">
         {list.length === 0 ? (

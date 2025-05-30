@@ -47,3 +47,8 @@ code {
 .scrollbar::-webkit-scrollbar-thumb:hover {
   background: #459dde;
 }
+
+html, body {
+  height: 100svh;
+  overflow: hidden;
+}
