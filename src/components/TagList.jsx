@@ -101,12 +101,13 @@ const TagList = ({ onHandleTag, tags }) => {
         </button>
       </div>
       <div
-        className="flex-col overflow-y-scroll scroll-smooth scrollbar overflow-hidden md:h-96 lg:max-h-122 pr-6 mr-1 ml-10 hidden lg:flex lg:ml-0 duration-200 ease-in-out"
+        className="flex-col overflow-y-scroll overscroll-none scroll-smooth scrollbar overflow-hidden md:h-96 lg:max-h-122 pr-6 mr-1 ml-10 hidden lg:flex lg:ml-0 duration-200 ease-in-out"
         ref={tagsRef}
       >
         {tags.map((tag) => (
           <TagButton
             tag={tag}
+            key={tag}
             pressHandler={pressHandler}
             isActive={active.includes(tag)}
           />

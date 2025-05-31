@@ -37,6 +37,8 @@ code {
 .scrollbar::-webkit-scrollbar-track {
   background: #373736;
   border-radius: 9px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
