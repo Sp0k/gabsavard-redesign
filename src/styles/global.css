@@ -51,6 +51,6 @@ code {
 }
 
 html, body {
-  height: 100svh;
+  height: 100dvh;
   overflow: hidden;
 }
