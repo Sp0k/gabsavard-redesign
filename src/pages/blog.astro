@@ -1,5 +1,4 @@
 ---
-// import { getCollection } from "astro:content"
 import matter from "gray-matter"
 import { supabase } from "../db/supabase"
 import BaseLayout from "../layouts/BaseLayout.astro"
@@ -7,11 +6,6 @@ import BlogPage from "../components/BlogPage"
 
 const pageTitle = "Blog"
 export const prerender = false
-// const posts = (await getCollection('posts')).sort(
-//   (a, b) => Date.parse(b.data.date.toString()) - Date.parse(a.data.date.toString())
-// );
-// const tags = [...new Set(posts.map((post) => post.data.tags).flat())];
-// tags.sort();
 
 const { data, error } = await supabase.storage
   .from("blog-posts")
@@ -61,7 +55,6 @@ const tags = [...new Set(posts.flatMap((p) => p.data?.tags ?? []))].sort();
       Dive into my thoughts and interests. I write down my thoughts and ideas in here and hope will
       either find them interesting or helpful.
     </p>
-    <!-- <BlogList posts={posts} tags={tags} client:load /> -->
     <BlogPage blogPosts={posts} blogTags={tags} client:load />
   </div>
 </BaseLayout>
