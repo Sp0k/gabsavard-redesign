@@ -1,18 +1,53 @@
 ---
-import { getCollection } from "astro:content"
+import matter from "gray-matter"
+import { supabase } from "../db/supabase"
 import BaseLayout from "../layouts/BaseLayout.astro"
 import HeroImage from "../components/HeroImage"
 import LatestPost from "../components/LatestPost"
 import Salutations from "../components/Salutations"
 
+export const prerender = false
+
 const pageTitle="Home"
 const resumeOnClick = "window.open('/gab_savard_resume.pdf')"
 const rssOnClick = "window.open('/rss.xml')"
-const currentJob = "Turn it Off"
+const currentJob = "Rover Game"
 
-const posts = (await getCollection('posts')).sort(
-(a, b) => Date.parse(b.data.date.toString()) - Date.parse(a.data.date.toString())
-)
+// list files
+const { data, error } = await supabase.storage
+  .from("blog-posts")
+  .list("published", { limit: 200 });
+
+if (error) console.error(error);
+
+const files = data ?? [];
+
+const posts = await Promise.all(
+  files
+    .filter((f) => f.name.endsWith(".md"))
+    .map(async (f) => {
+      const path = `published/${f.name}`;
+      const { data: urlData } = supabase.storage.from("blog-posts").getPublicUrl(path);
+
+      const res = await fetch(urlData.publicUrl);
+      const mdText = await res.text();
+      const parsed = matter(mdText);
+
+      return {
+        slug: f.name.replace(/\.md$/i, ""),
+        data: {
+          ...parsed.data,
+          date: parsed.data?.date ? new Date(String(parsed.data.date)) : undefined,
+        },
+      };
+    })
+);
+
+posts.sort((a, b) => {
+  const ad = a.data?.date ? +new Date(a.data.date) : 0;
+  const bd = b.data?.date ? +new Date(b.data.date) : 0;
+  return bd - ad;
+});
 ---
 <BaseLayout pageTitle={pageTitle}>
   <section class="h-[88vh] flex flex-row justify-evenly items-center" id="landing">

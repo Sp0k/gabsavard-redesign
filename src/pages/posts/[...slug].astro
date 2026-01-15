@@ -1,10 +1,13 @@
 ---
 import matter from "gray-matter"
 import { marked } from "marked"
+import markedFootnote from "marked-footnote"
 import { supabase } from "../../db/supabase"
 import BaseLayout from "../../layouts/BaseLayout.astro"
 
 export const prerender = false
+
+marked.use(markedFootnote());
 
 const slugParts = Astro.params.slug;
 const slug = Array.isArray(slugParts) ? slugParts.join("/") : slugParts;
