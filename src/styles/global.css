@@ -50,7 +50,8 @@ code {
   background: #459dde;
 }
 
-html, body {
-  height: 100dvh;
+html, body, #root {
+  height: 100%;
   overflow: hidden;
+  margin: 0;
 }

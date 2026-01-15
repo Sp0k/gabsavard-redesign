@@ -1,15 +1,58 @@
 ---
-import { getCollection } from "astro:content"
+// import { getCollection } from "astro:content"
+import matter from "gray-matter"
+import { supabase } from "../db/supabase"
 import BaseLayout from "../layouts/BaseLayout.astro"
-// import BlogList from "../components/BlogList"
 import BlogPage from "../components/BlogPage"
 
 const pageTitle = "Blog"
-const posts = (await getCollection('posts')).sort(
-  (a, b) => Date.parse(b.data.date.toString()) - Date.parse(a.data.date.toString())
+export const prerender = false
+// const posts = (await getCollection('posts')).sort(
+//   (a, b) => Date.parse(b.data.date.toString()) - Date.parse(a.data.date.toString())
+// );
+// const tags = [...new Set(posts.map((post) => post.data.tags).flat())];
+// tags.sort();
+
+const { data, error } = await supabase.storage
+  .from("blog-posts")
+  .list("published", { limit: 200 });
+
+if (error) console.error(error);
+
+const files = data ?? [];
+
+// Parse markdown files
+const posts = await Promise.all(
+  files
+    .filter((f) => f.name.endsWith(".md"))
+    .map(async (f) => {
+      const path = `published/${f.name}`;
+
+      const { data: urlData } = supabase.storage
+        .from("blog-posts")
+        .getPublicUrl(path);
+
+      const mdText = await fetch(urlData.publicUrl).then((r) => r.text());
+
+      const parsed = matter(mdText);
+      const slug = f.name.replace(/\.md$/i, "");
+
+      const sortDate = parsed.data?.date
+        ? Date.parse(String(parsed.data.date))
+        : Date.parse(String(f.updated_at ?? f.created_at ?? ""));
+
+      return {
+        slug,
+        data: parsed.data ?? {},
+        content: parsed.content,
+        sortDate,
+      };
+    })
 );
-const tags = [...new Set(posts.map((post) => post.data.tags).flat())];
-tags.sort();
+
+posts.sort((a, b) => (b.sortDate ?? 0) - (a.sortDate ?? 0));
+
+const tags = [...new Set(posts.flatMap((p) => p.data?.tags ?? []))].sort();
 ---
 <BaseLayout pageTitle={pageTitle}>
   <div class="mt-4">

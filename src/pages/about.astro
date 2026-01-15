@@ -2,8 +2,12 @@
 import BaseLayout from "../layouts/BaseLayout.astro"
 import SkillsTable from "../components/SkillsTable"
 
-const pageTitle="About me"
-const age = 22
+const pageTitle = "About me"
+const today = Date.now()
+const birthday = new Date(2002, 5, 18)
+const ag = today - birthday.getTime()
+const ad = new Date(ag);
+const age = Math.abs(ad.getUTCFullYear() - 1970).toString()
 ---
 <BaseLayout pageTitle={pageTitle}>
   <div class="mt-4">

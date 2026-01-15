@@ -11,6 +11,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props
 const { Content } = await entry.render()
+export const prerender = false
 ---
 <BaseLayout pageTitle={entry.data.title}>
   <div class="mt-4">
