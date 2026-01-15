@@ -5,7 +5,7 @@ const BlogCard = ({ title, description, url, image }) => {
     <div className="w-full lg:mr-6 md:w-fit md:max-w-2xl lg:max-w-[1000px] border border-[#D9D9D9] flex flex-row py-4 px-4 mb-4 mx-auto hover:shadow-[#459DDE] hover:shadow-lg transition-all hover:border-[#459DDE]">
       <a href={path} className="flex flex-col lg:flex-row">
         <div className="w-full md:w-full lg:max-w-[331.5px] h-auto md:max-h-[160px] mb-4 lg:mb-auto overflow-hidden border border-neutral-400 lg:my-auto mx-auto">
-          <img src={image.url} alt={image.src} />
+          <img src={image.url} alt={image.alt} />
         </div>
         <div className="px-4 max-w-[550px]">
           <div className="text-2xl lg:text-3xl text-[#D9D9D9] font-Nunito mb-2 font-semibold">

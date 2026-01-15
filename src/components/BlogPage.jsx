@@ -65,7 +65,7 @@ const BlogPage = ({ blogPosts, blogTags }) => {
         </button>
       </div>
       {content === "blog" ? (
-        <BlogList posts={blogPosts} tags={blogTags} ref={devlogBtnRef} />
+        <BlogList posts={blogPosts} tags={blogTags} />
       ) : (
         <p className="font-Source-Sans-Pro text-neutral-400 text-4xl my-8 w-full md:w-2xl lg:max-w-[1000px] text-center">
           Coming Soon!

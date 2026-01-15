@@ -1,6 +1,6 @@
 ---
 import matter from "gray-matter"
-import { supabase } from "../db/supabase"
+import { supabase, blogBucket, publishedTable } from "../db/supabase"
 import BaseLayout from "../layouts/BaseLayout.astro"
 import BlogPage from "../components/BlogPage"
 
@@ -8,8 +8,8 @@ const pageTitle = "Blog"
 export const prerender = false
 
 const { data, error } = await supabase.storage
-  .from("blog-posts")
-  .list("published", { limit: 200 });
+  .from(blogBucket)
+  .list(publishedTable, { limit: 200 });
 
 if (error) console.error(error);
 
@@ -20,16 +20,36 @@ const posts = await Promise.all(
   files
     .filter((f) => f.name.endsWith(".md"))
     .map(async (f) => {
-      const path = `published/${f.name}`;
+      const path = `${publishedTable}/${f.name}`;
 
       const { data: urlData } = supabase.storage
-        .from("blog-posts")
-        .getPublicUrl(path);
+      .from(blogBucket)
+      .getPublicUrl(path);
 
       const mdText = await fetch(urlData.publicUrl).then((r) => r.text());
 
       const parsed = matter(mdText);
       const slug = f.name.replace(/\.md$/i, "");
+
+      const assetsBase = `${import.meta.env.SUPABASE_URL}/storage/v1/object/public/blog-assets/${slug}/`;
+      const src = parsed.data?.image?.url;
+
+      if (
+        !src.startsWith("http://") &&
+          !src.startsWith("https://") &&
+          !src.startsWith("data:") &&
+          !src.startsWith("#")
+      ) {
+        if (src.startsWith("/pictures/posts/")) {
+          const rest = src.replace(/^\/pictures\/posts\//, ""); // <folder>/file.jpg
+          parsed.data.image.url = `${import.meta.env.SUPABASE_URL}/storage/v1/object/public/blog-assets/${rest}`;
+        }
+
+        if (src.startsWith("/")) return src;
+
+        const clean = src.replace(/^\.?\//, "");
+        parsed.data.image.url = assetsBase + clean;
+      }
 
       const sortDate = parsed.data?.date
         ? Date.parse(String(parsed.data.date))

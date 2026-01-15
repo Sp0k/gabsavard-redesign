@@ -1,21 +1,50 @@
 ---
-import matter from "gray-matter"
-import { marked } from "marked"
-import markedFootnote from "marked-footnote"
-import { supabase } from "../../db/supabase"
-import BaseLayout from "../../layouts/BaseLayout.astro"
+import matter from "gray-matter";
+import { Marked } from "marked";
+import markedFootnote from "marked-footnote";
+import { supabase } from "../../db/supabase";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 
-export const prerender = false
-
-marked.use(markedFootnote());
+export const prerender = false;
 
 const slugParts = Astro.params.slug;
 const slug = Array.isArray(slugParts) ? slugParts.join("/") : slugParts;
 
-const candidates = [
-  `published/${slug}.md`,
-  `published/${slug}/index.md`,
-];
+const candidates = [`published/${slug}.md`, `published/${slug}/index.md`];
+
+function isRelativeUrl(href: unknown): href is string {
+  return (
+    typeof href === "string" &&
+    !href.startsWith("http://") &&
+    !href.startsWith("https://") &&
+    !href.startsWith("data:") &&
+    !href.startsWith("/") &&
+    !href.startsWith("#")
+  );
+}
+
+const assetsBase = `${import.meta.env.SUPABASE_URL}/storage/v1/object/public/blog-assets/${slug}/`;
+
+function toSupabaseAssetUrl(src: string): string {
+  if (
+    src.startsWith("http://") ||
+    src.startsWith("https://") ||
+    src.startsWith("data:") ||
+    src.startsWith("#")
+  ) {
+    return src;
+  }
+
+  if (src.startsWith("/pictures/posts/")) {
+    const rest = src.replace(/^\/pictures\/posts\//, ""); // <folder>/file.jpg
+    return `${import.meta.env.SUPABASE_URL}/storage/v1/object/public/blog-assets/${rest}`;
+  }
+
+  if (src.startsWith("/")) return src;
+
+  const clean = src.replace(/^\.?\//, "");
+  return assetsBase + clean;
+}
 
 let html = "";
 let title = "Post not found";
@@ -37,7 +66,29 @@ for (const path of candidates) {
     dateText = d.toDateString().slice(4, 15);
   }
 
-  html = await marked.parse(parsed.content ?? "");
+  let content = parsed.content ?? "";
+
+  content = content.replace(
+    /<img\b([^>]*?)\bsrc=(["'])([^"']+)\2/gi,
+    (_match, before, quote, src) => {
+      const newSrc = toSupabaseAssetUrl(String(src));
+      return `<img${before} src=${quote}${newSrc}${quote}`;
+    }
+  );
+
+  const md = new Marked();
+  md.use(markedFootnote());
+
+  // Keep your existing markdown-image rewrite (for ![]() syntax)
+  md.use({
+    walkTokens(token: any) {
+      if (token.type === "image" && token.href && isRelativeUrl(token.href)) {
+        token.href = toSupabaseAssetUrl(token.href);
+      }
+    },
+  });
+
+  html = await md.parse(content);
   break;
 }
 

@@ -4,3 +4,6 @@ const supabaseUrl = import.meta.env.SUPABASE_URL;
 const supabaseKey = import.meta.env.SUPABASE_KEY;
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
+export const blogBucket = "blog-posts";
+export const projectsBucket = "project-posts";
+export const publishedTable = "published";
