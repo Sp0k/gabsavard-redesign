@@ -1,0 +1,45 @@
+---
+import EmptyLayout from "../../layouts/EmptyLayout.astro";
+import { supabase } from "../../db/supabase";
+
+export const prerender = false
+
+const accessToken = Astro.cookies.get("sb-access-token");
+const refreshToken = Astro.cookies.get("sb-refresh-token");
+
+if (!accessToken || !refreshToken) {
+  return Astro.redirect("/admin/");
+}
+
+let session;
+try {
+  session = await supabase.auth.setSession({
+    refresh_token: refreshToken.value,
+    access_token: accessToken.value,
+  });
+  if (session.error) {
+    Astro.cookies.delete("sb-access-token", {
+      path: "/",
+    });
+    Astro.cookies.delete("sb-refresh-token", {
+      path: "/",
+    });
+    return Astro.redirect("/admin/");
+  }
+} catch (error) {
+  Astro.cookies.delete("sb-access-token", {
+    path: "/",
+  });
+  Astro.cookies.delete("sb-refresh-token", {
+    path: "/",
+  });
+  return Astro.redirect("/admin/");
+}
+
+const pageTitle = "Admin Dashboard";
+---
+<EmptyLayout pageTitle={pageTitle} accessToken={accessToken} refreshToken={refreshToken}>
+  <div class="max-w-screen-xl mx-auto">
+    <h1 class="text-[#D9D9D9] font-Source-Sans-Pro font-semibold text-4xl mt-[30px]">Welcome back Gabriel!</h1>
+  </div>
+</EmptyLayout>
