@@ -3,10 +3,9 @@ import { ViewTransitions } from "astro:transitions"
 import Navigation from "../components/admin/Navigation"
 import "../styles/global.css"
 
-const { pageTitle, accessToken, refreshToken } = Astro.props
-const year = new Date().getFullYear();
+const { pageTitle, accessToken, refreshToken, showNav } = Astro.props
 ---
-<html lang="en">
+<html lang="en" class="h-auto">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/computer.svg" />
@@ -15,20 +14,10 @@ const year = new Date().getFullYear();
     <title>GS | {pageTitle}</title>
     <ViewTransitions />
   </head>
-  <body class="bg-[#252525]">
-    <div class="max-w-screen-2xl mx-auto md:mt-[2dvh]">
-      <Navigation accessToken={accessToken} refreshToken={refreshToken} />
-      <div class="flex flex-row h-[100%] justify-center gap-8 ml-8 items-start md:pr-1">
-        <div class="max-w-[1400px] w-full min-h-[500px] h-[87dvh] md:max-h-[83dvh] overflow-y-scroll scrollbar scroll-smooth overscroll-none">
-          <div class="mr-6 md:mr-0">
-            <slot/>
-          </div>
-          <p class="mx-auto text-[#999999] w-fit font-Source-Sans-Pro text-sm md:text-base py-6">
-            © Copyright {year}. Made by Gab Savard.
-          </p>
-        </div>
-      </div>
-    </div>
+  <body class="bg-[#252525] overflow-y-auto h-auto">
+    <div>
+      {showNav && <Navigation accessToken={accessToken} refreshToken={refreshToken} /> }
+      <slot/>
     </div>
   </body>
 </html>

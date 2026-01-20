@@ -1,6 +1,9 @@
 ---
 import EmptyLayout from "../../layouts/EmptyLayout.astro";
-import { supabase } from "../../db/supabase";
+import { Sidebar } from "../../components/admin/Sidebar/Sidebar";
+import { AdminDashboard } from "../../components/admin/AdminDashboard/AdminDashboard";
+import matter from "gray-matter"
+import { supabase, blogBucket, publishedTable } from "../../db/supabase"
 
 export const prerender = false
 
@@ -37,9 +40,75 @@ try {
 }
 
 const pageTitle = "Admin Dashboard";
+
+const { data, error } = await supabase.storage
+  .from(blogBucket)
+  .list(publishedTable, { limit: 200 });
+
+if (error) console.error(error);
+
+const files = data ?? [];
+
+// Parse markdown files
+const posts = await Promise.all(
+  files
+    .filter((f) => f.name.endsWith(".md"))
+    .map(async (f) => {
+      const path = `${publishedTable}/${f.name}`;
+
+      const { data: urlData } = supabase.storage
+      .from(blogBucket)
+      .getPublicUrl(path);
+
+      const mdText = await fetch(urlData.publicUrl).then((r) => r.text());
+
+      const parsed = matter(mdText);
+      const slug = f.name.replace(/\.md$/i, "");
+
+      const assetsBase = `${import.meta.env.SUPABASE_URL}/storage/v1/object/public/blog-assets/${slug}/`;
+      const src = parsed.data?.image?.url;
+
+      if (
+        !src.startsWith("http://") &&
+          !src.startsWith("https://") &&
+          !src.startsWith("data:") &&
+          !src.startsWith("#")
+      ) {
+        if (src.startsWith("/pictures/posts/")) {
+          const rest = src.replace(/^\/pictures\/posts\//, "");
+          parsed.data.image.url = `${import.meta.env.SUPABASE_URL}/storage/v1/object/public/blog-assets/${rest}`;
+        }
+
+        if (src.startsWith("/")) return src;
+
+        const clean = src.replace(/^\.?\//, "");
+        parsed.data.image.url = assetsBase + clean;
+      }
+
+      const sortDate = parsed.data?.date
+        ? Date.parse(String(parsed.data.date))
+        : Date.parse(String(f.updated_at ?? f.created_at ?? ""));
+
+      return {
+        slug,
+        data: parsed.data ?? {},
+        content: parsed.content,
+        sortDate,
+        status: "published",
+      };
+    })
+);
+
+posts.sort((a, b) => (b.sortDate ?? 0) - (a.sortDate ?? 0));
 ---
-<EmptyLayout pageTitle={pageTitle} accessToken={accessToken} refreshToken={refreshToken}>
-  <div class="max-w-screen-xl mx-auto">
-    <h1 class="text-[#D9D9D9] font-Source-Sans-Pro font-semibold text-4xl mt-[30px]">Welcome back Gabriel!</h1>
+<EmptyLayout pageTitle={pageTitle} accessToken={accessToken} refreshToken={refreshToken} showNav={false}>
+  <div class="bg-stone-100 h-[100lvh]">
+    <div class="grid gap-4 p-4 grid-cols-[220px_1fr]">
+      <Sidebar client:load />
+      <AdminDashboard articles={posts} client:load />
+    </div>
+    <p class="mx-auto text-stone-400 w-fit text-sm py-1.5">
+      © Copyright 2026. Made by Gab Savard.
+    </p>
   </div>
 </EmptyLayout>
