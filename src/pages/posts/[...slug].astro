@@ -2,7 +2,7 @@
 import matter from "gray-matter";
 import { Marked } from "marked";
 import markedFootnote from "marked-footnote";
-import { supabase } from "../../db/supabase";
+import { supabase } from "../../db/supabase.server";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export const prerender = false;

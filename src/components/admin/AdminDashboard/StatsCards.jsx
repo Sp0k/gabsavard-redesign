@@ -1,14 +1,14 @@
 import { FiTrendingDown, FiTrendingUp } from "react-icons/fi";
 
-export const StatsCards = () => {
+export const StatsCards = ({ postCount }) => {
   return (
     <>
       <Card
-        title="Gross Revenue"
-        value="$120,054.24"
-        pillText="2.75%"
-        trend="up"
-        period="From Jan 1st - Jul 31st"
+        title="Amount of Articles"
+        value={postCount}
+        pillText="N/A"
+        trend="none"
+        period="Since site opening"
       />
       <Card 
         title="Avg Order"

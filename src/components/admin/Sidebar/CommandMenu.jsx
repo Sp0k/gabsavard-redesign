@@ -1,6 +1,6 @@
 import { Command } from "cmdk";
 import { useEffect, useState } from "react";
-import { FiEye, FiLink, FiLogOut, FiPhone, FiPlus } from "react-icons/fi";
+import { FiLink, FiList, FiLogOut, FiPhone, FiShare } from "react-icons/fi";
 
 
 export const CommandMenu = ({ open, setOpen }) => {
@@ -43,20 +43,30 @@ export const CommandMenu = ({ open, setOpen }) => {
           </Command.Empty>
 
           <Command.Group 
-            heading="Team"
+            heading="Articles"
             className="text-sm mb-3 text-stone-400"
           >
             <Command.Item 
-            className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 rounded hover:bg-stone-200 items-center gap-2"
+              className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 rounded hover:bg-stone-200 items-center gap-2"
+              onSelect={() => {
+                setOpen(false);
+                setValue("");
+                window.location.href = "/admin/articles";
+              }}
             >
-              <FiPlus />
-              Invite Member
+              <FiList />
+              See all articles
             </Command.Item>
             <Command.Item 
-            className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 rounded hover:bg-stone-200 items-center gap-2"
+              className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 rounded hover:bg-stone-200 items-center gap-2"
+              onSelect={() => {
+                setOpen(false);
+                setValue("");
+                window.location.href= "/admin/uploads"
+              }}
             >
-              <FiEye />
-              See Org Chart
+              <FiShare />
+              Upload new article
             </Command.Item>
           </Command.Group>
 
@@ -65,13 +75,13 @@ export const CommandMenu = ({ open, setOpen }) => {
             className="text-sm mb-3 text-stone-400"
           >
             <Command.Item 
-            className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 rounded hover:bg-stone-200 items-center gap-2"
+              className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 rounded hover:bg-stone-200 items-center gap-2"
             >
               <FiLink />
               Link Services
             </Command.Item>
             <Command.Item 
-            className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 rounded hover:bg-stone-200 items-center gap-2"
+              className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 rounded hover:bg-stone-200 items-center gap-2"
             >
               <FiPhone />
               Contact Support

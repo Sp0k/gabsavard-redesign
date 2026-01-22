@@ -1,6 +1,7 @@
 ---
 import matter from "gray-matter"
-import { supabase, blogBucket, publishedTable } from "../db/supabase"
+import { supabase } from "../db/supabase.server"
+import { BLOG_BUCKET, PUBLISHED_FOLDER } from "../db/storage.constants"
 import BaseLayout from "../layouts/BaseLayout.astro"
 import BlogPage from "../components/BlogPage"
 
@@ -8,8 +9,8 @@ const pageTitle = "Blog"
 export const prerender = false
 
 const { data, error } = await supabase.storage
-  .from(blogBucket)
-  .list(publishedTable, { limit: 200 });
+  .from(BLOG_BUCKET)
+  .list(PUBLISHED_FOLDER, { limit: 200 });
 
 if (error) console.error(error);
 
@@ -20,10 +21,10 @@ const posts = await Promise.all(
   files
     .filter((f) => f.name.endsWith(".md"))
     .map(async (f) => {
-      const path = `${publishedTable}/${f.name}`;
+      const path = `${PUBLISHED_FOLDER}/${f.name}`;
 
       const { data: urlData } = supabase.storage
-      .from(blogBucket)
+      .from(BLOG_BUCKET)
       .getPublicUrl(path);
 
       const mdText = await fetch(urlData.publicUrl).then((r) => r.text());

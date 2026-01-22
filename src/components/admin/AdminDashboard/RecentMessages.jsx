@@ -1,6 +1,7 @@
 import { FiArrowUpRight, FiMail } from "react-icons/fi"
 
 export const RecentMessages = () => {
+  // TODO: Limit the messages to a small list here
   return (
     <div className="col-span-12 p-4 rounded border border-stone-300">
       <div className="mb-4 flex items-center justify-between">

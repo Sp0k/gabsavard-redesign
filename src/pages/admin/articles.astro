@@ -1,7 +1,7 @@
 ---
 import EmptyLayout from "../../layouts/EmptyLayout.astro";
 import { Sidebar } from "../../components/admin/Sidebar/Sidebar";
-import { AdminDashboard } from "../../components/admin/AdminDashboard/AdminDashboard";
+import { ArticlesPage } from "../../components/admin/Articles/ArticlesPage";
 import matter from "gray-matter"
 import { supabase } from "../../db/supabase.server"
 import { BLOG_BUCKET, DRAFT_FOLDER, PUBLISHED_FOLDER } from "../../db/storage.constants";
@@ -40,7 +40,7 @@ try {
   return Astro.redirect("/admin/");
 }
 
-const pageTitle = "Admin Dashboard";
+const pageTitle = "Articles";
 
 const [{ data: pubData, error: pubError }, { data: draftData, error: draftError }] =
   await Promise.all([
@@ -149,12 +149,12 @@ const posts = [...publishedPosts, ...draftPosts].filter(Boolean);
 posts.sort((a, b) => (b?.sortDate ?? 0) - (a?.sortDate ?? 0));
 ---
 <EmptyLayout pageTitle={pageTitle} accessToken={accessToken} refreshToken={refreshToken} showNav={false}>
-  <div class="bg-stone-100 h-full">
+  <div class="bg-stone-100 h-[100lvh]">
     <div class="grid gap-4 p-4 grid-cols-[220px_1fr]">
-      <Sidebar page="dashboard" client:load />
-      <AdminDashboard articles={posts} client:load />
+      <Sidebar page="articles" client:load />
+      <ArticlesPage articles={posts} client:load />
     </div>
-    <p class="mx-auto text-stone-400 w-fit text-sm pt-1.5 pb-3">
+    <p class="mx-auto text-stone-400 w-fit text-sm py-1.5">
       © Copyright 2026. Made by Gab Savard.
     </p>
   </div>

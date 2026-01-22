@@ -1,10 +1,10 @@
 import { defineMiddleware } from "astro/middleware";
 import { createClient } from "@supabase/supabase-js";
 
-const PROTECTED_PREFIXES = ["/admin/dashboard"];
+const PROTECTED_PREFIXES = ["/admin/dashboard", "/admin/articles", "/admin/uploads", "/admin/messages", "/admin/statistics"];
 
 function supabaseServer() {
-  return createClient(import.meta.env.SUPABASE_URL, import.meta.env.SUPABASE_KEY, {
+  return createClient(import.meta.env.SUPABASE_URL, import.meta.env.SUPABASE_ANON_KEY, {
     auth: {
       persistSession: false,
       autoRefreshToken: false,
@@ -16,9 +16,11 @@ function supabaseServer() {
 export const onRequest = defineMiddleware(async (context, next) => {
   const pathname = decodeURI(context.url.pathname);
 
-  if (pathname.startsWith("/api/")) return next();
+  if (pathname.startsWith("/api/auth/")) return next();
 
-  const isProtected = PROTECTED_PREFIXES.some((p) => pathname.startsWith(p));
+  const isAdminApi = pathname.startsWith("/api/admin/");
+
+  const isProtected = isAdminApi || PROTECTED_PREFIXES.some((p) => pathname.startsWith(p));
   if (!isProtected) return next();
 
   const access = context.cookies.get("sb-access-token")?.value;

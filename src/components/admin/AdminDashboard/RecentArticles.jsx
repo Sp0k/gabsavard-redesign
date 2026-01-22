@@ -1,8 +1,49 @@
-import { FiArrowUpRight, FiFileText } from "react-icons/fi"
+import { useState } from "react";
+import { FiArrowUpRight, FiFileText, FiEye, FiEyeOff } from "react-icons/fi"
 import { FaCircle } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 export const RecentArticles = ({ articles }) => {
   const recent = articles.slice(0, 5);
+
+  const [rows, setRows] = useState(recent ?? []);
+  const [busySlug, setBusySlug] = useState(null);
+
+  async function togglePublish(slug, currentStatus) {
+    if (!slug) return;
+
+    const nextStatus = currentStatus === "published" ? "draft" : "published";
+
+    setBusySlug(slug);
+
+    try {
+      const res = await fetch("/api/admin/posts/toggle-publish", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ slug, toStatus: nextStatus }),
+      });
+
+      const text = await res.text();
+      if (!res.ok) {
+        toast.error(`Failed: ${text}`)
+        throw new Error(text);
+      }
+
+      setRows((prev) =>
+        prev.map((a) => (a.slug === slug ? { ...a, status: nextStatus } : a))
+      );
+    } catch (e) {
+      console.error(e);
+      toast.error(`Failed to toggle publish`);
+    } finally {
+      setBusySlug(null);
+      toast.success(
+        nextStatus === "published"
+          ? `Published article!`
+          : `Moved back article to drafts!`
+      )
+    }
+  }
 
   return (
     <div className="col-span-12 p-4 rounded border border-stone-300">
@@ -10,15 +51,15 @@ export const RecentArticles = ({ articles }) => {
         <h3 className="flex items-center font-medium gap-1.5">
           <FiFileText /> Recent Articles
         </h3>
-        <button className="text-sm text-[#459DDE] hover:underline cursor-pointer">
+        <a href="/admin/articles" className="text-sm text-[#459DDE] hover:underline cursor-pointer">
           See all
-        </button>
+        </a>
       </div>
       <table className="w-full table-auto">
         <TableHead />
 
         <tbody>
-          {recent.map((a, i) => {
+          {rows.map((a, i) => {
             const name = a?.data?.title ?? a?.slug ?? "Untitled";
             const date = a?.data?.date ? formatDate(a.data.date) : formatDate(a.sortDate);
 
@@ -34,6 +75,8 @@ export const RecentArticles = ({ articles }) => {
                 date={date}
                 status={status}
                 order={i}
+                busy={busySlug === a.slug}
+                onToggle={() => togglePublish(a.slug, status)}
               />
             );
           })}
@@ -50,14 +93,14 @@ const TableHead = () => {
         <th className="text-start p-1.5">Article Name</th>
         <th className="text-start p-1.5">Date</th>
         <th className="text-start p-1.5">Status</th>
-        {/* <th className="text-start p-1.5"></th> */}
+        <th className="text-start p-1.5"></th>
         <th className="w-8"></th>
       </tr>
     </thead>
   );
 }
 
-const TableRow = ({ slug, name, date, status, order }) => {
+const TableRow = ({ slug, name, date, status, order, onToggle, busy }) => {
   return (
     <tr className={order % 2 ? "bg-stone-100 text-sm" : "text-sm"}>
       <td className="p-1.5">
@@ -80,7 +123,17 @@ ${status === "published" ? "bg-green-100 text-green-700" : "bg-orange-200 text-o
           {status === "published" ? "published" : "draft"}
         </span>
       </td>
-      <td className="p-1.5"></td>
+      <td className="p-1.5">
+        <button
+          type="button"
+          onClick={onToggle}
+          disabled={busy}
+          className="cursor-pointer flex items-center disabled:opacity-50"
+          title={status === "published" ? "Unpublish (move to draft)" : "Publish (move to published)"}
+        >
+          {status === "published" ? <FiEye className="text-xl"/> : <FiEyeOff className="text-xl" />}
+        </button>
+      </td>
     </tr>
   );
 }

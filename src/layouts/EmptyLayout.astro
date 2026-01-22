@@ -1,6 +1,7 @@
 ---
 import { ViewTransitions } from "astro:transitions"
 import Navigation from "../components/admin/Navigation"
+import ToastHost from "../components/admin/ToastHost"
 import "../styles/global.css"
 
 const { pageTitle, accessToken, refreshToken, showNav } = Astro.props
@@ -16,6 +17,9 @@ const { pageTitle, accessToken, refreshToken, showNav } = Astro.props
   </head>
   <body class="bg-[#252525] overflow-y-auto h-auto">
     <div>
+      <div data-astro-transition-persist="toast">
+        <ToastHost client:load />
+      </div>
       {showNav && <Navigation accessToken={accessToken} refreshToken={refreshToken} /> }
       <slot/>
     </div>

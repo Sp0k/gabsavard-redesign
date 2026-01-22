@@ -1,12 +1,12 @@
 import { FiFileText, FiHome, FiMail, FiPieChart } from "react-icons/fi"
 
-export const RouteSelect = () => {
+export const RouteSelect = ({ page }) => {
   return (
     <div className="space-y-1">
-      <Route Icon={FiHome} selected={true} title={"Dashboard"} href="/admin/dashboard" />
-      <Route Icon={FiFileText} selected={false} title={"Articles"} href="/" />
-      <Route Icon={FiPieChart} selected={false} title={"Statistics"} href="/" />
-      <Route Icon={FiMail} selected={false} title={"Messages"} href="/" />
+      <Route Icon={FiHome} selected={"dashboard" === page} title={"Dashboard"} href="/admin/dashboard" />
+      <Route Icon={FiFileText} selected={"articles" === page} title={"Articles"} href="/admin/articles" />
+      <Route Icon={FiPieChart} selected={"statistics" === page} title={"Statistics"} href="/admin/statistics" />
+      <Route Icon={FiMail} selected={"messages" === page} title={"Messages"} href="/admin/messages" />
     </div>
   )
 }
