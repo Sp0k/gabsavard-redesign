@@ -5,17 +5,18 @@ import ScrollView from '../components/ScrollView'
 const { pageTitle } = Astro.props
 ---
 <html lang="en" class="h-auto">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/computer.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/computer.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
     <title>GS | {pageTitle}</title>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="780798d8-9c98-46d2-8f92-fc2be9b7a1f3"></script>
     <ViewTransitions />
-	</head>
+  </head>
   <body class="bg-[#252525] h-auto overflow-hidden">
     <ScrollView client:load>
       <slot />
     </ScrollView>
-	</body>
+  </body>
 </html>

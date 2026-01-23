@@ -5,7 +5,7 @@ export const RouteSelect = ({ page }) => {
     <div className="space-y-1">
       <Route Icon={FiHome} selected={"dashboard" === page} title={"Dashboard"} href="/admin/dashboard" />
       <Route Icon={FiFileText} selected={"articles" === page} title={"Articles"} href="/admin/articles" />
-      <Route Icon={FiPieChart} selected={"statistics" === page} title={"Statistics"} href="/admin/statistics" />
+      {/* <Route Icon={FiPieChart} selected={"statistics" === page} title={"Statistics"} href="/admin/statistics" /> */}
       <Route Icon={FiMail} selected={"messages" === page} title={"Messages"} href="/admin/messages" />
     </div>
   )

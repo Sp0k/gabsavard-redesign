@@ -131,7 +131,7 @@ ${status === "published" ? "bg-green-100 text-green-700" : "bg-orange-200 text-o
           className="cursor-pointer flex items-center disabled:opacity-50"
           title={status === "published" ? "Unpublish (move to draft)" : "Publish (move to published)"}
         >
-          {status === "published" ? <FiEye className="text-xl"/> : <FiEyeOff className="text-xl" />}
+          {status === "published" ? <FiEye className="text-xl hover:text-stone-500"/> : <FiEyeOff className="text-xl hover:text-stone-500" />}
         </button>
       </td>
     </tr>
