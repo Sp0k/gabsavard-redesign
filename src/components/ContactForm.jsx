@@ -131,7 +131,7 @@ const ContactForm = () => {
           placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="bg-transparent border-b-2 border-b-neutral-400 font-Source-Sans-Pro text-xl md:text-3xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none focus:border-b-[#D9D9D9]"
+          className="bg-transparent border-b-2 border-b-neutral-400 font-Source-Sans-Pro text-lg md:text-xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none focus:border-b-[#D9D9D9]"
           id="name"
         />
         {errors.name && (
@@ -144,7 +144,7 @@ const ContactForm = () => {
           placeholder="Email *"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="bg-transparent border-b-2 border-b-neutral-400 mt-9 font-Source-Sans-Pro text-xl md:text-3xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none focus:border-b-[#D9D9D9]"
+          className="bg-transparent border-b-2 border-b-neutral-400 mt-9 font-Source-Sans-Pro text-lg md:text-xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none focus:border-b-[#D9D9D9]"
           id="email"
         />
         {errors.email && (
@@ -160,7 +160,7 @@ const ContactForm = () => {
             placeholder="Message *"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="bg-transparent font-Source-Sans-Pro text-xl md:text-3xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none"
+            className="bg-transparent font-Source-Sans-Pro text-lg md:text-xl text-[#D9D9D9] placeholder-neutral-400 focus:outline-none"
             rows={7}
           ></textarea>
           <span className="text-right text-lg md:text-2xl">
