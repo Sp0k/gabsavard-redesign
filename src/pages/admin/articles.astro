@@ -102,7 +102,7 @@ async function parseFiles(
         const parsed = matter(mdText);
         const slug = f.name.replace(/\.md$/i, "");
 
-        const assetsBase = `${import.meta.env.SUPABASE_URL}/storage/v1/object/public/blog-assets/${slug}/`;
+        const assetsBase = `${import.meta.env.PUBLIC_SUPABASE_URL}/storage/v1/object/public/blog-assets/${slug}/`;
         const src = (parsed.data as any)?.image?.url as string | undefined;
 
         if (
@@ -115,7 +115,7 @@ async function parseFiles(
           if (src.startsWith("/pictures/posts/")) {
             const rest = src.replace(/^\/pictures\/posts\//, "");
             (parsed.data as any).image.url =
-              `${import.meta.env.SUPABASE_URL}/storage/v1/object/public/blog-assets/${rest}`;
+              `${import.meta.env.PUBLIC_SUPABASE_URL}/storage/v1/object/public/blog-assets/${rest}`;
           } else if (src.startsWith("/")) {
             // leave absolute site path alone
           } else {

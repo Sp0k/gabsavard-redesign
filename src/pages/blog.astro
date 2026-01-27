@@ -32,7 +32,7 @@ const posts = await Promise.all(
       const parsed = matter(mdText);
       const slug = f.name.replace(/\.md$/i, "");
 
-      const assetsBase = `${import.meta.env.SUPABASE_URL}/storage/v1/object/public/blog-assets/${slug}/`;
+      const assetsBase = `${import.meta.env.PUBLIC_SUPABASE_URL}/storage/v1/object/public/blog-assets/${slug}/`;
       const src = parsed.data?.image?.url;
 
       if (
@@ -43,7 +43,7 @@ const posts = await Promise.all(
       ) {
         if (src.startsWith("/pictures/posts/")) {
           const rest = src.replace(/^\/pictures\/posts\//, "");
-          parsed.data.image.url = `${import.meta.env.SUPABASE_URL}/storage/v1/object/public/blog-assets/${rest}`;
+          parsed.data.image.url = `${import.meta.env.PUBLIC_SUPABASE_URL}/storage/v1/object/public/blog-assets/${rest}`;
         }
 
         if (src.startsWith("/")) return src;

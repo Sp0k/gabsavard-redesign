@@ -4,7 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 const PROTECTED_PREFIXES = ["/admin/dashboard", "/admin/articles", "/admin/uploads", "/admin/messages", "/admin/statistics"];
 
 function supabaseServer() {
-  return createClient(import.meta.env.SUPABASE_URL, import.meta.env.SUPABASE_ANON_KEY, {
+  return createClient(import.meta.env.PUBLIC_SUPABASE_URL, import.meta.env.PUBLIC_SUPABASE_ANON_KEY, {
     auth: {
       persistSession: false,
       autoRefreshToken: false,

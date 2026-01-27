@@ -23,7 +23,7 @@ function isRelativeUrl(href: unknown): href is string {
   );
 }
 
-const assetsBase = `${import.meta.env.SUPABASE_URL}/storage/v1/object/public/blog-assets/${slug}/`;
+const assetsBase = `${import.meta.env.PUBLIC_SUPABASE_URL}/storage/v1/object/public/blog-assets/${slug}/`;
 
 function toSupabaseAssetUrl(src: string): string {
   if (
@@ -37,7 +37,7 @@ function toSupabaseAssetUrl(src: string): string {
 
   if (src.startsWith("/pictures/posts/")) {
     const rest = src.replace(/^\/pictures\/posts\//, ""); // <folder>/file.jpg
-    return `${import.meta.env.SUPABASE_URL}/storage/v1/object/public/blog-assets/${rest}`;
+    return `${import.meta.env.PUBLIC_SUPABASE_URL}/storage/v1/object/public/blog-assets/${rest}`;
   }
 
   if (src.startsWith("/")) return src;
