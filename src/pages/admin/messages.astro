@@ -1,16 +1,28 @@
 ---
 import EmptyLayout from "../../layouts/EmptyLayout.astro";
 import { Sidebar } from "../../components/admin/Sidebar/Sidebar";
+import { MessagesPage } from "../../components/admin/Messages/MessagesPage";
+import { supabase } from "../../db/supabase.server";
+import { CONTACT_TABLE } from "../../db/storage.constants";
 
 export const prerender = false
 
 const pageTitle ="Messages"
+
+const { data, error } = await supabase
+  .from(CONTACT_TABLE)
+  .select("id,name,email,message,created_at,seen")
+  .order("created_at", { ascending: false });
+
+const messages = error ? [] : (data ?? []);
+
+const unreadMsgCount = messages.reduce((acc, m) => acc + (!m.seen ? 1 : 0), 0);
 ---
 <EmptyLayout pageTitle={pageTitle} showNav={false}>
   <div class="bg-stone-100 h-[100lvh]">
     <div class="grid gap-4 p-4 grid-cols-[220px_1fr]">
-      <Sidebar page="messages" client:load />
-      <h3>Messages...</h3>
+      <Sidebar page="messages" unreadMsgCount={unreadMsgCount} client:load />
+      <MessagesPage messages={messages} client:load />
     </div>
     <p class="mx-auto text-stone-400 w-fit text-sm py-1.5">
       © Copyright 2026. Made by Gab Savard.

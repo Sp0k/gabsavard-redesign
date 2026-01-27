@@ -4,12 +4,21 @@ export const prerender = false;
 import EmptyLayout from "../../layouts/EmptyLayout.astro";
 import { Sidebar } from "../../components/admin/Sidebar/Sidebar";
 import { UploadDropbox } from "../../components/admin/Articles/UploadDropbox";
+import { supabase } from "../../db/supabase.server";
+import { CONTACT_TABLE } from "../../db/storage.constants";
+
+const { count, error: countError } = await supabase
+  .from(CONTACT_TABLE)
+  .select("id", { count: "exact", head: true })
+  .eq("seen", false);
+
+const unreadMsgCount = countError ? 0 : (count ?? 0);
 ---
 
 <EmptyLayout pageTitle="Uploads">
   <div class="bg-stone-100 h-full">
     <div class="grid gap-4 p-4 grid-cols-[220px_1fr]">
-      <Sidebar page="articles" client:load />
+      <Sidebar page="articles" unreadMsgCount={unreadMsgCount} client:load />
       <UploadDropbox client:load />
     </div>
     <p class="mx-auto text-stone-400 w-fit text-sm pt-1.5 pb-3">

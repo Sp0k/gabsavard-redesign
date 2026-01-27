@@ -4,7 +4,7 @@ import { Sidebar } from "../../components/admin/Sidebar/Sidebar";
 import { ArticlesPage } from "../../components/admin/Articles/ArticlesPage";
 import matter from "gray-matter"
 import { supabase } from "../../db/supabase.server"
-import { BLOG_BUCKET, DRAFT_FOLDER, PUBLISHED_FOLDER } from "../../db/storage.constants";
+import { BLOG_BUCKET, CONTACT_TABLE, DRAFT_FOLDER, PUBLISHED_FOLDER } from "../../db/storage.constants";
 
 export const prerender = false
 
@@ -147,11 +147,18 @@ const [publishedPosts, draftPosts] = await Promise.all([
 const posts = [...publishedPosts, ...draftPosts].filter(Boolean);
 
 posts.sort((a, b) => (b?.sortDate ?? 0) - (a?.sortDate ?? 0));
+
+const { count, error: countError } = await supabase
+  .from(CONTACT_TABLE)
+  .select("id", { count: "exact", head: true })
+  .eq("seen", false);
+
+const unreadMsgCount = countError ? 0 : (count ?? 0);
 ---
 <EmptyLayout pageTitle={pageTitle} accessToken={accessToken} refreshToken={refreshToken} showNav={false}>
   <div class="bg-stone-100 h-[100lvh]">
     <div class="grid gap-4 p-4 grid-cols-[220px_1fr]">
-      <Sidebar page="articles" client:load />
+      <Sidebar page="articles" unreadMsgCount={unreadMsgCount} client:load />
       <ArticlesPage articles={posts} client:load />
     </div>
     <p class="mx-auto text-stone-400 w-fit text-sm py-1.5">

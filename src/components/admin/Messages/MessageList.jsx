@@ -1,30 +1,25 @@
 import { FiArrowUpRight, FiMail } from "react-icons/fi";
 
-export const RecentMessages = ({ messages = [] }) => {
-  const recent = messages.slice(0, 5);
-
+export const MessageList = ({ messages = [] }) => {
   return (
     <div className="col-span-12 p-4 rounded border border-stone-300">
       <div className="mb-4 flex items-center justify-between">
         <h3 className="flex items-center font-medium gap-1.5">
-          <FiMail /> Recent Messages
+          <FiMail /> Messages
         </h3>
-        <a href="/admin/messages" className="text-sm text-[#459DDE] hover:underline cursor-pointer">
-          See all
-        </a>
       </div>
 
       <table className="w-full table-auto">
         <TableHead />
         <tbody>
-          {recent.length === 0 ? (
+          {messages.length === 0 ? (
             <tr>
               <td className="p-2 text-sm text-stone-500" colSpan={5}>
                 No messages yet.
               </td>
             </tr>
           ) : (
-              recent.map((m, i) => (
+              messages.map((m, i) => (
                 <TableRow
                   key={m.id ?? i}
                   order={i}

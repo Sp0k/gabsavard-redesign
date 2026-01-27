@@ -1,6 +1,7 @@
-import emailjs from "@emailjs/browser";
 import { useState } from "react";
 import Alert from "./Alert";
+import { supabase } from "../db/supabase.client";
+import { CONTACT_TABLE } from "../db/storage.constants";
 
 const ContactForm = () => {
   const [name, setName] = useState("");
@@ -69,35 +70,32 @@ const ContactForm = () => {
     return valid;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setShowError(false);
+    setShowSuccess(false);
 
-    const serviceId = "service_iu4kme9";
-    const templateId = "template_b4y2vyy";
-    const publicKey = "9eg31SGGnOYt6jxnF";
+    if (!validateForm()) return;
 
-    const templateParams = {
-      user_name: name,
-      user_email: email,
-      message: message,
-    };
+    const { error } = await supabase.from(CONTACT_TABLE).insert([
+      {
+        name: name.trim() || null,
+        email: email.trim(),
+        message: message.trim(),
+      },
+    ]);
 
-    if (validateForm()) {
-      emailjs
-        .send(serviceId, templateId, templateParams, publicKey)
-        .then((response) => {
-          console.log("email sent successfully", response);
-          setShowSuccess(true);
-          setName("");
-          setEmail("");
-          setMessage("");
-          setErrors({});
-        })
-        .catch((error) => {
-          console.log("error sending email", error);
-          setShowError(true);
-        });
+    if (error) {
+      console.log("error saving message", error);
+      setShowError(true);
+      return;
     }
+
+    setShowSuccess(true);
+    setName("");
+    setEmail("");
+    setMessage("");
+    setErrors({});
   };
 
   const onCloseError = () => {
