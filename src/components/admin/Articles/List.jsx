@@ -7,7 +7,13 @@ import { toast } from "react-toastify";
 export const List = ({ sectionName, articles }) => {
   const [rows, setRows] = useState(articles ?? []);
   const [busySlug, setBusySlug] = useState(null);
-  const [confirm, setConfirm] = useState({ open: false, slug: "", name: "", status: "" });
+  const [confirm, setConfirm] = useState({
+    open: false,
+    slug: "",
+    name: "",
+    status: "",
+    type: "blog", // "blog" | "devlog"
+  });
   const [busyDelete, setBusyDelete] = useState(false);
 
   async function togglePublish(slug, currentStatus, type) {
@@ -48,7 +54,13 @@ export const List = ({ sectionName, articles }) => {
   }
 
   function requestDeleteDraft(a) {
-    setConfirm({ open: true, slug: a.slug, name: a?.data?.title ?? a.slug, status: a.status });
+    setConfirm({
+      open: true,
+      slug: a.slug,
+      name: a?.data?.title ?? a.slug,
+      status: a.status,
+      type: a.type ?? "blog",
+    });
   }
 
   async function doDelete() {
@@ -63,7 +75,7 @@ export const List = ({ sectionName, articles }) => {
       const res = await fetch("/api/admin/posts/delete-draft", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ slug: confirm.slug }),
+        body: JSON.stringify({ slug: confirm.slug, type: confirm.type }),
       });
 
       const text = await res.text();
@@ -74,12 +86,12 @@ export const List = ({ sectionName, articles }) => {
 
       setRows((prev) => prev.filter((p) => p.slug !== confirm.slug));
       setConfirm({ open: false, slug: "", name: "", status: "" });
+      toast.success("Deleted article");
     } catch (e) {
       console.error(e);
       toast.error(`Failed to delete`);
     } finally {
       setBusyDelete(false);
-      toast.success("Deleted article");
     }
   }
 

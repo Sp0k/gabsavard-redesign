@@ -2,10 +2,15 @@ export const prerender = false;
 
 import type { APIRoute } from "astro";
 import { adminSupabase } from "../../../../db/supabase.admin";
-import { ASSETS_BUCKET, BLOG_BUCKET, DRAFT_FOLDER } from "../../../../db/storage.constants";
+import {
+  ASSETS_BUCKET,
+  BLOG_BUCKET,
+  DRAFT_FOLDER,
+  DEVLOG_POSTS,
+  DEVLOG_ASSETS,
+} from "../../../../db/storage.constants";
 
 async function removeAllUnderPrefix(bucket: string, prefix: string) {
-  // We list recursively by walking prefixes. Storage "folders" are just prefixes.
   const toDelete: string[] = [];
 
   async function walk(pathPrefix: string) {
@@ -44,30 +49,40 @@ async function removeAllUnderPrefix(bucket: string, prefix: string) {
 export const POST: APIRoute = async ({ request }) => {
   const body = await request.json().catch(() => ({}));
   const slug = String(body.slug ?? "").trim();
+  const type = String(body.type ?? "blog").trim(); // "blog" | "devlog"
 
   if (!slug) return new Response("Missing slug", { status: 400 });
+  if (type !== "blog" && type !== "devlog") {
+    return new Response("Invalid type", { status: 400 });
+  }
+
+  const postsBucket = type === "devlog" ? DEVLOG_POSTS : BLOG_BUCKET;
+  const assetsBucket = type === "devlog" ? DEVLOG_ASSETS : ASSETS_BUCKET;
 
   const draftPath = `${DRAFT_FOLDER}/${slug}.md`;
   const assetsPrefix = slug;
 
   const { data: signed, error: signErr } = await adminSupabase.storage
-    .from(BLOG_BUCKET)
+    .from(postsBucket)
     .createSignedUrl(draftPath, 60);
 
   if (signErr || !signed?.signedUrl) {
     return new Response("Not found in draft (delete blocked)", { status: 404 });
   }
 
-  const { error: mdErr } = await adminSupabase.storage.from(BLOG_BUCKET).remove([draftPath]);
+  const { error: mdErr } = await adminSupabase.storage
+    .from(postsBucket)
+    .remove([draftPath]);
+
   if (mdErr) {
     return new Response(`Delete draft failed: ${mdErr.message}`, { status: 500 });
   }
 
   try {
-    const deletedCount = await removeAllUnderPrefix(ASSETS_BUCKET, assetsPrefix);
+    const deletedCount = await removeAllUnderPrefix(assetsBucket, assetsPrefix);
 
     return new Response(
-      JSON.stringify({ ok: true, slug, deletedDraft: true, deletedAssets: deletedCount }),
+      JSON.stringify({ ok: true, slug, type, deletedDraft: true, deletedAssets: deletedCount }),
       { headers: { "content-type": "application/json" } }
     );
   } catch (e: any) {
@@ -75,6 +90,7 @@ export const POST: APIRoute = async ({ request }) => {
       JSON.stringify({
         ok: true,
         slug,
+        type,
         deletedDraft: true,
         deletedAssets: 0,
         warning: `Draft deleted, but failed to delete assets: ${String(e?.message ?? e)}`,
