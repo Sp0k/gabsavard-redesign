@@ -4,7 +4,15 @@ import { Sidebar } from "../../components/admin/Sidebar/Sidebar";
 import { ArticlesPage } from "../../components/admin/Articles/ArticlesPage";
 import matter from "gray-matter"
 import { supabase } from "../../db/supabase.server"
-import { BLOG_BUCKET, CONTACT_TABLE, DRAFT_FOLDER, PUBLISHED_FOLDER } from "../../db/storage.constants";
+import { 
+  BLOG_BUCKET,
+  CONTACT_TABLE,
+  DRAFT_FOLDER,
+  PUBLISHED_FOLDER,
+  DEVLOG_POSTS,
+  DEVLOG_ASSETS,
+ASSETS_BUCKET,
+} from "../../db/storage.constants";
 
 export const prerender = false
 
@@ -42,17 +50,27 @@ try {
 
 const pageTitle = "Articles";
 
-const [{ data: pubData, error: pubError }, { data: draftData, error: draftError }] =
-  await Promise.all([
-    supabase.storage.from(BLOG_BUCKET).list(PUBLISHED_FOLDER, { limit: 200 }),
-    supabase.storage.from(BLOG_BUCKET).list(DRAFT_FOLDER, { limit: 200 }),
-  ]);
+const [
+  { data: pubData, error: pubError },
+  { data: draftData, error: draftError },
+  { data: devPubData, error: devPubError },
+  { data: devDraftData, error: devDraftError },
+] = await Promise.all([
+  supabase.storage.from(BLOG_BUCKET).list(PUBLISHED_FOLDER, { limit: 200 }),
+  supabase.storage.from(BLOG_BUCKET).list(DRAFT_FOLDER, { limit: 200 }),
+  supabase.storage.from(DEVLOG_POSTS).list(PUBLISHED_FOLDER, { limit: 200 }),
+  supabase.storage.from(DEVLOG_POSTS).list(DRAFT_FOLDER, { limit: 200 }),
+]);
 
 if (pubError) console.error(pubError);
 if (draftError) console.error(draftError);
+if (devPubError) console.error(devPubError);
+if (devDraftError) console.error(devDraftError);
 
 const publishedFiles = pubData ?? [];
 const draftFiles = draftData ?? [];
+const devPublishedFiles = devPubData ?? [];
+const devDraftFiles = devDraftData ?? [];
 
 type StorageListItem = {
   name: string;
@@ -62,19 +80,24 @@ type StorageListItem = {
 
 type PostStatus = "published" | "draft";
 
+type PostType = "blog" | "devlog";
+
 type ParsedPost = {
   slug: string;
   data: Record<string, any>;
   content: string;
   sortDate: number;
   status: PostStatus;
+  type: PostType;
 };
 
 async function parseFiles(
   files: StorageListItem[],
   folder: string,
-  status: PostStatus
+  status: PostStatus,
+  opts: { postsBucket: string; assetsBucket: string; type: PostType }
 ): Promise<(ParsedPost | null)[]> {
+  const { postsBucket, assetsBucket, type } = opts;
   return Promise.all(
     files
       .filter((f) => f.name.endsWith(".md"))
@@ -83,7 +106,7 @@ async function parseFiles(
 
         let mdText = "";
 
-        const { data: urlData } = supabase.storage.from(BLOG_BUCKET).getPublicUrl(path);
+        const { data: urlData } = supabase.storage.from(postsBucket).getPublicUrl(path);
 
         if (urlData?.publicUrl) {
           const r = await fetch(urlData.publicUrl);
@@ -91,7 +114,7 @@ async function parseFiles(
         }
 
         if (!mdText) {
-          const { data: blob, error } = await supabase.storage.from(BLOG_BUCKET).download(path);
+          const { data: blob, error } = await supabase.storage.from(postsBucket).download(path);
           if (error || !blob) {
             console.error(`Failed to read ${path}:`, error);
             return null;
@@ -102,7 +125,7 @@ async function parseFiles(
         const parsed = matter(mdText);
         const slug = f.name.replace(/\.md$/i, "");
 
-        const assetsBase = `${import.meta.env.PUBLIC_SUPABASE_URL}/storage/v1/object/public/blog-assets/${slug}/`;
+        const assetsBase = `${import.meta.env.PUBLIC_SUPABASE_URL}/storage/v1/object/public/${assetsBucket}/${slug}/`;
         const src = (parsed.data as any)?.image?.url as string | undefined;
 
         if (
@@ -115,7 +138,7 @@ async function parseFiles(
           if (src.startsWith("/pictures/posts/")) {
             const rest = src.replace(/^\/pictures\/posts\//, "");
             (parsed.data as any).image.url =
-              `${import.meta.env.PUBLIC_SUPABASE_URL}/storage/v1/object/public/blog-assets/${rest}`;
+              `${import.meta.env.PUBLIC_SUPABASE_URL}/storage/v1/object/public/${assetsBucket}/${rest}`;
           } else if (src.startsWith("/")) {
             // leave absolute site path alone
           } else {
@@ -134,19 +157,40 @@ async function parseFiles(
           content: parsed.content ?? "",
           sortDate: Number.isFinite(sortDate) ? sortDate : 0,
           status,
+          type,
         };
       })
   );
 }
 
-const [publishedPosts, draftPosts] = await Promise.all([
-  parseFiles(publishedFiles, PUBLISHED_FOLDER, "published"),
-  parseFiles(draftFiles, DRAFT_FOLDER, "draft"),
+const [publishedPosts, draftPosts, devPublishedPosts, devDraftPosts] = await Promise.all([
+  parseFiles(publishedFiles, PUBLISHED_FOLDER, "published", {
+    postsBucket: BLOG_BUCKET,
+    assetsBucket: ASSETS_BUCKET,
+    type: "blog",
+  }),
+  parseFiles(draftFiles, DRAFT_FOLDER, "draft", {
+    postsBucket: BLOG_BUCKET,
+    assetsBucket: ASSETS_BUCKET,
+    type: "blog",
+  }),
+  parseFiles(devPublishedFiles, PUBLISHED_FOLDER, "published", {
+    postsBucket: DEVLOG_POSTS,
+    assetsBucket: DEVLOG_ASSETS,
+    type: "devlog",
+  }),
+  parseFiles(devDraftFiles, DRAFT_FOLDER, "draft", {
+    postsBucket: DEVLOG_POSTS,
+    assetsBucket: DEVLOG_ASSETS,
+    type: "devlog",
+  }),
 ]);
 
-const posts = [...publishedPosts, ...draftPosts].filter(Boolean);
+const blogPosts = [...publishedPosts, ...draftPosts].filter(Boolean);
+const devlogPosts = [...devPublishedPosts, ...devDraftPosts].filter(Boolean);
 
-posts.sort((a, b) => (b?.sortDate ?? 0) - (a?.sortDate ?? 0));
+blogPosts.sort((a, b) => (b?.sortDate ?? 0) - (a?.sortDate ?? 0));
+devlogPosts.sort((a, b) => (b?.sortDate ?? 0) - (a?.sortDate ?? 0));
 
 const { count, error: countError } = await supabase
   .from(CONTACT_TABLE)
@@ -159,7 +203,7 @@ const unreadMsgCount = countError ? 0 : (count ?? 0);
   <div class="bg-stone-100 h-[100lvh]">
     <div class="grid gap-4 p-4 grid-cols-[220px_1fr]">
       <Sidebar page="articles" unreadMsgCount={unreadMsgCount} client:load />
-      <ArticlesPage articles={posts} client:load />
+      <ArticlesPage articles={blogPosts} devlogs={devlogPosts} client:load />
     </div>
     <p class="mx-auto text-stone-400 w-fit text-sm py-1.5">
       © Copyright 2026. Made by Gab Savard.

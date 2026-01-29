@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FiArrowUpRight, FiFileText, FiEye, FiEyeOff } from "react-icons/fi"
+import { FiArrowUpRight, FiFileText, FiEye, FiEyeOff, FiBook, FiCode } from "react-icons/fi"
 import { FaCircle } from "react-icons/fa";
 import { toast } from "react-toastify";
 
@@ -9,7 +9,7 @@ export const RecentArticles = ({ articles }) => {
   const [rows, setRows] = useState(recent ?? []);
   const [busySlug, setBusySlug] = useState(null);
 
-  async function togglePublish(slug, currentStatus) {
+  async function togglePublish(slug, currentStatus, type) {
     if (!slug) return;
 
     const nextStatus = currentStatus === "published" ? "draft" : "published";
@@ -20,7 +20,7 @@ export const RecentArticles = ({ articles }) => {
       const res = await fetch("/api/admin/posts/toggle-publish", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ slug, toStatus: nextStatus }),
+        body: JSON.stringify({ slug, type, toStatus: nextStatus }),
       });
 
       const text = await res.text();
@@ -32,16 +32,17 @@ export const RecentArticles = ({ articles }) => {
       setRows((prev) =>
         prev.map((a) => (a.slug === slug ? { ...a, status: nextStatus } : a))
       );
+
+      toast.success(
+        nextStatus === "published"
+          ? `Published post!`
+          : `Moved back post to drafts!`
+      )
     } catch (e) {
       console.error(e);
       toast.error(`Failed to toggle publish`);
     } finally {
       setBusySlug(null);
-      toast.success(
-        nextStatus === "published"
-          ? `Published article!`
-          : `Moved back article to drafts!`
-      )
     }
   }
 
@@ -49,7 +50,7 @@ export const RecentArticles = ({ articles }) => {
     <div className="col-span-12 p-4 rounded border border-stone-300">
       <div className="mb-4 flex items-center justify-between">
         <h3 className="flex items-center font-medium gap-1.5">
-          <FiFileText /> Recent Articles
+          <FiFileText /> Recent Posts
         </h3>
         <a href="/admin/articles" className="text-sm text-[#459DDE] hover:underline cursor-pointer">
           See all
@@ -75,8 +76,9 @@ export const RecentArticles = ({ articles }) => {
                 date={date}
                 status={status}
                 order={i}
+                type={a.type}
                 busy={busySlug === a.slug}
-                onToggle={() => togglePublish(a.slug, status)}
+                onToggle={() => togglePublish(a.slug, status, a.type)}
               />
             );
           })}
@@ -93,14 +95,14 @@ const TableHead = () => {
         <th className="text-start p-1.5">Article Name</th>
         <th className="text-start p-1.5">Date</th>
         <th className="text-start p-1.5">Status</th>
+        <th className="text-start p-1.5">Type</th>
         <th className="text-start p-1.5"></th>
-        <th className="w-8"></th>
       </tr>
     </thead>
   );
 }
 
-const TableRow = ({ slug, name, date, status, order, onToggle, busy }) => {
+const TableRow = ({ slug, name, date, status, order, type, onToggle, busy }) => {
   return (
     <tr className={order % 2 ? "bg-stone-100 text-sm" : "text-sm"}>
       <td className="p-1.5">
@@ -121,6 +123,16 @@ ${status === "published" ? "bg-green-100 text-green-700" : "bg-orange-200 text-o
         >
           <FaCircle className={`text-xs ${status === "published" ? "text-green-700" : "text-orange-700"}`}/>
           {status === "published" ? "published" : "draft"}
+        </span>
+      </td>
+      <td>
+        <span
+          className={
+          `text-xs flex items-center gap-1 font-medium px-2 py-1 w-fit rounded ${type === "blog" ? "bg-violet-200 text-violet-700" : "bg-teal-200 text-teal-700"}`
+          }
+        >
+          {type === "blog" ? <FiBook className="text-violet-700 text-xs" /> : <FiCode className="text-xs text-teal-700" />}
+          {type === "blog" ? "blog" : "devlog"}
         </span>
       </td>
       <td className="p-1.5">

@@ -11,7 +11,7 @@ const BlogList = ({ posts, tags }) => {
 
   useEffect(() => {
     filterByTag();
-  }, [active]);
+  }, [active, posts]);
 
   const handleFilterChange = (filters) => {
     setActive(filters);

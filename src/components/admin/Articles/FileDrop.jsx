@@ -9,6 +9,7 @@ export const FileDrop = () => {
   const [slug, setSlug] = useState("");
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState("");
+  const [kind, setKind] = useState("blog");
 
   const onDropMd = useCallback((acceptedFiles) => {
     setMsg("");
@@ -18,11 +19,11 @@ export const FileDrop = () => {
     if (f && !slug.trim()) {
       const base = f.name.replace(/\.(md|mdx)$/i, "");
       const auto = base
-        .toLowerCase()
-        .trim()
-        .replace(/['"]/g, "")
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/(^-|-$)+/g, "");
+      .toLowerCase()
+      .trim()
+      .replace(/['"]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)+/g, "");
       if (auto) setSlug(auto);
     }
   }, [slug]);
@@ -79,6 +80,8 @@ export const FileDrop = () => {
     try {
       const fdPost = new FormData();
       fdPost.set("target", "post");
+      fdPost.set("kind", kind);
+      if (slug.trim()) fdPost.set("slug", slug.trim());
       fdPost.append("files", mdFile);
 
       const postRes = await fetch("/api/admin/upload", { method: "POST", body: fdPost });
@@ -101,6 +104,7 @@ export const FileDrop = () => {
 
         const fdAssets = new FormData();
         fdAssets.set("target", "asset");
+        fdAssets.set("kind", kind);
         fdAssets.set("slug", effectiveSlug);
 
         for (const f of assetFiles) fdAssets.append("files", f);
@@ -130,6 +134,17 @@ export const FileDrop = () => {
         <h3 className="flex items-center text-md font-semibold gap-1.5">
           <FiShare /> Upload Article
         </h3>
+        <div className="flex items-center gap-2">
+          <label className="text-xs text-stone-500">Type</label>
+          <select
+            value={kind}
+            onChange={(e) => setKind(e.target.value)}
+            className="text-sm rounded border border-stone-300 px-2 py-1 bg-white"
+          >
+            <option value="blog">Blog</option>
+            <option value="devlog">Devlog</option>
+          </select>
+        </div>
       </div>
 
       <div className="grid grid-cols-12 gap-4">
@@ -145,12 +160,12 @@ export const FileDrop = () => {
           <div
             {...mdDrop.getRootProps()}
             className={`p-4 flex justify-center items-center text-center
-              overflow-hidden border-2 border-dashed cursor-pointer min-h-[22vh]
-              ${
-                mdDrop.isDragActive
-                  ? "bg-stone-100 border-stone-200"
-                  : "border-stone-300 hover:border-stone-200 bg-stone-200/50 hover:bg-stone-100"
-              }`}
+overflow-hidden border-2 border-dashed cursor-pointer min-h-[22vh]
+${
+mdDrop.isDragActive
+? "bg-stone-100 border-stone-200"
+: "border-stone-300 hover:border-stone-200 bg-stone-200/50 hover:bg-stone-100"
+}`}
           >
             <input {...mdDrop.getInputProps()} />
             <p className="text-sm text-stone-700">
@@ -197,12 +212,12 @@ export const FileDrop = () => {
           <div
             {...assetsDrop.getRootProps()}
             className={`p-4 flex justify-center items-center text-center
-              overflow-hidden border-2 border-dashed cursor-pointer min-h-[22vh]
-              ${
-                assetsDrop.isDragActive
-                  ? "bg-stone-100 border-stone-200"
-                  : "border-stone-300 hover:border-stone-200 bg-stone-200/50 hover:bg-stone-100"
-              }`}
+overflow-hidden border-2 border-dashed cursor-pointer min-h-[22vh]
+${
+assetsDrop.isDragActive
+? "bg-stone-100 border-stone-200"
+: "border-stone-300 hover:border-stone-200 bg-stone-200/50 hover:bg-stone-100"
+}`}
           >
             <input {...assetsDrop.getInputProps()} />
             <p className="text-sm text-stone-700">

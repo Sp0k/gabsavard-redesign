@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { FiArrowUpRight, FiEye, FiEyeOff, FiFileText, FiTrash } from "react-icons/fi";
+import { FiArrowUpRight, FiEye, FiEyeOff, FiFileText, FiTrash, FiCode } from "react-icons/fi";
 import { FaCircle } from "react-icons/fa";
 import { ConfirmModal } from "../ConfirmModal";
 import { toast } from "react-toastify";
 
-export const List = ({ articles }) => {
+export const List = ({ sectionName, articles }) => {
   const [rows, setRows] = useState(articles ?? []);
   const [busySlug, setBusySlug] = useState(null);
   const [confirm, setConfirm] = useState({ open: false, slug: "", name: "", status: "" });
   const [busyDelete, setBusyDelete] = useState(false);
 
-  async function togglePublish(slug, currentStatus) {
+  async function togglePublish(slug, currentStatus, type) {
     if (!slug) return;
 
     const nextStatus = currentStatus === "published" ? "draft" : "published";
@@ -21,28 +21,29 @@ export const List = ({ articles }) => {
       const res = await fetch("/api/admin/posts/toggle-publish", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ slug, toStatus: nextStatus }),
+        body: JSON.stringify({ slug, type, toStatus: nextStatus }),
       });
 
       const text = await res.text();
       if (!res.ok) {
-        toast.error(`Failed: ${text}`);
+        toast.error(`Failed: ${text}`)
         throw new Error(text);
       }
 
       setRows((prev) =>
         prev.map((a) => (a.slug === slug ? { ...a, status: nextStatus } : a))
       );
+
+      toast.success(
+        nextStatus === "published"
+          ? `Published post!`
+          : `Moved back post to drafts!`
+      )
     } catch (e) {
       console.error(e);
       toast.error(`Failed to toggle publish`);
     } finally {
       setBusySlug(null);
-      toast.success(
-        nextStatus === "published"
-        ? `Published article!`
-        : `Moved back article to drafts!`
-      );
     }
   }
 
@@ -86,7 +87,8 @@ export const List = ({ articles }) => {
     <div className="col-span-12 p-4 rounded border border-stone-300">
       <div className="mb-4 flex items-center justify-between">
         <h3 className="flex items-center font-medium gap-1.5">
-          <FiFileText /> Articles
+          {sectionName === "Articles" ? <FiFileText /> : <FiCode />}
+          {sectionName}
         </h3>
       </div>
 
@@ -109,7 +111,7 @@ export const List = ({ articles }) => {
                 status={status}
                 order={i}
                 busy={busySlug === a.slug}
-                onToggle={() => togglePublish(a.slug, status)}
+                onToggle={() => togglePublish(a.slug, status, a.type)}
                 onDelete={() => requestDeleteDraft(a)}
               />
             );

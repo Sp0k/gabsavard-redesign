@@ -1,73 +1,159 @@
 ---
-import matter from "gray-matter"
-import { supabase } from "../db/supabase.server"
-import { BLOG_BUCKET, PUBLISHED_FOLDER } from "../db/storage.constants"
-import BaseLayout from "../layouts/BaseLayout.astro"
-import BlogPage from "../components/BlogPage"
+import matter from "gray-matter";
+import { supabase } from "../db/supabase.server";
+import {
+  BLOG_BUCKET,
+  PUBLISHED_FOLDER,
+  DEVLOG_POSTS,
+  DEVLOG_ASSETS,
+ASSETS_BUCKET,
+} from "../db/storage.constants";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BlogPage from "../components/BlogPage";
 
-const pageTitle = "Blog"
-export const prerender = false
+export const prerender = false;
+const pageTitle = "Blog";
 
-const { data, error } = await supabase.storage
-  .from(BLOG_BUCKET)
-  .list(PUBLISHED_FOLDER, { limit: 200 });
+const PUBLIC_SUPABASE_URL = import.meta.env.PUBLIC_SUPABASE_URL;
+if (!PUBLIC_SUPABASE_URL) throw new Error("Missing PUBLIC_SUPABASE_URL");
 
-if (error) console.error(error);
+// ---- Types ----
+type PostStatusFolder = string;
 
-const files = data ?? [];
+type StorageListItem = {
+  name: string;
+  updated_at?: string | null;
+  created_at?: string | null;
+};
 
-// Parse markdown files
-const posts = await Promise.all(
-  files
-    .filter((f) => f.name.endsWith(".md"))
-    .map(async (f) => {
-      const path = `${PUBLISHED_FOLDER}/${f.name}`;
+type Frontmatter = Record<string, unknown> & {
+  date?: string | Date;
+  tags?: string[];
+  image?: {
+    url?: string;
+    [k: string]: unknown;
+  };
+};
 
-      const { data: urlData } = supabase.storage
-      .from(BLOG_BUCKET)
-      .getPublicUrl(path);
+type ParsedPost = {
+  slug: string;
+  data: Frontmatter;
+  content: string;
+  sortDate: number;
+};
 
-      const mdText = await fetch(urlData.publicUrl).then((r) => r.text());
+type FetchPostsArgs = {
+  postsBucket: string;
+  assetsBucket: string;
+  folder: PostStatusFolder;
+  limit?: number;
+};
 
-      const parsed = matter(mdText);
-      const slug = f.name.replace(/\.md$/i, "");
+async function fetchPostsFromStorage({
+  postsBucket,
+  assetsBucket,
+  folder,
+  limit = 200,
+}: FetchPostsArgs): Promise<ParsedPost[]> {
+  const { data, error } = await supabase.storage
+    .from(postsBucket)
+    .list(folder, { limit });
 
-      const assetsBase = `${import.meta.env.PUBLIC_SUPABASE_URL}/storage/v1/object/public/blog-assets/${slug}/`;
-      const src = parsed.data?.image?.url;
+  if (error) {
+    console.error(error);
+    return [];
+  }
 
-      if (
-        !src.startsWith("http://") &&
-          !src.startsWith("https://") &&
-          !src.startsWith("data:") &&
-          !src.startsWith("#")
-      ) {
-        if (src.startsWith("/pictures/posts/")) {
-          const rest = src.replace(/^\/pictures\/posts\//, "");
-          parsed.data.image.url = `${import.meta.env.PUBLIC_SUPABASE_URL}/storage/v1/object/public/blog-assets/${rest}`;
+  const files: StorageListItem[] = (data ?? []) as StorageListItem[];
+
+  const postsOrNull = await Promise.all(
+    files
+      .filter((f) => f.name.endsWith(".md"))
+      .map(async (f): Promise<ParsedPost | null> => {
+        const path = `${folder}/${f.name}`;
+
+        const { data: urlData } = supabase.storage
+          .from(postsBucket)
+          .getPublicUrl(path);
+
+        const publicUrl = urlData?.publicUrl;
+        if (!publicUrl) return null;
+
+        const r = await fetch(publicUrl);
+        if (!r.ok) return null;
+
+        const mdText = await r.text();
+
+        const parsed = matter(mdText);
+        const slug = f.name.replace(/\.md$/i, "");
+
+        const fm: Frontmatter = (parsed.data ?? {}) as Frontmatter;
+        fm.image = fm.image ?? {};
+
+        const assetsBase =
+          `${PUBLIC_SUPABASE_URL}/storage/v1/object/public/${assetsBucket}/${slug}/`;
+
+        const src = (fm.image.url ?? "").trim();
+
+        if (src) {
+          const alreadyAbsolute =
+            src.startsWith("http://") ||
+            src.startsWith("https://") ||
+            src.startsWith("data:") ||
+            src.startsWith("#") ||
+            src.includes("/storage/v1/object/public/");
+
+          if (!alreadyAbsolute) {
+            if (src.startsWith("/pictures/posts/")) {
+              const rest = src.replace(/^\/pictures\/posts\//, "");
+              fm.image.url =
+                `${PUBLIC_SUPABASE_URL}/storage/v1/object/public/${assetsBucket}/${rest}`;
+            } else if (src.startsWith("/")) {
+              // do nothing
+            } else {
+              const clean = src.replace(/^\.?\//, "");
+              fm.image.url = assetsBase + clean;
+            }
+          }
         }
 
-        if (src.startsWith("/")) return src;
+        const sortDate = fm.date
+          ? Date.parse(String(fm.date))
+          : Date.parse(String(f.updated_at ?? f.created_at ?? ""));
 
-        const clean = src.replace(/^\.?\//, "");
-        parsed.data.image.url = assetsBase + clean;
-      }
+        return {
+          slug,
+          data: fm,
+          content: parsed.content ?? "",
+          sortDate: Number.isFinite(sortDate) ? sortDate : 0,
+        };
+      })
+  );
 
-      const sortDate = parsed.data?.date
-        ? Date.parse(String(parsed.data.date))
-        : Date.parse(String(f.updated_at ?? f.created_at ?? ""));
+  return postsOrNull.filter((p): p is ParsedPost => p !== null);
+}
 
-      return {
-        slug,
-        data: parsed.data ?? {},
-        content: parsed.content,
-        sortDate,
-      };
-    })
-);
+// BLOG posts
+const blogPosts = await fetchPostsFromStorage({
+  postsBucket: BLOG_BUCKET,
+  assetsBucket: ASSETS_BUCKET,
+  folder: PUBLISHED_FOLDER,
+});
 
-posts.sort((a, b) => (b.sortDate ?? 0) - (a.sortDate ?? 0));
+// DEVLOG posts
+const devlogPosts = await fetchPostsFromStorage({
+  postsBucket: DEVLOG_POSTS,
+  assetsBucket: DEVLOG_ASSETS,
+  folder: PUBLISHED_FOLDER,
+});
 
-const tags = [...new Set(posts.flatMap((p) => p.data?.tags ?? []))].sort();
+console.log(devlogPosts);
+
+blogPosts.sort((a, b) => (b.sortDate ?? 0) - (a.sortDate ?? 0));
+devlogPosts.sort((a, b) => (b.sortDate ?? 0) - (a.sortDate ?? 0));
+
+const blogTags = [...new Set(blogPosts.flatMap((p) => p.data.tags ?? []))].sort();
+const devlogTags = [...new Set(devlogPosts.flatMap((p) => p.data.tags ?? []))].sort();
 ---
 <BaseLayout pageTitle={pageTitle}>
   <div class="mt-4">
@@ -76,6 +162,6 @@ const tags = [...new Set(posts.flatMap((p) => p.data?.tags ?? []))].sort();
       Dive into my thoughts and interests. I write down my thoughts and ideas in here and hope will
       either find them interesting or helpful.
     </p>
-    <BlogPage blogPosts={posts} blogTags={tags} client:load />
+    <BlogPage blogPosts={blogPosts} blogTags={blogTags} devlogPosts={devlogPosts} devlogTags={devlogTags} client:load />
   </div>
 </BaseLayout>

@@ -2,7 +2,7 @@ import { FiShare, FiBookOpen } from "react-icons/fi"
 import { TopBar } from "./TopBar"
 import { List } from "./List"
 
-export const ArticlesPage = ({ articles }) => {
+export const ArticlesPage = ({ articles, devlogs }) => {
   return (
     <div className="bg-white rounded-lg pb-4 shadow">
       <TopBar />
@@ -26,7 +26,8 @@ export const ArticlesPage = ({ articles }) => {
             Upload New Article
           </a>
         </div>
-        <List articles={articles} />
+        <List articles={articles} sectionName="Articles" />
+        <List articles={devlogs} sectionName="Devlogs" />
       </div>
     </div>
   )
