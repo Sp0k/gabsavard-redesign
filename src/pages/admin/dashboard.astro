@@ -67,10 +67,6 @@ if (draftError) console.error(draftError);
 if (devPubError) console.error(devPubError);
 if (devDraftError) console.error(devDraftError);
 
-console.log("DEVLOG drafts error:", devDraftError);
-console.log("DEVLOG drafts files:", devDraftData?.map((x) => x.name));
-console.log("DEVLOG published files:", devPubData?.map((x) => x.name));
-
 const publishedFiles = pubData ?? [];
 const draftFiles = draftData ?? [];
 const devPublishedFiles = devPubData ?? [];

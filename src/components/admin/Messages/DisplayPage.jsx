@@ -8,9 +8,7 @@ export const DisplayPage = ({ name, email, message, createdAt }) => {
     <div className="bg-white rounded-lg pb-4 shadow">
       <TopBar />
       <div className="px-4 grid gap-3 grid-cols-12">
-        <div className="col-span-4">
-        </div>
-        <div className="col-span-8 flex justify-end gap-4">
+        <div className="col-span-4 flex gap-4 justify-start">
           <a 
             className="flex cursor-pointer transition-colors p-2 text-sm text-stone-50 hover:bg-stone-700 bg-stone-950 rounded items-center gap-2"
             href="/admin/messages"
@@ -18,6 +16,8 @@ export const DisplayPage = ({ name, email, message, createdAt }) => {
             <FiArrowLeft />
             Back
           </a>
+        </div>
+        <div className="col-span-8 flex justify-end gap-4">
           <a 
             className="flex cursor-pointer transition-colors p-2 text-sm text-stone-50 hover:bg-stone-700 bg-stone-950 rounded items-center gap-2"
             href={`mailto:${email}`}
