@@ -1,6 +1,7 @@
 ---
 import matter from "gray-matter"
-import { supabase } from "../db/supabase.server"
+import { supabase } from "../db/supabase.server";
+import { BLOG_BUCKET, PUBLISHED_FOLDER, ASSETS_BUCKET } from "../db/storage.constants";
 import BaseLayout from "../layouts/BaseLayout.astro"
 import HeroImage from "../components/HeroImage"
 import LatestPost from "../components/LatestPost"
@@ -15,8 +16,8 @@ const currentJob = "Iron Phi"
 
 // list files
 const { data, error } = await supabase.storage
-  .from("blog-posts")
-  .list("published", { limit: 200 });
+  .from(BLOG_BUCKET)
+  .list(PUBLISHED_FOLDER, { limit: 200 });
 
 if (error) console.error(error);
 
@@ -26,15 +27,46 @@ const posts = await Promise.all(
   files
     .filter((f) => f.name.endsWith(".md"))
     .map(async (f) => {
-      const path = `published/${f.name}`;
-      const { data: urlData } = supabase.storage.from("blog-posts").getPublicUrl(path);
+      const slug = f.name.replace(/\.md$/i, "");
+      const path = `${PUBLISHED_FOLDER}/${f.name}`;
 
+      const { data: urlData } = supabase.storage.from(BLOG_BUCKET).getPublicUrl(path);
       const res = await fetch(urlData.publicUrl);
       const mdText = await res.text();
       const parsed = matter(mdText);
 
+      const img = parsed.data?.image?.url;
+      if (typeof img === "string" && img.trim()) {
+        const src = img.trim();
+
+        const isAbsolute =
+          src.startsWith("http://") ||
+          src.startsWith("https://") ||
+          src.startsWith("data:") ||
+          src.startsWith("#") ||
+          src.includes("/storage/v1/object/public/");
+
+        if (!isAbsolute) {
+          if (src.startsWith("/pictures/posts/")) {
+            const rest = src.replace(/^\/pictures\/posts\//, "");
+            const { data: u } = supabase.storage.from(ASSETS_BUCKET).getPublicUrl(rest);
+            parsed.data.image.url = u.publicUrl;
+          } else if (src.startsWith("/")) {
+            // site-absolute path, leave it alone
+          } else {
+            const clean = src.replace(/^\.?\//, "");
+            const { data: u } = supabase.storage
+              .from(ASSETS_BUCKET)
+              .getPublicUrl(`${slug}/${clean}`);
+
+            parsed.data.image = parsed.data.image ?? {};
+            parsed.data.image.url = u.publicUrl;
+          }
+        }
+      }
+
       return {
-        slug: f.name.replace(/\.md$/i, ""),
+        slug,
         data: {
           ...parsed.data,
           date: parsed.data?.date ? new Date(String(parsed.data.date)) : undefined,
